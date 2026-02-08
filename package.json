@@ -1,0 +1,33 @@
+{
+  "name": "mellow-md",
+  "version": "1.0.0",
+  "description": "\"Multi-device whatsapp bot'",
+  "keywords": [
+    "bot",
+    "baileys",
+    "mellow",
+    "demmy",
+    "whatsapp",
+    "automation",
+    "chat",
+    "@whiskeysockets/baileys",
+    "Mellow",
+    "MD",
+    "baileysQR"
+  ],
+  "license": "MIT",
+  "author": "Mellow",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3",
+    "fs-extra": "^11.3.3",
+    "pino": "^10.1.0"
+  }
+}
