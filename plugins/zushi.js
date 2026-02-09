@@ -3,7 +3,7 @@ export default {
     description: "",
     isPublic: false,
     async execute(sock, msg, args) {
-        const { getCommands } = await import("../../commandHandler.js");
+        const { getCommands } = await import("../lib/commandHandler.js");
         const commands = getCommands();
 
         if (!args || args.length === 0) {
