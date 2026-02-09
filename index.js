@@ -8,6 +8,7 @@ import makeWASocket, {
 import { configDotenv } from "dotenv";
 import pino from 'pino'
 import checkSessionID from "./lib/session.js";
+import handleCommand from "./lib/commandHandler.js";
 configDotenv()
 
 const startBot = async () =>{
@@ -28,7 +29,8 @@ const startBot = async () =>{
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
         if(connection === 'open'){
             console.log("Connected to whatsapp")
-            sock.sendMessage('2348105202390@s.whatsapp.net', {
+            const user = sock.user.id.split(':')[0] + '@s.whatsapp.net'
+            sock.sendMessage(user, {
                 text: "Your bot has been deployed successfully"
             })
         } else if (connection === 'close') {
@@ -38,6 +40,21 @@ const startBot = async () =>{
             }
         }
     })
+    sock.ev.on("messages.upsert", async({messages}) => {
+        const msg = messages[0];
+        if (!msg || !msg.message) return
+        const fromMe = msg.key.fromMe;
+        const botJid = sock.user?.id;
+        if (fromMe && msg.key.remoteJid === botJid) return
+
+        try {
+            await handleCommand(sock, msg)
+        } catch (error) {
+            console.error('Error in message handler:', error);
+        }
+    });
+
+    return sock
 }
 
 startBot()
