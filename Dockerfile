@@ -1,5 +1,10 @@
-FROM quay.io/m3110w/mellowmd
-RUN git clone https://github.com/DemmyJay-99/Mellow-MD.git /root/mellowmd 
+FROM quay.io/m3110w/mellowmd:latest
+
 WORKDIR /root/mellowmd
-RUN npm install
-CMD [ 'npm', 'start' ]
+
+RUN git clone https://github.com/DemmyJay-99/Mellow-MD.git . && \
+    npm install
+
+EXPOSE 5000
+
+CMD ["npm", "start"]
