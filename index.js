@@ -3,7 +3,8 @@ import makeWASocket, {
     DisconnectReason,
     jidNormalizedUser, 
     delay,
-    makeCacheableSignalKeyStore
+    makeCacheableSignalKeyStore,
+    fetchLatestBaileysVersion
 } from "@whiskeysockets/baileys";
 import { configDotenv } from "dotenv";
 import pino from 'pino'
@@ -13,6 +14,17 @@ configDotenv()
 
 const startBot = async () =>{
     await checkSessionID(process.env.SESSION_ID);
+        const FALLBACK_VERSION = [2, 3000, 1033105955];
+        let waVersion = FALLBACK_VERSION;
+        try {
+            const { version, isLatest } = await fetchLatestBaileysVersion();
+            if (version && Array.isArray(version)) {
+                waVersion = version;
+                console.log(waVersion, version);
+            }
+        } catch (e) {
+            console.log(e);
+        }
     const { state, saveCreds } = await useMultiFileAuthState('session');
     const sock = makeWASocket({
         auth: state,
@@ -23,7 +35,8 @@ const startBot = async () =>{
         logger: pino({level: "fatal"}),
         markOnlineOnConnect: false,
         printQRInTerminal: false,
-        keepAliveIntervalMs: 30000
+        keepAliveIntervalMs: 30000,
+        version: waVersion
     })
     sock.ev.on('creds.update', saveCreds)
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
