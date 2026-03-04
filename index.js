@@ -30,7 +30,7 @@ const startBot = async () =>{
         auth: state,
         creds: state.creds,
         keys: makeCacheableSignalKeyStore(state.keys, pino({
-            level: "fatal"
+            level: "silent"
         })),
         logger: pino({level: "silent"}),
         markOnlineOnConnect: false,
