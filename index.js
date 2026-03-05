@@ -35,7 +35,6 @@ const startBot = async () =>{
         logger: pino({level: "silent"}),
         markOnlineOnConnect: false,
         printQRInTerminal: false,
-        keepAliveIntervalMs: 30000,
         version: waVersion
     })
     sock.ev.on('creds.update', saveCreds)
