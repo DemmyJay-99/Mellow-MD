@@ -27,7 +27,7 @@ export default{
         const fonts = getFonts();
         const text = `Hello ,` + `*${config.OwnerName}*\n` +
                         `*PREFIX: ${config.prefix}*\n\n\n` +
-                        `╭─「 🤖 BOT MENU 」\n` + 
+                        `╭─「 MELLOW MD 」\n` + 
                         `│\n`+
                         `│\n`+
                         `${joinedText}\n` +
