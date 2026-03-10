@@ -2,6 +2,7 @@ export default {
     name: "ope",
     description: "",
     isPublic: false,
+    category: "Owner",
     async execute(sock, msg, args) {
         const { getCommands } = await import("../../commandHandler.js");
         const commands = getCommands();

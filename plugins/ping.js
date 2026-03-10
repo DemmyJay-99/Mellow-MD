@@ -2,6 +2,7 @@ export default {
     name: "ping",
     description: "Replies with pong!",
     isPublic: false,
+    category: "Utility",
     execute: async (sock, msg, args) => {
         const start = Date.now();
         await sock.sendMessage(msg.key.remoteJid, { text: "Pong!" });

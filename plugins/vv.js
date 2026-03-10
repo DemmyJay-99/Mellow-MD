@@ -2,6 +2,7 @@ export default {
     name: "vv",
     description: "Reveal a quoted view-once media",
     isPublic: false,
+    category: "Whatsapp",
     execute: async (sock, msg, args) => {
         try {
             const remoteJid = msg.key.remoteJid;

@@ -4,6 +4,7 @@ export default {
     name: "tiktok",
     description: "Download Tiktok videos",
     isPublic: false,
+    category: "Downloaders",
     execute: async (sock, msg, args) => {
         if(!args || args.length === 0) {
             await sock.sendMessage(msg.key.remoteJid, {
