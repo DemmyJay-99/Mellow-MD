@@ -20,19 +20,17 @@ const startBot = async () =>{
             const { version, isLatest } = await fetchLatestBaileysVersion();
             if (version && Array.isArray(version)) {
                 waVersion = version;
-                console.log(waVersion, version);
             }
         } catch (e) {
             console.log(e);
         }
     const { state, saveCreds } = await useMultiFileAuthState('session');
+    const logger = pino({ level: "fatal" })
     const sock = makeWASocket({
         auth: state,
         creds: state.creds,
-        keys: makeCacheableSignalKeyStore(state.keys, pino({
-            level: "silent"
-        })),
-        logger: pino({level: "silent"}),
+        keys: makeCacheableSignalKeyStore(state.keys, logger.child({ level: "fatal"})),
+        logger: logger.child({ level: "fatal"}),
         markOnlineOnConnect: false,
         printQRInTerminal: false,
         version: waVersion
