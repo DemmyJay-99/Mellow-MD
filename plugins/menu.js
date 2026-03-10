@@ -25,15 +25,26 @@ export default{
 
         const joinedText = lines.join("\n").toUpperCase();
         const fonts = getFonts();
-        const text = `Hello ,` + `*${config.OwnerName}*\n` +
-                        `*PREFIX: ${config.prefix}*\n\n\n` +
-                        `╭─「 MELLOW MD 」\n` + 
+        const hour = new Date().getHours();
+        const minute = new Date().getMinutes();
+        const date = new Date();
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const day = days[date.getDay()];
+        const text =    "```╭═══ MELLOW MD ═══⊷\n" +
+                        "┃❃╭──────────────\n" +
+                        `┃❃│Prefix: ${config.prefix}\n` +
+                        `┃❃│User: ${config.OwnerName}\n` +
+                        `┃❃│Time: ${hour} : ${minute}\n` +
+                        `┃❃│Day: ${day}\n` +
+                        `┃❃│Platform: ${process.env.PLATFORM}\n` +
+                        `┃❃╰───────────────\n` +
+                        "╰═════════════════⊷```\n" +
                         `│\n`+
                         `│\n`+
                         `${joinedText}\n` +
                         `│\n` +
                         `╰───────────────`;
-        const styledText = transform(text, fonts['fullWidth'])
+        const styledText = transform(text, fonts["bold"])
 
         await sock.sendMessage(msg.key.remoteJid, { text: styledText });
     }
