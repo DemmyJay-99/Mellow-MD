@@ -34,7 +34,7 @@ export default{
                         "┃❃╭──────────────\n" +
                         `┃❃│Prefix: ${config.prefix}\n` +
                         `┃❃│User: ${config.OwnerName}\n` +
-                        `┃❃│Time: ${hour} : ${minute}\n` +
+                        `┃❃│Time: ${hour}:${minute}\n` +
                         `┃❃│Day: ${day}\n` +
                         `┃❃│Platform: ${process.env.PLATFORM}\n` +
                         `┃❃╰───────────────\n` +
