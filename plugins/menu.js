@@ -17,7 +17,6 @@ export default{
             return;
         }
 
-        // Wrap the command in * for WhatsApp bold, keep spaces intact
         const lines = cmds.map(c => {
             const desc = c.description ? c.description : "No description";
             return `├─ *${config.prefix}${c.name}*`;
