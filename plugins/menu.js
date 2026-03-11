@@ -18,7 +18,6 @@ export default {
       return;
     }
 
-    // 1. Group by category
     const grouped = {};
     for (const c of cmds) {
       const category = c.category || "Uncategorized";
@@ -26,7 +25,6 @@ export default {
       grouped[category].push(c);
     }
 
-    // 2. Decide category order (optional but recommended)
     const categoryOrder = [
       "General",
       "Utility",
@@ -46,22 +44,18 @@ export default {
       return ia - ib;
     });
 
-    // 3. Build lines for each category
     const lines = [];
 
     for (const category of sortedCategories) {
       const cmdsInCategory = grouped[category];
 
-      // Sort commands within category (alphabetical by name)
       cmdsInCategory.sort((a, b) => a.name.localeCompare(b.name));
 
-      // Category header
-      lines.push(`│`);
-      lines.push(`├─ 〘 ${category.toUpperCase()} 〙`);
+      lines.push(`╰─────────────────`);
+      lines.push(`╭─ ❏ ${category.toUpperCase()} ❏ `);
 
-      // Commands
       for (const c of cmdsInCategory) {
-        lines.push(`├─ *${config.prefix}${c.name}*`);
+        lines.push(` |  *${config.prefix}${c.name}*`);
       }
     }
 
@@ -83,9 +77,7 @@ export default {
       `┃❃│Platform: ${process.env.PLATFORM}\n` +
       "┃❃╰───────────────\n" +
       "╰═════════════════⊷```\n" +
-      `│\n` +
       `${joinedText}\n` +
-      `│\n` +
       `╰───────────────`;
 
     const styledText = transform(text, fonts["bold"]);
