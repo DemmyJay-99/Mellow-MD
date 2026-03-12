@@ -1,4 +1,4 @@
-# Mellow MD
+<h1 align='center'> Mellow MD (Multi-Device Whatsapp Bot)</h1>
 
 A WhatsApp bot built with the Baileys multi-device library. Once authenticated, the bot runs independently without requiring the paired phone to stay online.
 
@@ -44,11 +44,7 @@ Edit `config.js` to customise the bot behaviour:
 | Setting | Default | Description |
 |---|---|---|
 | `prefix` | `.` | Command prefix |
-| `ownerNumber` | `2348101653826` | Your WhatsApp number (with country code, no `+`) |
-| `botName` | `Mellow MD` | Name displayed in the menu |
-| `OwnerName` | `Mellow` | Owner name displayed in the menu |
-| `reactEmoji` | `✨` | Emoji reacted to each command |
-| `allowedUsers` | `[]` | Additional WhatsApp IDs allowed to use owner commands |
+| `ownerNumber` | `2348xxxxxxxxx` | Your WhatsApp number (with country code, no `+`) |
 
 ---
 
