@@ -9,18 +9,15 @@ A WhatsApp bot built with the Baileys multi-device library. Once authenticated, 
 - Node.js v18 or higher
 - npm
 - A WhatsApp account to pair with the bot
-- A GitHub Gist containing your `creds.json` session file (see Session Setup below)
+- A `SESSION_ID` obtained by pairing at [https://mellowmd-site.pxxl.click/](https://mellowmd-site.pxxl.click/)
 
 ---
 
-## Session Setup
+## Getting Your Session ID
 
-Mellow MD authenticates via a `creds.json` file hosted on a **GitHub Gist**.
-
-1. Run the bot locally once to generate `creds.json` (it will appear in the `auth/` folder after pairing).
-2. Create a **secret GitHub Gist** and upload the contents of `creds.json`.
-3. Copy the **Gist ID** from the URL (the long alphanumeric string after `gist.github.com/<username>/`).
-4. Set this as your `SESSION_ID` environment variable (see Configuration below).
+1. Visit [https://mellowmd-site.pxxl.click/](https://mellowmd-site.pxxl.click/) and follow the pairing steps.
+2. After pairing, your `SESSION_ID` will be sent to you via WhatsApp DM.
+3. Copy it and set it as your `SESSION_ID` environment variable (see Configuration below).
 
 ---
 
@@ -31,13 +28,13 @@ Mellow MD authenticates via a `creds.json` file hosted on a **GitHub Gist**.
 Create a `.env` file in the project root based on `sample.env`:
 
 ```
-SESSION_ID=<your_gist_id>
+SESSION_ID=<your_session_id>
 PLATFORM=<e.g. Replit, VPS, Docker>
 ```
 
 | Variable | Description |
 |---|---|
-| `SESSION_ID` | GitHub Gist ID containing your `creds.json` |
+| `SESSION_ID` | Session ID received after pairing at the site |
 | `PLATFORM` | Label shown in the bot menu (e.g. `Replit`) |
 
 ### Bot Settings (`config.js`)
@@ -79,7 +76,7 @@ npm start
 ```bash
 docker build -t mellowmd .
 docker run -d \
-  -e SESSION_ID=<your_gist_id> \
+  -e SESSION_ID=<your_session_id> \
   -e PLATFORM=Docker \
   -p 5000:5000 \
   mellowmd
@@ -95,4 +92,4 @@ The Dockerfile clones the repository, installs dependencies, and starts the bot 
 npm start
 ```
 
-The bot will fetch `creds.json` from your Gist using `SESSION_ID` and connect to WhatsApp automatically. No QR scan is needed after the first pairing.
+The bot will use your `SESSION_ID` to authenticate and connect to WhatsApp automatically. No QR scan is needed after pairing.
