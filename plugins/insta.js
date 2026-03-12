@@ -1,30 +1,36 @@
-import { igdl } from "ruhend-scraper"
+import { igdl } from "ruhend-scraper";
 
 export default {
     name: "insta",
     description: "Download IG reels",
     isPublic: false,
     category: "Downloaders",
-    execute: async (sock, msg, args) => {
-        if(!args || args.length === 0) {
-            await sock.sendMessage(msg.key.remoteJid, {
-                text: "invalid url"
-            })
-            return
+    execute: async (sock, msg, args, quotedMessage) => {
+        let url;
+        if (args[0]) {
+            url = args[0];
+        } else if (quotedMessage) {
+            url =
+                quotedMessage?.conversation ||
+                quotedMessage?.extendedTextMessage?.text;
         }
-        const url = args[0];
-        
+        if (!url) {
+            await sock.sendMessage(msg.key.remoteJid, {
+                text: "Usage: tiktok <Insta URL> (or reply to a message with the URL)",
+            });
+            return;
+        }
+
         function checkInstagram(url) {
-            const igRegex = /(?:https?:\/\/)?(?:www\.)?instagram\.com\/(?:p|reel)\/([^/?#&]+)/i;
+            const igRegex =
+                /(?:https?:\/\/)?(?:www\.)?instagram\.com\/(?:p|reel)\/([^/?#&]+)/i;
             return igRegex.test(url);
         }
-        if(!checkInstagram(url)){
-            await sock.sendMessage(msg.key.remoteJid, {text: "Invalid url"})
+        if (!checkInstagram(url)) {
+            await sock.sendMessage(msg.key.remoteJid, { text: "Invalid url" });
         }
-        const res = await igdl(url)        
+        const res = await igdl(url);
         const data = res.data[0].url;
-        await sock.sendMessage(msg.key.remoteJid,
-            {video: {url: data}}
-        )
-    }
-}
+        await sock.sendMessage(msg.key.remoteJid, { video: { url: data } });
+    },
+};
