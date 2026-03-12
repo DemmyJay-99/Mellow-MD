@@ -1,28 +1,36 @@
-import { ttdl } from "ruhend-scraper"
+import { ttdl } from "ruhend-scraper";
 
 export default {
     name: "tiktok",
     description: "Download Tiktok videos",
     isPublic: false,
     category: "Downloaders",
-    execute: async (sock, msg, args) => {
-        if(!args || args.length === 0) {
+    execute: async (sock, msg, args, quotedMessage) => {
+        let url;
+        if (args[0]) {
+            url = args[0];
+        } else if (quotedMessage) {
+            url =
+                quotedMessage?.conversation ||
+                quotedMessage?.extendedTextMessage?.text;
+        }
+        if (!url) {
             await sock.sendMessage(msg.key.remoteJid, {
-                text: "Usage: tiktok <TikTok URL> (or reply to a message with the URL)"
-            })
-            return
+                text: "Usage: tiktok <TikTok URL> (or reply to a message with the URL)",
+            });
+            return;
         }
-        const url = args[0];
         function isTikTokUrlRegex(url) {
-          const tiktokRegex = new RegExp(/^(https?:\/\/)?(www\.|m\.|vm\.)?tiktok\.com\b/);
-          return tiktokRegex.test(url);
+            const tiktokRegex = new RegExp(
+                /https?:\/\/(?:www\.|vm\.|vt\.)?tiktok\.com\/(@[\w.-]+\/video\/(\d+)|[\w.-]+)/i,
+            );
+            return tiktokRegex.test(url);
         }
-        if(!isTikTokUrlRegex(url)) {
-           await sock.sendMessage(msg.key.remoteJid, {text: "Invalid url"})
+        if (!isTikTokUrlRegex(url)) {
+            await sock.sendMessage(msg.key.remoteJid, { text: "Invalid url" });
+            return;
         }
         let { video } = await ttdl(url);
-        await sock.sendMessage(msg.key.remoteJid,
-            {video: {url: video}}
-        )
-    }
-}
+        await sock.sendMessage(msg.key.remoteJid, { video: { url: video } });
+    },
+};
