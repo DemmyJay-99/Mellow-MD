@@ -34,6 +34,7 @@ const startBot = async () => {
             logger.child({ level: "fatal" }),
         ),
         logger: logger.child({ level: "fatal" }),
+        generateHighQualityLinkPreview: true,
         markOnlineOnConnect: false,
         printQRInTerminal: false,
         version: waVersion,
