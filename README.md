@@ -9,13 +9,13 @@ A WhatsApp bot built with the Baileys multi-device library. Once authenticated, 
 - Node.js v18 or higher
 - npm
 - A WhatsApp account to pair with the bot
-- A `SESSION_ID` obtained by pairing at [https://mellowmd-site.pxxl.click/](https://mellowmd-site.pxxl.click/)
+- A `SESSION_ID` obtained by pairing at [https://pairing-site-rho.vercel.app/](https://pairing-site-rho.vercel.app/)
 
 ---
 
 ## Getting Your Session ID
 
-1. Visit [https://mellowmd-site.pxxl.click/](https://mellowmd-site.pxxl.click/) and follow the pairing steps.
+1. Visit  [https://pairing-site-rho.vercel.app/](https://pairing-site-rho.vercel.app/) and follow the pairing steps.
 2. After pairing, your `SESSION_ID` will be sent to you via WhatsApp DM.
 3. Copy it and set it as your `SESSION_ID` environment variable (see Configuration below).
 
