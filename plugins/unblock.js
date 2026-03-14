@@ -30,7 +30,7 @@ export default {
         try {
             await sock.updateBlockStatus(targetJid, "unblock");
             await sock.sendMessage(remoteJid, {
-                text: `unlocked`,
+                text: `Unblocked`,
             });
         } catch (err) {
             console.error("block error:", err);
