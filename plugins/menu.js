@@ -32,6 +32,7 @@ export default {
       "Fun",
       "Owner",
       "AI",
+      'Group',
       "Uncategorized"
     ];
 
