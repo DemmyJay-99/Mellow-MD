@@ -23,14 +23,9 @@ export default {
     const title = search.title;
     const songImage = search.image;
     const lyrics = await getLyrics(artistName, title);
-    const ddd = await sock.sendMessage(msg.key.remoteJid, {
+    await sock.sendMessage(msg.key.remoteJid, {
       image: { url: songImage },
-      caption: `${title} by ${artistName}`,
+      caption: `*${title} by ${artistName} (lyrics)*\n\n${lyrics}`,
     });
-    await sock.sendMessage(
-      msg.key.remoteJid,
-      { text: lyrics },
-      { quoted: ddd },
-    );
   },
 };
