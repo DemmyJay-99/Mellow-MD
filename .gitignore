@@ -2,3 +2,5 @@
 *node_modules
 *session
 test/
+database/
+*.mp4
