@@ -19,9 +19,14 @@ export default {
     }
     const searches = await Client.songs.search(song);
     const search = searches[0];
-    const artistName = search.artist.name;
-    const title = search.title;
-    const songImage = search.image;
+    if (!search) {
+      return await sock.sendMessage(msg.key.remoteJid, {
+        text: "Song not found.",
+      });
+    }
+    const artistName = search?.artist?.name;
+    const title = search?.title;
+    const songImage = search?.image;
     const lyrics = await getLyrics(artistName, title);
     await sock.sendMessage(msg.key.remoteJid, {
       image: { url: songImage },
