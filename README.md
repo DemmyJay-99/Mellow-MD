@@ -59,6 +59,7 @@ npm install
 cp sample.env .env
 # Fill in SESSION_ID and PLATFORM in .env
 npm start
+
 ```
 
 ### Option 2 — Replit
