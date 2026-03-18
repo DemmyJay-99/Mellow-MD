@@ -35,6 +35,7 @@
     "pino": "^10.3.0",
     "qrcode-terminal": "^0.12.0",
     "ruhend-scraper": "^9.0.8",
-    "unicode-text-styler": "^1.0.6"
+    "unicode-text-styler": "^1.0.6",
+    "wa-sticker-formatter": "^4.4.4"
   }
 }
