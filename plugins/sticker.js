@@ -1,4 +1,4 @@
-import { StickerTypes } from "wa-sticker-formatter";
+import { StickerTypes } from "stickers-formatter";
 import id from "../lib/id.js";
 export default {
   name: "sticker",
@@ -6,7 +6,7 @@ export default {
   isPublic: false,
   category: "Media",
   execute: async (sock, msg, args, quotedMessage) => {
-    const { createSticker } = await import("wa-sticker-formatter");
+    const { createSticker } = await import("stickers-formatter");
     const { downloadContentFromMessage } = await import(
       "@whiskeysockets/baileys"
     );
