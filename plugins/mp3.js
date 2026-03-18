@@ -38,7 +38,7 @@ export default {
         } catch (e) {
             console.error("tomp3 error:", e);
             await sock.sendMessage(msg.key.remoteJid, {
-                text: "Failed to convert to MP3.",
+                text: "Conversion to MP3 failed.",
             });
         }
     },
