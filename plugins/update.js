@@ -1,5 +1,4 @@
 import { execSync } from "child_process";
-import { text } from "express";
 export default {
   name: "update",
   description: "Update the bot",
