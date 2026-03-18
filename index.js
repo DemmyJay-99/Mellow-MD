@@ -23,10 +23,10 @@ const checkUpdates = () => {
             .trim();
 
         if (local !== remote) {
-            console.log("Your bot is OUTDATED");
+            console.log("Your version of mellow-md is outdated");
 
             if (process.env.AUTO_UPDATE === "true") {
-                console.log("Auto-update enabled. Updating...");
+                console.log("Updating...");
 
                 execSync("git pull", { stdio: "inherit" });
 
