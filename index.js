@@ -1,8 +1,6 @@
 import makeWASocket, {
     useMultiFileAuthState,
     DisconnectReason,
-    jidNormalizedUser,
-    delay,
     makeCacheableSignalKeyStore,
     fetchLatestBaileysVersion,
 } from "@whiskeysockets/baileys";
@@ -11,6 +9,42 @@ import pino from "pino";
 import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
 configDotenv();
+import { execSync } from "child_process";
+
+const checkUpdates = () => {
+    try {
+        console.log("Checking for updates...");
+
+        execSync("git fetch", { stdio: "ignore" });
+
+        const local = execSync("git rev-parse HEAD").toString().trim();
+        const remote = execSync("git rev-parse origin/master")
+            .toString()
+            .trim();
+
+        if (local !== remote) {
+            console.log("Your bot is OUTDATED");
+
+            if (process.env.AUTO_UPDATE === "true") {
+                console.log("Auto-update enabled. Updating...");
+
+                execSync("git pull", { stdio: "inherit" });
+
+                console.log("Updated successfully. Restarting...");
+                process.exit(0);
+            } else {
+                console.log("Auto-update disabled. Please update manually.");
+            }
+        } else {
+            console.log("No updates found");
+        }
+    } catch (e) {
+        console.log("Error checking for updates:", e.message);
+    }
+};
+
+checkUpdates();
+setInterval(checkUpdates, 1000 * 60 * 60);
 
 const startBot = async () => {
     await checkSessionID(process.env.SESSION_ID);
@@ -37,7 +71,7 @@ const startBot = async () => {
         generateHighQualityLinkPreview: true,
         markOnlineOnConnect: false,
         printQRInTerminal: false,
-        markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false
+        markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false,
         version: waVersion,
     });
     sock.ev.on("creds.update", saveCreds);
