@@ -20,7 +20,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "pm2 start index.js --name mellow && pm2 logs mellow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
