@@ -37,6 +37,7 @@ const startBot = async () => {
         generateHighQualityLinkPreview: true,
         markOnlineOnConnect: false,
         printQRInTerminal: false,
+        markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false
         version: waVersion,
     });
     sock.ev.on("creds.update", saveCreds);
