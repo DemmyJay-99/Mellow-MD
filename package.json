@@ -21,6 +21,7 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2 start index.js --name mellow && pm2 logs mellow",
+    "stop": "pm2 stop mellow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
