@@ -9,7 +9,7 @@ import pino from "pino";
 import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
 configDotenv();
-import { execSync } from "child_process";
+import { execSync, exec } from "child_process";
 import pm2 from "pm2";
 
 const checkUpdates = () => {
@@ -52,8 +52,7 @@ const startBot = async () => {
         await checkSessionID(process.env.SESSION_ID)
     } catch (error) {
         console.error("Failed to validate session:", error.message);
-        pm2.killDaemon()
-        pm2.disconnect()
+       	exec('npm stop')
         process.exit(0)
     }
     const FALLBACK_VERSION = [2, 3000, 1033105955];
