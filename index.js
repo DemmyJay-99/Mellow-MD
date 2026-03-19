@@ -10,6 +10,7 @@ import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
 configDotenv();
 import { execSync } from "child_process";
+import pm2 from "pm2";
 
 const checkUpdates = () => {
     try {
@@ -47,7 +48,14 @@ checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
 
 const startBot = async () => {
-    await checkSessionID(process.env.SESSION_ID);
+    try{
+        await checkSessionID(process.env.SESSION_ID)
+    } catch (error) {
+        console.error("Failed to validate session:", error.message);
+        pm2.killDaemon()
+        pm2.disconnect()
+        process.exit(0)
+    }
     const FALLBACK_VERSION = [2, 3000, 1033105955];
     let waVersion = FALLBACK_VERSION;
     try {
