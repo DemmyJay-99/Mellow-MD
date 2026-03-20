@@ -46,6 +46,7 @@ REACT_EMOJI=
 GENIUS_API_KEY=
 ALWAYS_ONLINE=
 STICKER_PACKNAME=
+STICKER_AUTHOR=
 ```
 
 | Variable | Description |
@@ -57,7 +58,8 @@ STICKER_PACKNAME=
 | `REACT_EMOJI` | Emoji the bot reacts with when a command is used (e.g. `✨`) |
 | `GENIUS_API_KEY` | API key from [genius.com](https://genius.com/api-clients) for lyrics features |
 | `ALWAYS_ONLINE` | Set to `true` to keep the bot's WhatsApp status always online |
-| `STICKER_PACKNAME` | Name printed on stickers created by the bot |
+| `STICKER_PACKNAME` | Pack name printed on stickers created by the bot |
+| `STICKER_AUTHOR` | Author name printed on stickers created by the bot |
 
 ---
 
