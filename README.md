@@ -35,32 +35,29 @@
 
 ## Configuration
 
-### Environment Variables
-
-Create a `.env` file in the project root based on `sample.env`:
+Create a `.env` file in the project root based on `sample.env` and fill in the variables below:
 
 ```env
-SESSION_ID=<your_session_id>
-PLATFORM=<e.g. Replit, VPS, Panel>
+SESSION_ID=
+PLATFORM=
+AUTO_UPDATE=
+OWNER_NUMBER=
+REACT_EMOJI=
+GENIUS_API_KEY=
+ALWAYS_ONLINE=
+STICKER_PACKNAME=
 ```
 
 | Variable | Description |
 |---|---|
-| `SESSION_ID` | Session ID received after pairing |
-| `PLATFORM` | Label shown in the bot menu |
-
-### Bot Settings (`config.js`)
-
-Edit `config.js` to customise the bot behaviour:
-
-| Setting | Default | Description |
-|---|---|---|
-| `prefix` | `.` | Command prefix |
-| `ownerNumber` | `2348101653826` | Your WhatsApp number (with country code, no `+`) |
-| `botName` | `Mellow MD` | Name displayed in the menu |
-| `OwnerName` | `Mellow` | Owner name displayed in the menu |
-| `reactEmoji` | `✨` | Emoji reacted to each command |
-| `allowedUsers` | `[]` | Additional WhatsApp IDs allowed to use owner commands |
+| `SESSION_ID` | Session ID received after pairing at the pairing site |
+| `PLATFORM` | Label shown in the bot menu (e.g. `Replit`, `VPS`, `Panel`) |
+| `AUTO_UPDATE` | Set to `true` to enable automatic bot updates |
+| `OWNER_NUMBER` | Your WhatsApp number with country code, no `+` (e.g. `2348101653826`) |
+| `REACT_EMOJI` | Emoji the bot reacts with when a command is used (e.g. `✨`) |
+| `GENIUS_API_KEY` | API key from [genius.com](https://genius.com/api-clients) for lyrics features |
+| `ALWAYS_ONLINE` | Set to `true` to keep the bot's WhatsApp status always online |
+| `STICKER_PACKNAME` | Name printed on stickers created by the bot |
 
 ---
 
@@ -70,8 +67,8 @@ Edit `config.js` to customise the bot behaviour:
 
 ### Deploy Now
 
-[![Deploy on KataBump Panel](https://img.shields.io/badge/Deploy%20on%20KataBump-0e76a8?style=for-the-badge&logo=serverless&logoColor=white)](https://dashboard.katabump.com/auth/login#c0b714)
-[![Deploy on Bot-Hosting Panel](https://img.shields.io/badge/Deploy%20on%20Bot--Hosting-7b2ff7?style=for-the-badge&logo=serverless&logoColor=white)](https://bot-hosting.net/?aff=1280297606333071372)
+[![Deploy on KataBump](https://img.shields.io/badge/KataBump-0e76a8?style=for-the-badge&logo=serverless&logoColor=white)](https://dashboard.katabump.com/auth/login#c0b714)
+[![Deploy on Bot-Hosting Panel](https://img.shields.io/badge/Bot--Hosting.net-7b2ff7?style=for-the-badge&logo=serverless&logoColor=white)](https://bot-hosting.net/?aff=1280297606333071372)
 [![Deploy on Render](https://img.shields.io/badge/Deploy%20on%20Render-46e3b7?style=for-the-badge&logo=render&logoColor=black)](https://dashboard.render.com)
 [![Deploy on Replit](https://img.shields.io/badge/Deploy%20on%20Replit-f26207?style=for-the-badge&logo=replit&logoColor=white)](https://replit.com/github/DemmyJay-99/Mellow-MD)
 
