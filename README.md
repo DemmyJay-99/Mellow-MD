@@ -147,6 +147,8 @@ The bot will use your `SESSION_ID` to authenticate and connect to WhatsApp autom
 
 <div align="center">
 
+Developed by **[Mellow](https://github.com/DemmyJay-99)**
+
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:7b2ff7,100:f107a3&height=100&section=footer" width="100%"/>
 
 </div>
