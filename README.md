@@ -113,25 +113,10 @@ npm start
 
 ### Option 4 — Render
 
-1. Click **[Deploy on Render](https://dashboard.render.com)** above and create a new **Web Service**.
-2. Connect your forked GitHub repository.
-3. Set `SESSION_ID` and `PLATFORM` as environment variables in the Render dashboard.
-4. Set the start command to `npm start` and deploy.
-
----
-
-### Option 5 — Docker
-
-```bash
-docker build -t mellowmd .
-docker run -d \
-  -e SESSION_ID=<your_session_id> \
-  -e PLATFORM=Docker \
-  -p 5000:5000 \
-  mellowmd
-```
-
-The Dockerfile clones the repository, installs dependencies, and starts the bot on port `5000`.
+1. Create a repository and upload the official **Dockerfile**.
+2. Go to the Render Dashboard and create a new **Web Service**.
+3. Connect your repository and use the **Docker** runtime.
+4. Configure the mandatory environment variables (`SESSION_ID`, `PORT`).
 
 ---
 
