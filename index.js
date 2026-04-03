@@ -3,7 +3,7 @@ import makeWASocket, {
     DisconnectReason,
     makeCacheableSignalKeyStore,
     fetchLatestBaileysVersion,
-} from "@whiskeysockets/baileys";
+} from "baileys";
 import { configDotenv } from "dotenv";
 import pino from "pino";
 import checkSessionID from "./lib/session.js";

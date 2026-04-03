@@ -23,7 +23,7 @@ export default {
                 });
             }
 
-            const { downloadContentFromMessage } = await import("@whiskeysockets/baileys");
+            const { downloadContentFromMessage } = await import("baileys");
 
             const type = mediaType.replace("Message", "").toLowerCase();
 

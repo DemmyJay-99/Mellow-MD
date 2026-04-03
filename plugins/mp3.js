@@ -14,7 +14,7 @@ export default {
                 });
             }
             const { downloadContentFromMessage } = await import(
-                "@whiskeysockets/baileys"
+                "baileys"
             );
             const stream = await downloadContentFromMessage(
                 mediaMessage,

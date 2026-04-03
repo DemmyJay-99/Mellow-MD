@@ -8,7 +8,7 @@ export default {
   execute: async (sock, msg, args, quotedMessage) => {
     const { createSticker } = await import("stickers-formatter");
     const { downloadContentFromMessage } = await import(
-      "@whiskeysockets/baileys"
+      "baileys"
     );
     const mediaMessage =
       quotedMessage?.imageMessage ||
