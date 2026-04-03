@@ -25,8 +25,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^7.0.0-rc.9",
-    "@whiskeysockets/baileys": "github:4relial/Baileys#fixUpdateBlockStatus",
+    "baileys" : "git+https://lyfe00011-admin@bitbucket.org/lyfe00011/baileys.git",
     "axios": "^1.13.5",
     "convert-unicode-fonts": "^1.0.1",
     "dotenv": "^17.2.3",
