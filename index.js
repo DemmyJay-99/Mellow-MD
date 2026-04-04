@@ -1,8 +1,8 @@
-import makeWASocket, {
+import {
     useMultiFileAuthState,
     DisconnectReason,
     makeCacheableSignalKeyStore,
-    fetchLatestBaileysVersion,
+    makeWASocket,
 } from "@innovatorssoft/baileys";
 import { configDotenv } from "dotenv";
 import pino from "pino";
@@ -10,7 +10,6 @@ import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
 configDotenv();
 import { execSync, exec } from "child_process";
-import pm2 from "pm2";
 
 const checkUpdates = () => {
     try {
@@ -48,22 +47,12 @@ checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
 
 const startBot = async () => {
-    try{
-        await checkSessionID(process.env.SESSION_ID)
+    try {
+        await checkSessionID(process.env.SESSION_ID);
     } catch (error) {
         console.error("Failed to validate session:", error.message);
-       	exec('npm stop')
-        process.exit(0)
-    }
-    const FALLBACK_VERSION = [2, 3000, 1033105955];
-    let waVersion = FALLBACK_VERSION;
-    try {
-        const { version, isLatest } = await fetchLatestBaileysVersion();
-        if (version && Array.isArray(version)) {
-            waVersion = version;
-        }
-    } catch (e) {
-        console.log(e);
+        exec("npm stop");
+        process.exit(0);
     }
     const { state, saveCreds } = await useMultiFileAuthState("session");
     const logger = pino({ level: "fatal" });
@@ -79,7 +68,6 @@ const startBot = async () => {
         markOnlineOnConnect: false,
         printQRInTerminal: false,
         markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false,
-        version: waVersion,
     });
     sock.ev.on("creds.update", saveCreds);
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
