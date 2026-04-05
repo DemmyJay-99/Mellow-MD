@@ -47,6 +47,8 @@ export default {
         "add",
       );
       const status = res?.[0]?.status;
+      console.log(status);
+      console.log(res);
       if (status === 200 || status === "200") {
         await sock.sendMessage(remoteJid, { text: "User added successfully." });
       } else {
@@ -54,6 +56,7 @@ export default {
       }
     } catch (e) {
       console.error("add error:", e);
+      await sock.sendMessage(remoteJid, { text: "Failed to add user." });
     }
   },
 };
