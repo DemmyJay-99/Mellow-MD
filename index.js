@@ -94,9 +94,9 @@ const startBot = async () => {
     sock.ev.on("messages.upsert", async ({ messages }) => {
         const msg = messages[0];
         if (!msg || !msg.message) return;
-        const fromMe = msg.key.fromMe;
-        const botJid = sock.user?.id;
-        if (fromMe && msg.key.remoteJid === botJid) return;
+        // const fromMe = msg.key.fromMe;
+        // const botJid = sock.user?.id;
+        // if (fromMe && msg.key.remoteJid === botJid) return;
 
         try {
             await handleCommand(sock, msg);
