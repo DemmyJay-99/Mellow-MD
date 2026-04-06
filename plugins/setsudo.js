@@ -1,17 +1,5 @@
 import fs from "fs";
-import isSudo from "../lib/isSudo.js"
-
-const sudoPath = "./data/sudo.json";
-
-if (!fs.existsSync(sudoPath)) {
-  const dir = "./data";
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  fs.writeFileSync(sudoPath, JSON.stringify([]));
-}
-
-const sudoUsers = JSON.parse(fs.readFileSync(sudoPath));
+import isSudo from "../lib/isSudo.js";
 
 export default {
   name: "setsudo",
@@ -20,6 +8,8 @@ export default {
   category: "Owner",
   execute: async (sock, msg, args) => {
     const store = sock.signalRepository.lidMapping;
+    const sudoPath = "./data/sudo.json";
+    const sudoUsers = JSON.parse(fs.readFileSync(sudoPath));
     const remoteJid = msg.key.remoteJid;
     const ctxInfo = msg.message?.extendedTextMessage?.contextInfo;
     let targetJid;
@@ -36,7 +26,7 @@ export default {
         });
         return;
       }
-      targetJid = num + "@s.whatsapp.net";
+      targetJid = num;
     } else {
       await sock.sendMessage(remoteJid, {
         text: "Reply to a user or mention one, or use `.setsudo <number>`.",
@@ -47,14 +37,24 @@ export default {
     if (targetJid.endsWith("@lid")) {
       const p = await store.getPNForLID(targetJid);
       targetJid = p.split(":")[0];
+    } else if (targetJid.endsWith("@s.whatsapp.net")) {
+      targetJid = targetJid.split("@")[0];
     }
-    
+    const botId = sock.user.id.split(":")[0];
+    if (targetJid === botId) {
+      await sock.sendMessage(remoteJid, {
+        text: "You can't add bot as sudo.",
+      });
+      return;
+    }
+
     if (await isSudo(targetJid)) {
       await sock.sendMessage(remoteJid, {
         text: "User is already sudo.",
       });
       return;
     }
+
     sudoUsers.push(targetJid);
     fs.writeFileSync(sudoPath, JSON.stringify(sudoUsers));
     await sock.sendMessage(remoteJid, { text: `${targetJid} is now sudo` });

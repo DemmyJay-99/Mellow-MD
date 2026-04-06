@@ -3,4 +3,5 @@
 *session
 test/
 database/
+data/*.json
 *.mp4
