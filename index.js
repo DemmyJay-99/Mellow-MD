@@ -72,16 +72,23 @@ const startBot = async () => {
     sock.ev.on("creds.update", saveCreds);
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
         if (connection === "open") {
+            let hasSent = false;
+            async function sendMessage() {
+                const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
+                const ddd = await sock.sendMessage(user, {
+                    text: "Your bot has been deployed successfully",
+                });
+                await sock.sendMessage(
+                    user,
+                    { text: "Welcome to mellow md" },
+                    { quoted: ddd },
+                );
+                hasSent = true;
+            }
+            if (!hasSent) {
+                sendMessage();
+            }
             console.log("Connected to whatsapp");
-            const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-            const ddd = await sock.sendMessage(user, {
-                text: "Your bot has been deployed successfully",
-            });
-            await sock.sendMessage(
-                user,
-                { text: "Welcome to mellow md" },
-                { quoted: ddd },
-            );
         } else if (connection === "close") {
             const shouldReconnect =
                 lastDisconnect?.error?.output?.statusCode !==
