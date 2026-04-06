@@ -10,6 +10,7 @@ import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
 configDotenv();
 import { execSync, exec } from "child_process";
+import config from "./config.js"
 
 const checkUpdates = () => {
     try {
@@ -83,6 +84,9 @@ const startBot = async () => {
                     { text: "Welcome to mellow md" },
                     { quoted: ddd },
                 );
+                await sock.sendMessage(user, {
+                    text: `Type ${config.prefix}menu to see all commands`,
+                }
                 hasSent = true;
             }
             if (!hasSent) {
