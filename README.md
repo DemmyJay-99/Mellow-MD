@@ -18,7 +18,7 @@
 
 ## Prerequisites
 
-- Node.js v18 or higher
+- Node.js v20 or higher
 - npm
 - A WhatsApp account to pair with the bot
 - A `SESSION_ID` — get yours at **[pairing-site-rho.vercel.app](https://pairing-site-rho.vercel.app/)**
