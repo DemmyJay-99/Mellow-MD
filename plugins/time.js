@@ -8,9 +8,9 @@ export default {
             hour: "2-digit",
             minute: "2-digit",
             second: "2-digit",
-            hour12: true
+            hour12: true,
         });
 
-        await sock.sendMessage(msg.key.remoteJid, { text: `🕐 Current time: ${time}` });
-    }
-}
+        await sock.sendMessage(msg.key.remoteJid, { text: `Time: ${time}` });
+    },
+};
