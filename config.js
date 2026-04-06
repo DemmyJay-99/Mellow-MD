@@ -3,5 +3,4 @@ export default {
     botName: "Mellow MD",
     OwnerName: "Mellow",
     reactEmoji: "✨",
-    allowedUsers: [""],
 };
