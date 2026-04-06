@@ -20,7 +20,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --name mellow && pm2 logs mellow",
+    "start": "pm2 start . --attach --name mellow",
     "stop": "pm2 stop mellow",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

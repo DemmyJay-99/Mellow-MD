@@ -1,6 +1,6 @@
 import p from '../package.json' with { type: 'json' };
 
-const  version = p.version;
+const version = p.version;
 export default {
     name: "version",
     description: "Check the bot's current version",
