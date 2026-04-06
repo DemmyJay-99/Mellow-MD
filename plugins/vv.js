@@ -6,24 +6,27 @@ export default {
     execute: async (sock, msg, args) => {
         try {
             const remoteJid = msg.key.remoteJid;
-            const quoted = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+            const quoted =
+                msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
 
             if (!quoted) {
                 return sock.sendMessage(remoteJid, {
-                    text: "Reply to a view-once message with .vv"
+                    text: "Reply to a view-once message with .vv",
                 });
             }
 
-            const mediaType = Object.keys(quoted)[0];  
+            const mediaType = Object.keys(quoted)[0];
             const media = quoted[mediaType];
 
             if (!media?.viewOnce) {
                 return sock.sendMessage(remoteJid, {
-                    text: "Quoted message is not a view-once message."
+                    text: "Quoted message is not a view-once message.",
                 });
             }
 
-            const { downloadContentFromMessage } = await import("baileys");
+            const { downloadContentFromMessage } = await import(
+                "@innovatorssoft/baileys"
+            );
 
             const type = mediaType.replace("Message", "").toLowerCase();
 
@@ -50,12 +53,11 @@ export default {
             }
 
             await sock.sendMessage(remoteJid, sendObject);
-
         } catch (err) {
             console.error("vv error:", err);
             sock.sendMessage(msg.key.remoteJid, {
-                text: "❌ Failed to reveal view-once."
+                text: "❌ Failed to reveal view-once.",
             });
         }
-    }
+    },
 };
