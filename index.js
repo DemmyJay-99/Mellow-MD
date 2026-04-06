@@ -86,7 +86,7 @@ const startBot = async () => {
                 );
                 await sock.sendMessage(user, {
                     text: `Type ${config.prefix}menu to see all commands`,
-                }
+                })
                 hasSent = true;
             }
             if (!hasSent) {
