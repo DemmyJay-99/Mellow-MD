@@ -8,7 +8,9 @@ import { configDotenv } from "dotenv";
 import pino from "pino";
 import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
-configDotenv();
+configDotenv({
+    quiet: true
+});
 import { execSync, exec } from "child_process";
 import config from "./config.js"
 
