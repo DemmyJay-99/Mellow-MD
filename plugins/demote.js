@@ -1,12 +1,13 @@
 import normaliseLid from "../lib/normaliseLid.js";
 
 export default {
-  name: "promote",
-  description: "Promote a user to admin",
+  name: "demote",
+  description: "Demote a user",
   isPublic: false,
   category: "Group",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
+    const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
 
     if (!remoteJid?.endsWith("@g.us")) {
       return sock.sendMessage(remoteJid, {
@@ -23,11 +24,10 @@ export default {
     const admins = metadata.participants
       .filter((p) => p.admin || p.admin === "superadmin")
       .map((p) => p.id);
+
     if (!admins.includes(senderJid)) {
       return sock.sendMessage(remoteJid, { text: "Admin only." });
     }
-
-    const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
 
     const isBotAdmin = metadata.participants.find((p) => p.id === user)?.admin;
 
@@ -60,20 +60,20 @@ export default {
       targetJid = pn + "@s.whatsapp.net";
     }
 
-    if (admins.includes(targetJid)) {
-      return sock.sendMessage(remoteJid, { text: "User is already an admin." });
+    if (!admins.includes(targetJid)) {
+      return sock.sendMessage(remoteJid, { text: "User cannot be demoted" });
     }
 
-    if (targetJid === user) {
-      return sock.sendMessage(remoteJid, { text: "I can't promote myself." });
-    }
+    // if (targetJid === user) {
+    //   return sock.sendMessage(remoteJid, { text: "I can't promote myself." });
+    // }
 
     try {
-      await sock.groupParticipantsUpdate(remoteJid, [targetJid], "promote");
-      await sock.sendMessage(remoteJid, { text: "Promoted." });
+      await sock.groupParticipantsUpdate(remoteJid, [targetJid], "demote");
+      await sock.sendMessage(remoteJid, { text: "Demoted." });
     } catch (e) {
-      console.error("promote error:", e);
-      await sock.sendMessage(remoteJid, { text: "Failed to promote user." });
+      console.error("Demote error:", e);
+      await sock.sendMessage(remoteJid, { text: "Failed to demote user." });
     }
   },
 };
