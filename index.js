@@ -112,7 +112,7 @@ const startBot = async () => {
         const msg = messages[0];
         if (!msg || !msg.message) return;
         const messageTime = msg.messageTimestamp;
-        
+        console.log(messageTime, BOT_START_TIME)
         if (messageTime < BOT_START_TIME) return;
 
         if (seenMessages.has(msg.key.id)) return;
