@@ -5,7 +5,7 @@ export default {
   name: "setsudo",
   description: "Add sudo user",
   isPublic: false,
-  category: "Owner",
+  category: "Sudo",
   execute: async (sock, msg, args) => {
     const store = sock.signalRepository.lidMapping;
     const sudoPath = "./data/sudo.json";

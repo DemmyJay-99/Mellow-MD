@@ -4,7 +4,7 @@ export default {
    name: "getsudo",
    description: "Get sudo users",
    isPublic: false,
-   category: "Owner",
+   category: "Sudo",
    execute: async (sock, msg, args) => {
       const remoteJid = msg.key.remoteJid;
       const sudoUsers = sudo.map((user) => `${user}`).join("\n");

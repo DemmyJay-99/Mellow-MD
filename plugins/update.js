@@ -3,7 +3,7 @@ export default {
   name: "update",
   description: "Update the bot",
   isPublic: false,
-  category: "Owner",
+  category: "Bot",
   execute: async (sock, msg, args) => {
     try {
       execSync("git fetch", { stdio: "ignore" });
