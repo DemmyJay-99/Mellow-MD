@@ -3,7 +3,6 @@ import {
     DisconnectReason,
     makeCacheableSignalKeyStore,
     makeWASocket,
-    delay,
 } from "@innovatorssoft/baileys";
 import { configDotenv } from "dotenv";
 import pino from "pino";
@@ -12,40 +11,9 @@ import handleCommand from "./lib/commandHandler.js";
 configDotenv({
     quiet: true,
 });
-import { execSync, exec } from "child_process";
+import { exec } from "child_process";
 import config from "./config.js"
-
-const checkUpdates = () => {
-    try {
-        console.log("Checking for updates...");
-
-        execSync("git fetch", { stdio: "ignore" });
-
-        const local = execSync("git rev-parse HEAD").toString().trim();
-        const remote = execSync("git rev-parse origin/master")
-            .toString()
-            .trim();
-
-        if (local !== remote) {
-            console.log("Your version of mellow-md is outdated");
-
-            if (process.env.AUTO_UPDATE === "true") {
-                console.log("Updating...");
-
-                execSync("git pull", { stdio: "inherit" });
-
-                console.log("Updated successfully. Restarting...");
-                process.exit(0);
-            } else {
-                console.log("Auto-update disabled. Please update manually.");
-            }
-        } else {
-            console.log("No updates found");
-        }
-    } catch (e) {
-        console.log("Error checking for updates:", e.message);
-    }
-};
+import checkUpdates from "./lib/checkUpdates.js"
 
 checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
@@ -103,7 +71,7 @@ const startBot = async () => {
             if (!hasSent) {
                 sendMessage();
             }
-            console.log("Connected to whatsapp");
+            console.log('Connected to whatsapp');
         } else if (connection === "close") {
             const shouldReconnect =
                 lastDisconnect?.error?.output?.statusCode !==
