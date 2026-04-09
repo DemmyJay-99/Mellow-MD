@@ -1,10 +1,9 @@
-import fs from 'fs';
-import path from 'path';
-import { json } from 'stream/consumers';
-import { fileURLToPath } from 'url';
 import { transform, getFonts } from "convert-unicode-fonts";
 import { getCommands } from "../lib/commandHandler.js";
 import config from '../config.js';
+import getPlugins from "../lib/getPlugins.js"
+import p from '../package.json' with { type: 'json' };
+import { formatSeconds } from "../lib/uptime.js"
 
 export default {
   name: "menu",
@@ -62,20 +61,30 @@ export default {
 
     const joinedText = lines.join("\n").toUpperCase();
     const fonts = getFonts();
-    const hour = new Date().getHours();
-    const minute = new Date().getMinutes();
+    const time = new Date().toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: true,
+    });
     const date = new Date();
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const day = days[date.getDay()];
-
+    const plugins = await getPlugins();
+    const version = p.version;
+    const uptime = process.uptime();
+    const formattedSeconds =  formatSeconds(uptime);
     const text =
       "```╭═══ MELLOW MD ═══⊷\n" +
       "┃❃╭──────────────\n" +
       `┃❃│Prefix: ${config.prefix}\n` +
       `┃❃│User: ${config.OwnerName}\n` +
-      `┃❃│Time: ${hour}:${minute}\n` +
+      `┃❃│Time: ${time}\n` +
       `┃❃│Day: ${day}\n` +
       `┃❃│Platform: ${process.env.PLATFORM}\n` +
+      `┃❃│Plugins: ${plugins.length}\n` +
+      `┃❃│Version: ${version}\n` +
+      `┃❃│Uptime: ${formattedSeconds}\n` +
       "┃❃╰───────────────\n" +
       "╰═════════════════⊷```\n" +
       `${joinedText}\n` +
