@@ -50,7 +50,7 @@ checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
 
 const startBot = async () => {
-    const BOT_START_TIME = Math.floor(Date.now() / 1000);
+    let BOT_START_TIME = Infinity;
     const seenMessages = new Set();
     try {
         await checkSessionID(process.env.SESSION_ID);
@@ -78,6 +78,7 @@ const startBot = async () => {
     sock.ev.on("creds.update", saveCreds);
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
         if (connection === "open") {
+            BOT_START_TIME = Math.floor(Date.now() / 1000);
             let hasSent = false;
             async function sendMessage() {
                 const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
