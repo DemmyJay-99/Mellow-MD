@@ -3,6 +3,7 @@ import {
     DisconnectReason,
     makeCacheableSignalKeyStore,
     makeWASocket,
+    delay,
 } from "@innovatorssoft/baileys";
 import { configDotenv } from "dotenv";
 import pino from "pino";
@@ -51,6 +52,8 @@ setInterval(checkUpdates, 1000 * 60 * 60);
 
 const startBot = async () => {
     let BOT_START_TIME = Infinity;
+    let CONNECTED_AT_MS = 0;
+    const STARTUP_GRACE_MS = 10000
     const seenMessages = new Set();
     try {
         await checkSessionID(process.env.SESSION_ID);
@@ -72,13 +75,15 @@ const startBot = async () => {
         generateHighQualityLinkPreview: true,
         markOnlineOnConnect: false,
         syncFullHistory: false,
+        shouldSyncHistoryMessage: () => false,
         printQRInTerminal: false,
         markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false,
     });
     sock.ev.on("creds.update", saveCreds);
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
         if (connection === "open") {
-            BOT_START_TIME = Math.floor(Date.now() / 1000);
+            CONNECTED_AT_MS = Date.now();
+            BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
             let hasSent = false;
             async function sendMessage() {
                 const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
@@ -109,12 +114,20 @@ const startBot = async () => {
         }
     });
     sock.ev.on("messages.upsert", async ({ messages, type }) => {
-        if (type !== "notify") return;
+         if (CONNECTED_AT_MS && Date.now() - CONNECTED_AT_MS < STARTUP_GRACE_MS) {
+            return;
+          }
         const msg = messages[0];
         if (!msg || !msg.message) return;
+        if (type !== "notify") {
+            return      
+        }
         const messageTime = msg.messageTimestamp;
-        console.log(messageTime, BOT_START_TIME)
-        if (messageTime < BOT_START_TIME) return;
+        
+        if (messageTime < BOT_START_TIME) {
+            console.log("Message received before bot started, ignoring...");
+            return;      
+        };
 
         if (seenMessages.has(msg.key.id)) return;
         seenMessages.add(msg.key.id);
