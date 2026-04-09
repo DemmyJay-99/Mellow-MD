@@ -53,7 +53,6 @@ export default {
             mentions: nonAdmins,
          });
       } else if (repliedMessage) {
-         console.log(repliedMessage);
          await sock.sendMessage(remoteJid, {
             text: `${repliedMessage}`,
             mentions: members,
