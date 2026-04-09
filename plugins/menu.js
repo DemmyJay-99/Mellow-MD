@@ -52,7 +52,7 @@ export default {
 
       cmdsInCategory.sort((a, b) => a.name.localeCompare(b.name));
 
-      lines.push(`╰─────────────────`);
+      lines.push(`╰───────────────`);
       lines.push(`╭─ ❏ ${category.toUpperCase()} ❏ `);
 
       for (const c of cmdsInCategory) {
