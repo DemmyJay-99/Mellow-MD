@@ -9,7 +9,7 @@ import pino from "pino";
 import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
 configDotenv({
-    quiet: true
+    quiet: true,
 });
 import { execSync, exec } from "child_process";
 import config from "./config.js"
@@ -50,6 +50,8 @@ checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
 
 const startBot = async () => {
+    const BOT_START_TIME = Math.floor(Date.now() / 1000);
+    const seenMessages = new Set();
     try {
         await checkSessionID(process.env.SESSION_ID);
     } catch (error) {
@@ -69,6 +71,7 @@ const startBot = async () => {
         logger: logger.child({ level: "fatal" }),
         generateHighQualityLinkPreview: true,
         markOnlineOnConnect: false,
+        syncFullHistory: false,
         printQRInTerminal: false,
         markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false,
     });
@@ -104,12 +107,22 @@ const startBot = async () => {
             }
         }
     });
-    sock.ev.on("messages.upsert", async ({ messages }) => {
+    sock.ev.on("messages.upsert", async ({ messages, type }) => {
+        if (type !== "notify") return;
         const msg = messages[0];
         if (!msg || !msg.message) return;
+        const messageTime = msg.messageTimestamp;
+        
+        if (messageTime < BOT_START_TIME) return;
+
+        if (seenMessages.has(msg.key.id)) return;
+        seenMessages.add(msg.key.id);
+        const id = msg.key.id
+         setTimeout(() => seenMessages.delete(id), 60 * 1000);
+        
         // const fromMe = msg.key.fromMe;
         // const botJid = sock.user?.id;
-        // if (fromMe && msg.key.remoteJid === botJid) return;
+        // if (fromMe) return;
 
         try {
             await handleCommand(sock, msg);

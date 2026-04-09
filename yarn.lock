@@ -269,30 +269,6 @@
     qrcode-terminal "^0.12.0"
     ws "^8.13.0"
 
-"@itsukichan/baileys@^7.3.2":
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/@itsukichan/baileys/-/baileys-7.3.2.tgz#fa82586390b9d8e48c1e91ec188dfb5e6dbca637"
-  integrity sha512-WXQhqd9jkdkFmxM0gGMslGrIMvR5vTMJTN/8pwSlv7tf+7m+Fm/k9m6ZgYdEC5iE8WsTgKhvtU8ak4BeY0+RCQ==
-  dependencies:
-    "@adiwajshing/keyed-db" "^0.2.4"
-    "@cacheable/node-cache" "1.5.3"
-    "@hapi/boom" "^9.1.3"
-    "@itsukichan/eslint-config" "^1.0.0"
-    "@itsukichan/libsignal-node" "^1.0.1"
-    async-mutex "^0.5.0"
-    audio-decode "^2.2.2"
-    axios "^1.12.1"
-    cache-manager "^5.7.6"
-    fflate "^0.8.2"
-    link-preview-js "^3.0.14"
-    lodash "^4.17.21"
-    lru-cache "^11.1.0"
-    music-metadata "^7.12.3"
-    pino "^9.6"
-    protobufjs "^7.2.4"
-    qrcode-terminal "^0.12.0"
-    ws "^8.13.0"
-
 "@itsukichan/eslint-config@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@itsukichan/eslint-config/-/eslint-config-1.0.0.tgz#a7d2f2bd29547c117e5023da44bfbe63c0f3c29b"
