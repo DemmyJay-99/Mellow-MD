@@ -13,7 +13,7 @@ export default {
   description: "Enable or disable antilink",
   isPublic: false,
   category: "Group",
-  Usage: "antilink on|off|set <warn|kick|delete>",
+  usage: "antilink on|off|set <warn|kick|delete>",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {
@@ -48,7 +48,7 @@ export default {
         text: "Antilink enabled.",
       });
     } else if (action === "off") {
-      await setGroupConfig(remoteJid, { ...groupConfig, enabled: false });
+      await setGroupConfig(remoteJid, {...groupConfig, enabled: false});
       await sock.sendMessage(remoteJid, {
         text: "Antilink disabled.",
       });
@@ -59,7 +59,7 @@ export default {
           text: "Invalid action. Use 'warn', 'kick', or 'delete'.",
         });
       }
-      await setGroupConfig(remoteJid, { enabled: true, action: newAction });
+      await setGroupConfig(remoteJid, {enabled: true, action: newAction});
       await sock.sendMessage(remoteJid, {
         text: `Antilink action set to ${newAction}.`,
       });

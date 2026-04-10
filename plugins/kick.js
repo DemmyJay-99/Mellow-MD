@@ -3,7 +3,7 @@ export default {
   description: "Remove a user from the group",
   isPublic: false,
   category: "Group",
-  Usage: "Reply to a user, mention them, or use `.kick <number>`.",
+  usage: "Reply to a user, mention them, or use `.kick <number>`.",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
 
@@ -15,23 +15,18 @@ export default {
 
     const metadata = await sock.groupMetadata(remoteJid);
     const senderJid = msg.key.participant || msg.key.remoteJid;
-    const admins = metadata.participants
-      .filter((p) => p.admin)
-      .map((p) => p.id);
+    const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
 
     if (!admins.includes(senderJid) && !msg.key.fromMe) {
-      return sock.sendMessage(remoteJid, { text: "Admin only." });
+      return sock.sendMessage(remoteJid, {text: "Admin only."});
     }
 
     const ctxInfo = msg.message?.extendedTextMessage?.contextInfo;
-    let targetJid =
-      ctxInfo?.participant ||
-      (ctxInfo?.mentionedJid?.length ? ctxInfo.mentionedJid[0] : null);
+    let targetJid = ctxInfo?.participant || (ctxInfo?.mentionedJid?.length ? ctxInfo.mentionedJid[0] : null);
 
     if (!targetJid && args[0]) {
       const num = args[0].replace(/\D/g, "");
-      if (!num)
-        return sock.sendMessage(remoteJid, { text: "Provide a valid number." });
+      if (!num) return sock.sendMessage(remoteJid, {text: "Provide a valid number."});
       targetJid = `${num}@s.whatsapp.net`;
     }
 
@@ -43,10 +38,10 @@ export default {
 
     try {
       await sock.groupParticipantsUpdate(remoteJid, [targetJid], "remove");
-      await sock.sendMessage(remoteJid, { text: "Removed." });
+      await sock.sendMessage(remoteJid, {text: "Removed."});
     } catch (e) {
       console.error("kick error:", e);
-      await sock.sendMessage(remoteJid, { text: "Failed to remove user." });
+      await sock.sendMessage(remoteJid, {text: "Failed to remove user."});
     }
   },
 };

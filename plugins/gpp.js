@@ -1,11 +1,11 @@
-import { downloadContentFromMessage } from "@innovatorssoft/baileys";
+import {downloadContentFromMessage} from "@innovatorssoft/baileys";
 
 export default {
   name: "gpp",
   description: "Set group profile picture",
   isPublic: false,
   category: "Group",
-  Usage: "Reply to an image with .gpp",
+  usage: "Reply to an image with .gpp",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {
@@ -13,8 +13,7 @@ export default {
         text: "This command only works in groups.",
       });
     }
-    const quotedMessage =
-      msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+    const quotedMessage = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
     const media = quotedMessage?.imageMessage;
     if (!quotedMessage || !quotedMessage.imageMessage) {
       return sock.sendMessage(remoteJid, {

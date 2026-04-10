@@ -5,10 +5,10 @@ export default {
   description: "Restart the bot",
   isPublic: false,
   category: "Bot",
-  Usage: "restart",
+  usage: "restart",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
-    await sock.sendMessage(remoteJid, { text: "Restarting..." });
+    await sock.sendMessage(remoteJid, {text: "Restarting..."});
     await clearReact(sock, msg);
     setTimeout(() => {
       process.exit(0);

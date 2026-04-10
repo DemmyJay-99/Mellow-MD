@@ -5,7 +5,7 @@ export default {
   description: "Add profile picture",
   isPublic: false,
   category: "Owner",
-  Usage: "Reply to an image with .addpp",
+  usage: "Reply to an image with .addpp",
   execute: async (sock, msg, args, quotedMessage) => {
     const remoteJid = msg.key.remoteJid;
     const media = quotedMessage?.imageMessage;
@@ -23,7 +23,7 @@ export default {
     if (!remoteJid.endsWith("@g.us")) {
       const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
       await sock.updateProfilePicture(user, buffer);
-      await sock.sendMessage(remoteJid, { text: "Profile picture updated" });
+      await sock.sendMessage(remoteJid, {text: "Profile picture updated"});
       return;
     }
     await sock.updateProfilePicture(remoteJid, buffer);
