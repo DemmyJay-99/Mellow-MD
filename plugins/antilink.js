@@ -33,7 +33,7 @@ export default {
     const groupConfig = await getGroupConfig(remoteJid)
     if (!action) {
       return sock.sendMessage(remoteJid, {
-        text: "Please provide an action: enable or disable.",
+        text: "Please provide an action: on, off or set <action>.",
       });
     }
     if (action === "on") {
