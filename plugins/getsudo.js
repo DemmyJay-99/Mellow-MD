@@ -1,4 +1,4 @@
-import sudo from  "../data/sudo.json" with { type: "json" };
+import fs from "fs"
 
 export default {
    name: "getsudo",
@@ -7,6 +7,7 @@ export default {
    category: "Sudo",
    execute: async (sock, msg, args) => {
       const remoteJid = msg.key.remoteJid;
+      const sudo = JSON.parse(fs.readFileSync("./data/sudo.json"));
       const sudoUsers = sudo.map((user) => `${user}`).join("\n");
       await sock.sendMessage(remoteJid, { text: `Sudo users are: ${sudoUsers}` });
    }
