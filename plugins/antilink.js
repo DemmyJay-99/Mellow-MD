@@ -1,5 +1,10 @@
 import normalizeJid from "../lib/normaliseLid.js";
-import { getGroupConfig, setGroupConfig, getWarns, setWarns } from "../lib/index.js";
+import {
+  getGroupConfig,
+  setGroupConfig,
+  getWarns,
+  setWarns,
+} from "../lib/index.js";
 
 const WARN_LIMIT = Number(process.env.WARN_LIMIT) || 3;
 
@@ -31,14 +36,14 @@ export default {
       });
     }
     const action = args[0];
-    const groupConfig = await getGroupConfig(remoteJid)
+    const groupConfig = await getGroupConfig(remoteJid);
     if (!action) {
       return sock.sendMessage(remoteJid, {
         text: "Please provide an action: on, off or set <action>.",
       });
     }
     if (action === "on") {
-      await setGroupConfig(remoteJid, {...groupConfig, enabled: true });
+      await setGroupConfig(remoteJid, { ...groupConfig, enabled: true });
       await sock.sendMessage(remoteJid, {
         text: "Antilink enabled.",
       });
@@ -46,18 +51,18 @@ export default {
       await setGroupConfig(remoteJid, { ...groupConfig, enabled: false });
       await sock.sendMessage(remoteJid, {
         text: "Antilink disabled.",
-      })
-    } else if (action === 'set') {
+      });
+    } else if (action === "set") {
       const newAction = args[1];
-      if (!newAction || !['warn', 'kick', 'delete'].includes(newAction)) {
+      if (!newAction || !["warn", "kick", "delete"].includes(newAction)) {
         return sock.sendMessage(remoteJid, {
           text: "Invalid action. Use 'warn', 'kick', or 'delete'.",
         });
       }
       await setGroupConfig(remoteJid, { enabled: true, action: newAction });
       await sock.sendMessage(remoteJid, {
-        text: `Antilink action set to ${newAction}.`
-      })
+        text: `Antilink action set to ${newAction}.`,
+      });
     }
   },
   onMessage: async (sock, msg, body) => {
@@ -66,7 +71,8 @@ export default {
     if (!remoteJid.endsWith("@g.us")) return;
     const groupConfig = await getGroupConfig(remoteJid);
     if (!groupConfig.enabled) return;
-    const linkRegex = /(https?:\/\/|www\.|chat\.whatsapp\.com|t\.me|discord\.gg)/i;
+    const linkRegex =
+      /(https?:\/\/|www\.|chat\.whatsapp\.com|t\.me|discord\.gg)/i;
     if (linkRegex.test(body)) {
       let sender = msg.key.participant || msg.key.remoteJid;
       if (sender.endsWith("@lid")) {
@@ -78,19 +84,19 @@ export default {
       const isAdmin = groupAdmins.some((admin) => admin.id === sender);
       if (isAdmin) return;
       if (groupConfig.action === "warn") {
-        const warnCount = await getWarns(remoteJid, sender);  
+        const warnCount = await getWarns(remoteJid, sender);
         if (warnCount + 1 >= WARN_LIMIT) {
           await sock.groupParticipantsUpdate(remoteJid, [sender], "remove");
           await sock.sendMessage(remoteJid, {
             text: `@${sender.split("@")[0]} has been kicked for sending too many links.`,
             mentions: [sender],
           });
-          await setWarns(remoteJid, sender, 0)
+          await setWarns(remoteJid, sender, 0);
           return;
         }
         const newWarnCount = warnCount + 1;
-        await setWarns(remoteJid, sender, newWarnCount)
-        
+        await setWarns(remoteJid, sender, newWarnCount);
+
         await sock.sendMessage(remoteJid, {
           text: `Warning @${sender.split("@")[0]}! Links are not allowed in this group.\n Warn count: ${newWarnCount}`,
           mentions: [sender],
@@ -116,8 +122,8 @@ export default {
             fromMe: false,
             id: msg.key.id,
             participant: sender,
-          }
-        })
+          },
+        });
       }
     }
   },

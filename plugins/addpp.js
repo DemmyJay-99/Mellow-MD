@@ -1,7 +1,7 @@
-import { downloadContentFromMessage } from '@innovatorssoft/baileys'
+import { downloadContentFromMessage } from "@innovatorssoft/baileys";
 
 export default {
-   name: "addpp",
+  name: "addpp",
   description: "Add profile picture",
   isPublic: false,
   category: "Owner",
@@ -10,10 +10,12 @@ export default {
     const remoteJid = msg.key.remoteJid;
     const media = quotedMessage?.imageMessage;
     if (!media) {
-       await sock.sendMessage(remoteJid, { text: "Reply to an image with .addpp" });
-       return;
+      await sock.sendMessage(remoteJid, {
+        text: "Reply to an image with .addpp",
+      });
+      return;
     }
-    const stream = await downloadContentFromMessage(media, 'image');
+    const stream = await downloadContentFromMessage(media, "image");
     let buffer = Buffer.from([]);
     for await (const chunk of stream) {
       buffer = Buffer.concat([buffer, chunk]);
@@ -26,5 +28,5 @@ export default {
     }
     await sock.updateProfilePicture(remoteJid, buffer);
     await sock.sendMessage(remoteJid, { text: "Profile picture updated" });
-  }
-}
+  },
+};

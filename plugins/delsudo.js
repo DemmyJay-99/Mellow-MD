@@ -45,5 +45,8 @@ export default {
       }
       sudoUsers.splice(index, 1);
       fs.writeFileSync(sudoPath, JSON.stringify(sudoUsers));
-      await sock.sendMessage(remoteJid, { text: `${targetJid} is no longer sudo` });
-}}
+      await sock.sendMessage(remoteJid, {
+         text: `${targetJid} is no longer sudo`,
+      });
+   },
+};
