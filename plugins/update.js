@@ -4,6 +4,7 @@ export default {
   description: "Update the bot",
   isPublic: false,
   category: "Bot",
+  Usage: "update(to check for updates), update now (to update immediately)",
   execute: async (sock, msg, args) => {
     try {
       execSync("git fetch", { stdio: "ignore" });

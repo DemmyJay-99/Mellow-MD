@@ -3,6 +3,7 @@ export default {
     description: "Get the repository link of the bot",
     isPublic: false,
     category: "Bot",
+    Usage: "repo",
     execute: async (sock, msg, args) => {
       const remoteJid = msg.key.remoteJid;
       const link = "Repo link: https://github.com/DemmyJay-99/Mellow-MD.git\n\nDon't forget to give a star to the repo"

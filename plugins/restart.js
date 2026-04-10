@@ -5,6 +5,7 @@ export default {
   description: "Restart the bot",
   isPublic: false,
   category: "Bot",
+  Usage: "restart",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     await sock.sendMessage(remoteJid, { text: "Restarting..." });

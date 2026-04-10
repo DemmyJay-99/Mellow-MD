@@ -5,6 +5,7 @@ export default {
   description: "Add profile picture",
   isPublic: false,
   category: "Owner",
+  Usage: "Reply to an image with .addpp",
   execute: async (sock, msg, args, quotedMessage) => {
     const remoteJid = msg.key.remoteJid;
     const media = quotedMessage?.imageMessage;

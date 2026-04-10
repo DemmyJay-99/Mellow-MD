@@ -3,6 +3,7 @@ export default {
   description: "Remove a user from the group",
   isPublic: false,
   category: "Group",
+  Usage: "Reply to a user, mention them, or use `.kick <number>`.",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
 

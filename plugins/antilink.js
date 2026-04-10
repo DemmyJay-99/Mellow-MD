@@ -8,6 +8,7 @@ export default {
   description: "Enable or disable antilink",
   isPublic: false,
   category: "Group",
+  Usage: "antilink on|off|set <warn|kick|delete>",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {

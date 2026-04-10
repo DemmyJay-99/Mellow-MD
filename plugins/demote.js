@@ -5,6 +5,7 @@ export default {
   description: "Demote a user",
   isPublic: false,
   category: "Group",
+  Usage: "Reply to a user, mention them, or use `.demote <number>`.",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";

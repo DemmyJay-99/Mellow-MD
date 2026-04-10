@@ -3,6 +3,7 @@ export default {
    description: "Tag all members",
    isPublic: false,
    category: "Group",
+   Usage: "tag all|admins|nonadmins or reply to a message with tag",
    execute: async (sock, msg, args, quotedMessage) => {
       const remoteJid = msg.key.remoteJid;
       if (!remoteJid.endsWith("@g.us")) {

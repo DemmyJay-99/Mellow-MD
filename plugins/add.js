@@ -3,6 +3,7 @@ export default {
   description: "Add a user to the group",
   isPublic: false,
   category: "Group",
+  Usage: ".add <number> ",
   execute: async (sock, msg, args, quotedMessage) => {
     const remoteJid = msg.key.remoteJid;
 
@@ -36,7 +37,7 @@ export default {
 
     if (!targetJid) {
       return sock.sendMessage(remoteJid, {
-        text: "Reply to a user, mention them, or use `.add <number>`.",
+        text: "Reply to a user or use `.add <number>`.",
       });
     }
 

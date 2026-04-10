@@ -4,6 +4,7 @@ export default {
     description: "Convert video to MP3",
     isPublic: false,
     category: "Media",
+        Usage: "Reply to a video or document message with .mp3 to convert it to MP3",
     execute: async (sock, msg, args, quotedMessage) => {
         try {
             const mediaMessage =

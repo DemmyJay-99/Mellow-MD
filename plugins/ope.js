@@ -3,6 +3,7 @@ export default {
     description: "",
     isPublic: false,
     category: "Owner",
+        Usage: "ope <command>",
     async execute(sock, msg, args) {
         const { getCommands } = await import("../../commandHandler.js");
         const commands = getCommands();

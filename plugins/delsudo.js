@@ -6,6 +6,7 @@ export default {
    description: "Remove a user from sudo",
    isPublic: false,
    category: "Sudo",
+   Usage: "Reply to a user or mention one, or use `.delsudo <number>`.",
    execute: async (sock, msg, args) => {
       const remoteJid = msg.key.remoteJid;
       const sudoPath = "./data/sudo.json";

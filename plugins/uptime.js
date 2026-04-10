@@ -4,6 +4,7 @@ export default{
     description: "Check the bot's uptime",
     isPublic: false,
     category: "Utility",
+        Usage: "uptime",
     execute: async (sock, msg, args) =>{
         const uptime = process.uptime();
     function formatSeconds(totalSeconds) {

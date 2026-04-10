@@ -5,6 +5,7 @@ export default {
   description: "Get group info",
   isPublic: false,
   category: "Group",
+  Usage: "ginfo",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {

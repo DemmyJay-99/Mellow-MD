@@ -6,6 +6,7 @@ export default {
   description: "Add sudo user",
   isPublic: false,
   category: "Sudo",
+  Usage: "Reply to a user or mention one, or use `setsudo <number>`.",
   execute: async (sock, msg, args) => {
     const store = sock.signalRepository.lidMapping;
     const sudoPath = "./data/sudo.json";
@@ -29,7 +30,7 @@ export default {
       targetJid = num;
     } else {
       await sock.sendMessage(remoteJid, {
-        text: "Reply to a user or mention one, or use `.setsudo <number>`.",
+        text: "Reply to a user or mention one, or use `setsudo <number>`.",
       });
       return;
     }

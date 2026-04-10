@@ -5,6 +5,7 @@ export default {
     description: "Download Facebook videos",
     isPublic: false,
     category: "Downloaders",
+        Usage: "fb <fb URL> (or reply to a message with the URL)",
     execute: async (sock, msg, args, quotedMessage) => {
         let url;
         if (args[0]) {

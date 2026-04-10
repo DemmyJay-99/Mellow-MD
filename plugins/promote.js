@@ -5,6 +5,7 @@ export default {
   description: "Promote a user to admin",
   isPublic: false,
   category: "Group",
+  Usage: "Reply to a user, mention them, or use `.promote <number>`.",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
 

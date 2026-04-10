@@ -3,6 +3,7 @@ export default {
     description: "Set a label for a group",
     isPublic: false,
     category: "Group",
+    Usage: "gclabel <label>",
     execute: async (sock, msg, args) => {
       const remoteJid = msg.key.remoteJid;
       if(!remoteJid.endsWith('@g.us')) {

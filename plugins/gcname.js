@@ -5,6 +5,7 @@ export default {
   description: "Change the group name",
   isPublic: false,
   category: "Group",
+  Usage: "gcname <new name>",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {

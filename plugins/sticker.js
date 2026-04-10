@@ -5,10 +5,11 @@ export default {
   description: "Convert an image or video to a sticker",
   isPublic: false,
   category: "Media",
+    Usage: "Reply to an image or video message with .sticker",
   execute: async (sock, msg, args, quotedMessage) => {
     const { createSticker } = await import("stickers-formatter");
     const { downloadContentFromMessage } = await import(
-      "baileys"
+      "@innovatorssoft/baileys"
     );
     const mediaMessage =
       quotedMessage?.imageMessage ||

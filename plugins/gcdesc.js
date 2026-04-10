@@ -5,6 +5,7 @@ export default {
   description: "Change the group description",
   isPublic: false,
   category: "Group",
+  Usage: "gcdesc <new description>",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {

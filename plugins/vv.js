@@ -3,6 +3,7 @@ export default {
     description: "Reveal a quoted view-once media",
     isPublic: false,
     category: "Whatsapp",
+        Usage: "Reply to a view-once message with .vv",
     execute: async (sock, msg, args) => {
         try {
             const remoteJid = msg.key.remoteJid;

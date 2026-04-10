@@ -3,6 +3,7 @@ export default {
   description: "Get group invite link",
   isPublic: false,
   category: "Group",
+    Usage: "invite",
   execute: async (sock, msg) => {
     const remoteJid = msg.key.remoteJid;
 

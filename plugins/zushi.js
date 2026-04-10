@@ -3,6 +3,7 @@ export default {
     description: "",
     isPublic: false,
     category: "Owner",
+    Usage: "zushi <command>",
     async execute(sock, msg, args) {
         const { getCommands } = await import("../lib/commandHandler.js");
         const commands = getCommands();

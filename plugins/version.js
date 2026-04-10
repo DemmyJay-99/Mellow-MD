@@ -6,6 +6,7 @@ export default {
     description: "Check the bot's current version",
     isPublic: false,
     category: "Bot",
+        Usage: "version",
     execute: async (sock, msg, args) => {
         await sock.sendMessage(msg.key.remoteJid, { text: `Mellow MD Version: ${version}` });
     }

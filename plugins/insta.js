@@ -5,6 +5,7 @@ export default {
     description: "Download IG reels",
     isPublic: false,
     category: "Downloaders",
+        Usage: "insta <Insta URL> (or reply to a message with the URL)",
     execute: async (sock, msg, args, quotedMessage) => {
         let url;
         if (args[0]) {
@@ -16,7 +17,7 @@ export default {
         }
         if (!url) {
             await sock.sendMessage(msg.key.remoteJid, {
-                text: "Usage: tiktok <Insta URL> (or reply to a message with the URL)",
+                text: "Usage: insta <Insta URL> (or reply to a message with the URL)",
             });
             return;
         }

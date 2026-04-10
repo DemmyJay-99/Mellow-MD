@@ -3,6 +3,7 @@ export default {
     description: "unblock a user on WhatsApp",
     isPublic: false,
     category: "Owner",
+    Usage: "Reply to a user, mention them, or use `.unblock <number>`.",
     execute: async (sock, msg, args) => {
         const remoteJid = msg.key.remoteJid;
         const ctxInfo = msg.message?.extendedTextMessage?.contextInfo;

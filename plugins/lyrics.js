@@ -7,6 +7,7 @@ export default {
   description: "Get song lyrics",
   isPublic: false,
   category: "Media",
+    Usage: "Reply to a song name with .lyrics, or use .lyrics <song name>",
   execute: async (sock, msg, args, quotedMessage) => {
     let song;
     const repliedMessage =

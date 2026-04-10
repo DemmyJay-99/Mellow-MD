@@ -5,6 +5,7 @@ export default {
    description: "Get sudo users",
    isPublic: false,
    category: "Sudo",
+   Usage: "getsudo",
    execute: async (sock, msg, args) => {
       const remoteJid = msg.key.remoteJid;
       const sudo = JSON.parse(fs.readFileSync("./data/sudo.json"));

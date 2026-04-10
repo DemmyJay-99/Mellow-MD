@@ -5,6 +5,7 @@ export default {
    description: "Revoke group invite link",
    isPublic: false,
    category: "Group",
+   Usage: "revoke",
    execute: async (sock, msg, args) => {
       const remoteJid = msg.key.remoteJid;
       if (!remoteJid.endsWith("@g.us")) {

@@ -3,11 +3,11 @@ export default {
   description: "Remove profile picture",
   isPublic: false,
   category: "Owner",
+  Usage: "Reply to an image with .rmpp",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {
       const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-      console.log(user);
       await sock.removeProfilePicture(user);
       await sock.sendMessage(remoteJid, { text: "Profile picture removed"});
       return;

@@ -10,6 +10,7 @@ export default {
   description: "List all available commands",
   isPublic: false,
   category: "General",
+    Usage: "menu",
   execute: async (sock, msg, args) => {
     const cmds = getCommands() || [];
     if (cmds.length === 0) {

@@ -5,6 +5,7 @@ export default {
   description: "Set group profile picture",
   isPublic: false,
   category: "Group",
+  Usage: "Reply to an image with .gpp",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {

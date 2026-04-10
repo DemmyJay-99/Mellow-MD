@@ -5,6 +5,7 @@ export default {
     description: "Get the JID of a user",
     isPublic: false,
     category: "Dev",
+    Usage: "jid",
     execute: async (sock, msg, args) => {
         const remoteJid = msg.key.remoteJid;
         if (remoteJid.endsWith("@lid")) {
