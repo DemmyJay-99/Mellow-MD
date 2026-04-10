@@ -5,7 +5,7 @@ export default {
   description: "Promote a user to admin",
   isPublic: false,
   category: "Group",
-  Usage: "Reply to a user, mention them, or use `.promote <number>`.",
+  usage: "Reply to a user, mention them, or use `.promote <number>`.",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
 
@@ -21,11 +21,9 @@ export default {
       const pn = await normaliseLid(sock, senderJid);
       senderJid = pn + "@s.whatsapp.net";
     }
-    const admins = metadata.participants
-      .filter((p) => p.admin || p.admin === "superadmin")
-      .map((p) => p.id);
+    const admins = metadata.participants.filter((p) => p.admin || p.admin === "superadmin").map((p) => p.id);
     if (!admins.includes(senderJid)) {
-      return sock.sendMessage(remoteJid, { text: "Admin only." });
+      return sock.sendMessage(remoteJid, {text: "Admin only."});
     }
 
     const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
@@ -39,14 +37,11 @@ export default {
     }
 
     const ctxInfo = msg.message?.extendedTextMessage?.contextInfo || {};
-    let targetJid =
-      ctxInfo?.participant ||
-      (ctxInfo?.mentionedJid?.length ? ctxInfo.mentionedJid[0] : null);
+    let targetJid = ctxInfo?.participant || (ctxInfo?.mentionedJid?.length ? ctxInfo.mentionedJid[0] : null);
 
     if (!targetJid && args[0]) {
       const num = args[0].replace(/\D/g, "");
-      if (!num)
-        return sock.sendMessage(remoteJid, { text: "Provide a valid number." });
+      if (!num) return sock.sendMessage(remoteJid, {text: "Provide a valid number."});
       targetJid = `${num}@s.whatsapp.net`;
     }
 
@@ -62,19 +57,19 @@ export default {
     }
 
     if (admins.includes(targetJid)) {
-      return sock.sendMessage(remoteJid, { text: "User is already an admin." });
+      return sock.sendMessage(remoteJid, {text: "User is already an admin."});
     }
 
     if (targetJid === user) {
-      return sock.sendMessage(remoteJid, { text: "I can't promote myself." });
+      return sock.sendMessage(remoteJid, {text: "I can't promote myself."});
     }
 
     try {
       await sock.groupParticipantsUpdate(remoteJid, [targetJid], "promote");
-      await sock.sendMessage(remoteJid, { text: "Promoted." });
+      await sock.sendMessage(remoteJid, {text: "Promoted."});
     } catch (e) {
       console.error("promote error:", e);
-      await sock.sendMessage(remoteJid, { text: "Failed to promote user." });
+      await sock.sendMessage(remoteJid, {text: "Failed to promote user."});
     }
   },
 };

@@ -5,7 +5,7 @@ export default {
   description: "Change the group name",
   isPublic: false,
   category: "Group",
-  Usage: "gcname <new name>",
+  usage: "gcname <new name>",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {
@@ -19,11 +19,9 @@ export default {
       let pn = await normaliseLid(sock, senderJid);
       senderJid = pn + "@s.whatsapp.net";
     }
-    const admins = metadata.participants
-      .filter((p) => p.admin)
-      .map((p) => p.id);
+    const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
     if (!admins.includes(senderJid) && !msg.key.fromMe) {
-      return sock.sendMessage(remoteJid, { text: "Admin only." });
+      return sock.sendMessage(remoteJid, {text: "Admin only."});
     }
 
     const botJid = sock.user.id.split(":")[0] + "@s.whatsapp.net";
@@ -35,11 +33,11 @@ export default {
     }
     const newName = args.join(" ");
     if (!newName) {
-      return sock.sendMessage(remoteJid, { text: "Provide a new group name." });
+      return sock.sendMessage(remoteJid, {text: "Provide a new group name."});
     }
     try {
       await sock.groupUpdateSubject(remoteJid, newName);
-      await sock.sendMessage(remoteJid, { text: "Group name updated." });
+      await sock.sendMessage(remoteJid, {text: "Group name updated."});
     } catch (e) {
       console.error("gcname error:", e);
       await sock.sendMessage(remoteJid, {

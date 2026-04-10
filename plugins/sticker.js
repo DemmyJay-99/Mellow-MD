@@ -1,30 +1,21 @@
-import { StickerTypes } from "stickers-formatter";
+import {StickerTypes} from "stickers-formatter";
 import id from "../lib/id.js";
 export default {
   name: "sticker",
   description: "Convert an image or video to a sticker",
   isPublic: false,
   category: "Media",
-    Usage: "Reply to an image or video message with .sticker",
+  usage: "Reply to an image or video message with .sticker",
   execute: async (sock, msg, args, quotedMessage) => {
-    const { createSticker } = await import("stickers-formatter");
-    const { downloadContentFromMessage } = await import(
-      "@innovatorssoft/baileys"
-    );
-    const mediaMessage =
-      quotedMessage?.imageMessage ||
-      quotedMessage?.videoMessage ||
-      quotedMessage?.documentMessage;
+    const {createSticker} = await import("stickers-formatter");
+    const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
+    const mediaMessage = quotedMessage?.imageMessage || quotedMessage?.videoMessage || quotedMessage?.documentMessage;
     if (!mediaMessage) {
       return sock.sendMessage(msg.key.remoteJid, {
         text: "Reply to an image or video message.",
       });
     }
-    const type = quotedMessage?.imageMessage
-      ? "image"
-      : quotedMessage?.videoMessage
-        ? "video"
-        : "document";
+    const type = quotedMessage?.imageMessage ? "image" : quotedMessage?.videoMessage ? "video" : "document";
 
     const stream = await downloadContentFromMessage(mediaMessage, type);
     const chunks = [];
@@ -32,9 +23,7 @@ export default {
       chunks.push(chunk);
     }
     const buffer = Buffer.concat(chunks);
-    const [stickerNameRaw, stickerAuthorRaw] = (
-      process.env.STICKER_PACKNAME || ""
-    ).split(",");
+    const [stickerNameRaw, stickerAuthorRaw] = (process.env.STICKER_PACKNAME || "").split(",");
     const stickerName = stickerNameRaw || "Mellow MD";
     const stickerAuthor = stickerAuthorRaw || "Mellow";
     const sticker = await createSticker(buffer, {
@@ -45,6 +34,6 @@ export default {
       quality: 50,
       background: "transparent",
     });
-    await sock.sendMessage(msg.key.remoteJid, { sticker: sticker });
+    await sock.sendMessage(msg.key.remoteJid, {sticker: sticker});
   },
 };

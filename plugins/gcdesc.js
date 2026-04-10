@@ -5,7 +5,7 @@ export default {
   description: "Change the group description",
   isPublic: false,
   category: "Group",
-  Usage: "gcdesc <new description>",
+  usage: "gcdesc <new description>",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {
@@ -19,11 +19,9 @@ export default {
       let pn = await normaliseLid(sock, senderJid);
       senderJid = pn + "@s.whatsapp.net";
     }
-    const admins = metadata.participants
-      .filter((p) => p.admin)
-      .map((p) => p.id);
+    const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
     if (!admins.includes(senderJid) && !msg.key.fromMe) {
-      return sock.sendMessage(remoteJid, { text: "Admin only." });
+      return sock.sendMessage(remoteJid, {text: "Admin only."});
     }
 
     const botJid = sock.user.id.split(":")[0] + "@s.whatsapp.net";
@@ -41,7 +39,7 @@ export default {
     }
     try {
       await sock.groupUpdateDescription(remoteJid, newName);
-      await sock.sendMessage(remoteJid, { text: "Group description updated." });
+      await sock.sendMessage(remoteJid, {text: "Group description updated."});
     } catch (e) {
       console.error("gcname error:", e);
       await sock.sendMessage(remoteJid, {

@@ -1,5 +1,5 @@
 import genius from "genius-lyrics";
-import { getLyrics } from "../lib/lyrics.js";
+import {getLyrics} from "../lib/lyrics.js";
 const Client = new genius.Client(process.env.GENIUS_API_KEY);
 
 export default {
@@ -7,11 +7,10 @@ export default {
   description: "Get song lyrics",
   isPublic: false,
   category: "Media",
-    Usage: "Reply to a song name with .lyrics, or use .lyrics <song name>",
+  usage: "Reply to a song name with .lyrics, or use .lyrics <song name>",
   execute: async (sock, msg, args, quotedMessage) => {
     let song;
-    const repliedMessage =
-      quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
+    const repliedMessage = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
     song = repliedMessage || args.join(" ");
     if (!song) {
       return sock.sendMessage(msg.key.remoteJid, {
@@ -30,7 +29,7 @@ export default {
     const songImage = search?.image;
     const lyrics = await getLyrics(artistName, title);
     await sock.sendMessage(msg.key.remoteJid, {
-      image: { url: songImage },
+      image: {url: songImage},
       caption: `*${title} by ${artistName} (lyrics)*\n\n${lyrics}`,
     });
   },

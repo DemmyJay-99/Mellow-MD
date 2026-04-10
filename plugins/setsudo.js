@@ -6,7 +6,7 @@ export default {
   description: "Add sudo user",
   isPublic: false,
   category: "Sudo",
-  Usage: "Reply to a user or mention one, or use `setsudo <number>`.",
+  usage: "Reply to a user or mention one, or use `setsudo <number>`.",
   execute: async (sock, msg, args) => {
     const store = sock.signalRepository.lidMapping;
     const sudoPath = "./data/sudo.json";
@@ -58,6 +58,6 @@ export default {
 
     sudoUsers.push(targetJid);
     fs.writeFileSync(sudoPath, JSON.stringify(sudoUsers));
-    await sock.sendMessage(remoteJid, { text: `${targetJid} is now sudo` });
+    await sock.sendMessage(remoteJid, {text: `${targetJid} is now sudo`});
   },
 };

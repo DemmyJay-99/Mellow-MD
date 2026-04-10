@@ -1,20 +1,20 @@
-import { transform, getFonts } from "convert-unicode-fonts";
-import { getCommands } from "../lib/commandHandler.js";
-import config from '../config.js';
-import getPlugins from "../lib/getPlugins.js"
-import p from '../package.json' with { type: 'json' };
-import { formatSeconds } from "../lib/uptime.js"
+import {transform, getFonts} from "convert-unicode-fonts";
+import {getCommands} from "../lib/commandHandler.js";
+import config from "../config.js";
+import getPlugins from "../lib/getPlugins.js";
+import p from "../package.json" with {type: "json"};
+import {formatSeconds} from "../lib/uptime.js";
 
 export default {
   name: "menu",
   description: "List all available commands",
   isPublic: false,
   category: "General",
-    Usage: "menu",
+  usage: "menu",
   execute: async (sock, msg, args) => {
     const cmds = getCommands() || [];
     if (cmds.length === 0) {
-      await sock.sendMessage(msg.key.remoteJid, { text: "No commands loaded." });
+      await sock.sendMessage(msg.key.remoteJid, {text: "No commands loaded."});
       return;
     }
 
@@ -25,16 +25,7 @@ export default {
       grouped[category].push(c);
     }
 
-    const categoryOrder = [
-      "General",
-      "Utility",
-      "Downloaders",
-      "Fun",
-      "Owner",
-      "AI",
-      'Group',
-      "Uncategorized"
-    ];
+    const categoryOrder = ["General", "Utility", "Downloaders", "Fun", "Owner", "AI", "Group", "Uncategorized"];
 
     const sortedCategories = Object.keys(grouped).sort((a, b) => {
       const ia = categoryOrder.indexOf(a);
@@ -63,18 +54,18 @@ export default {
     const joinedText = lines.join("\n").toUpperCase();
     const fonts = getFonts();
     const time = new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
     });
     const date = new Date();
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const day = days[date.getDay()];
     const plugins = await getPlugins();
     const version = p.version;
     const uptime = process.uptime();
-    const formattedSeconds =  formatSeconds(uptime);
+    const formattedSeconds = formatSeconds(uptime);
     const text =
       "```╭═══ MELLOW MD ═══⊷\n" +
       "┃❃╭──────────────\n" +
@@ -93,6 +84,6 @@ export default {
 
     const styledText = transform(text, fonts["bold"]);
 
-    await sock.sendMessage(msg.key.remoteJid, { text: styledText });
-  }
+    await sock.sendMessage(msg.key.remoteJid, {text: styledText});
+  },
 };
