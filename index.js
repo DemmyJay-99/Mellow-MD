@@ -12,13 +12,13 @@ configDotenv({
     quiet: true,
 });
 import { exec } from "child_process";
-import config from "./config.js"
 import checkUpdates from "./lib/checkUpdates.js"
 
 checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
 
 const startBot = async () => {
+    let hasSent = false;
     let BOT_START_TIME = Infinity;
     let CONNECTED_AT_MS = 0;
     const STARTUP_GRACE_MS = 10000
@@ -52,7 +52,6 @@ const startBot = async () => {
         if (connection === "open") {
             CONNECTED_AT_MS = Date.now();
             BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
-            let hasSent = false;
             async function sendMessage() {
                 const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
                 const ddd = await sock.sendMessage(user, {
@@ -63,9 +62,6 @@ const startBot = async () => {
                     { text: "Welcome to mellow md" },
                     { quoted: ddd },
                 );
-                await sock.sendMessage(user, {
-                    text: `Type ${config.prefix}menu to see all commands`,
-                })
                 hasSent = true;
             }
             if (!hasSent) {
