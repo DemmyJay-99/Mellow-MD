@@ -105,7 +105,6 @@ const startBot = async () => {
         // const fromMe = msg.key.fromMe;
         // const botJid = sock.user?.id;
         // if (fromMe) return;
-
         try {
             await handleCommand(sock, msg);
         } catch (error) {
