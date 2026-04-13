@@ -69,8 +69,8 @@ export default {
     const text =
       "```┏━━━『 MELLOW MD 』━━━\n" +
       "┃★┏━━━━━━━━━━━━━━\n" +
-      `┃★┃Prefix: ${config.prefix}\n` +
-      `┃★┃User: ${config.OwnerName}\n` +
+      `┃★┃Prefix: ${process.env.PREFIX || config.prefix}\n` +
+      `┃★┃User: ${process.env.OWNER_NAME || config.OwnerName}\n` +
       `┃★┃Time: ${time}\n` +
       `┃★┃Day: ${day}\n` +
       `┃★┃Platform: ${process.env.PLATFORM}\n` +
