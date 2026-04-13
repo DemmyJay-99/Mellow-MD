@@ -21,7 +21,7 @@ const startBot = async () => {
     let hasSent = false;
     let BOT_START_TIME = Infinity;
     let CONNECTED_AT_MS = 0;
-    const STARTUP_GRACE_MS = 10000
+    const STARTUP_GRACE_MS = 15000
     const seenMessages = new Set();
     try {
         await checkSessionID(process.env.SESSION_ID);

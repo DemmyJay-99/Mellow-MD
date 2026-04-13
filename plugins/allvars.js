@@ -4,7 +4,7 @@ export default {
   name: "allvars",
   description: "Get all environment variables",
   isPublic: false,
-  category: "Owner",
+  category: "Vars",
   usage: "allvars",
   execute: async (sock, msg, args) => {
     const vars = await allvars();

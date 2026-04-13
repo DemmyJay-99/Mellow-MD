@@ -4,7 +4,7 @@ export default {
    name: "setvar",
    description: "Set environment variables",
    isPublic: false,
-   category: "Owner",
+   category: "Vars",
    usage: "setvar <variable>=<value>",
    execute: async (sock, msg, args) => {
       if (!args.join(' ').includes('=')){ return await sock.sendMessage(msg.key.remoteJid, {text: "Please provide a variable and a value separated by =."})}
