@@ -5,6 +5,10 @@ export default {
    category: "Owner",
    usage: "leave",
    execute: async (sock, msg, args) => {
-      await sock.groupLeave(msg.key.remoteJid);
+      const jid = msg.key.remoteJid;
+     if(!jid.endsWith("@g.us")){
+        await sock.sendMessage(jid, {text: "This command only works in groups."});
+     }
+      await sock.groupLeave(jid);
    }
 }
