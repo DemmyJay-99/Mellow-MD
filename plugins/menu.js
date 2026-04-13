@@ -43,11 +43,11 @@ export default {
 
       cmdsInCategory.sort((a, b) => a.name.localeCompare(b.name));
 
-      lines.push(`╰───────────────`);
-      lines.push(`╭─ ❏ ${category.toUpperCase()} ❏ `);
+      lines.push(`┗━━━━━━━━━━━━━━`);
+      lines.push(`┏━━〔 ${category.toUpperCase()} 〕 `);
 
       for (const c of cmdsInCategory) {
-        lines.push(` |  *${config.prefix}${c.name}*`);
+        lines.push(`┃  *${config.prefix}${c.name}*`);
       }
     }
 
@@ -67,20 +67,19 @@ export default {
     const uptime = process.uptime();
     const formattedSeconds = formatSeconds(uptime);
     const text =
-      "```╭═══ MELLOW MD ═══⊷\n" +
-      "┃❃╭──────────────\n" +
-      `┃❃│Prefix: ${config.prefix}\n` +
-      `┃❃│User: ${config.OwnerName}\n` +
-      `┃❃│Time: ${time}\n` +
-      `┃❃│Day: ${day}\n` +
-      `┃❃│Platform: ${process.env.PLATFORM}\n` +
-      `┃❃│Plugins: ${plugins.length}\n` +
-      `┃❃│Version: ${version}\n` +
-      `┃❃│Uptime: ${formattedSeconds}\n` +
-      "┃❃╰───────────────\n" +
-      "╰═════════════════⊷```\n" +
+      "```┏━━━『 MELLOW MD 』━━━\n" +
+      "┃★┏━━━━━━━━━━━━━━\n" +
+      `┃★┃Prefix: ${config.prefix}\n` +
+      `┃★┃User: ${config.OwnerName}\n` +
+      `┃★┃Time: ${time}\n` +
+      `┃★┃Day: ${day}\n` +
+      `┃★┃Platform: ${process.env.PLATFORM}\n` +
+      `┃★┃Plugins: ${plugins.length}\n` +
+      `┃★┃Version: ${version}\n` +
+      `┃★┃Uptime: ${formattedSeconds}\n` +
+      "┃★┗━━━━━━━━━━━━━━```\n" +
       `${joinedText}\n` +
-      `╰───────────────`;
+      `┗━━━━━━━━━━━━━━`;
 
     const styledText = transform(text, fonts["bold"]);
 
