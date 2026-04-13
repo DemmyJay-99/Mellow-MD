@@ -53,7 +53,7 @@ STICKER_PACKNAME=
 | `SESSION_ID` | Session ID received after pairing at the pairing site |
 | `PLATFORM` | Label shown in the bot menu (e.g. `Replit`, `VPS`, `Panel`) |
 | `AUTO_UPDATE` | Set to `true` to enable automatic bot updates |
-| `OWNER_NUMBER` | Your WhatsApp number with country code, no `+` (e.g. `2348101653826`) |
+| `OWNER_NUMBER` | Your WhatsApp number with country code, no `+` (e.g. `234123456789`) |
 | `REACT_EMOJI` | Emoji the bot reacts with when a command is used (e.g. `✨`) |
 | `GENIUS_API_KEY` | API key from [genius.com](https://genius.com/api-clients) for lyrics features |
 | `ALWAYS_ONLINE` | Set to `true` to keep the bot's WhatsApp status always online |
