@@ -16,9 +16,8 @@ import checkUpdates from "./lib/checkUpdates.js"
 
 checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
-
+let hasSent = false;
 const startBot = async () => {
-    let hasSent = false;
     let BOT_START_TIME = Infinity;
     let CONNECTED_AT_MS = 0;
     const STARTUP_GRACE_MS = 15000
