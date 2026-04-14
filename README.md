@@ -29,7 +29,7 @@
 
 1. Visit **[Pairing Site](https://pairing-site-rho.vercel.app)** and follow the pairing steps.
 2. After pairing, your `SESSION_ID` will be sent to you via WhatsApp DM.
-3. Copy it — you will need it for every deployment option below.
+3. Copy it — you'll need it for every deployment option below.
 
 ---
 
