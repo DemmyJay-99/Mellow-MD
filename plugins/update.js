@@ -40,14 +40,14 @@ export default {
           `https://api.github.com/repos/DemmyJay-99/Mellow-MD/compare/${local}...master`,
         );
         const message = data.data.commits.map(
-          (commit) => commit.commit.message.split("\n")[0],
+          (commit) => `* ${commit.commit.message.split("\n")[0]}`,
         );
         const commitLength = message.length;
         const commitMessage =
           `Missing ${commitLength} updates\n` +
           message.join("\n") +
           "\n" +
-          "Use update now to update";
+          "*Use update now to update*";
         const buttons = generateQuickReplyButtons(
           commitMessage,
           [{ displayText: "Update now", id: "update now" }],
