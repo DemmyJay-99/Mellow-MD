@@ -26,6 +26,7 @@ export default {
     }
     if (!checkInstagram(url)) {
       await sock.sendMessage(msg.key.remoteJid, {text: "Invalid url"});
+      return;
     }
     const res = await igdl(url);
     const data = res.data[0].url;
