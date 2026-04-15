@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:7b2ff7,100:f107a3&height=180&section=header&text=Mellow%20MD&fontSize=70&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Multi-Device%20WhatsApp%20Bot&descAlignY=58&descSize=20&descColor=ffffff" width="100%"/>
-
 <img src="https://i.ibb.co/fVJQHczm/siGOdOA.jpg" width="180" style="border-radius: 50%; margin: 20px 0;" />
 
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=7B2FF7&center=true&vCenter=true&width=500&lines=Fast+%26+Lightweight+WhatsApp+Bot;Multi-Device+Support;Plugin-Based+Architecture;Easy+to+Deploy+Anywhere" alt="Typing SVG" />
@@ -14,23 +12,10 @@
 
 </div>
 
----
-
-## Prerequisites
-
-- Node.js v20 or higher
-- npm
-- A WhatsApp account to pair with the bot
-- A `SESSION_ID` — get yours at **[pairing-site-rho.vercel.app](https://pairing-site-rho.vercel.app/)**
-
----
 
 ## Getting Your Session ID
 
-1. Visit **[Pairing Site](https://pairing-site-rho.vercel.app)** and follow the pairing steps.
-2. After pairing, your `SESSION_ID` will be sent to you via WhatsApp DM.
-3. Copy it — you'll need it for every deployment option below.
-
+Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?style=for-the-badge&logo=whatsapp&logoColor=white)](https://pairing-site-rho.vercel.app/)** to get session ID
 ---
 
 ## Configuration
@@ -46,6 +31,7 @@ REACT_EMOJI=
 GENIUS_API_KEY=
 ALWAYS_ONLINE=
 STICKER_PACKNAME=
+WARN_LIMIT =
 ```
 
 | Variable | Description |
@@ -58,6 +44,7 @@ STICKER_PACKNAME=
 | `GENIUS_API_KEY` | API key from [genius.com](https://genius.com/api-clients) for lyrics features |
 | `ALWAYS_ONLINE` | Set to `true` to keep the bot's WhatsApp status always online |
 | `STICKER_PACKNAME` | Pack name and author for stickers, separated by a comma — e.g. `packname,author` |
+|`WARN_LIMIT =`| Number of warnings before a group member gets removed|
 
 ---
 
@@ -78,16 +65,11 @@ STICKER_PACKNAME=
 
 ### Option 1 — Pterodactyl Panel
 
-> Supports any Pterodactyl-based hosting panel including KataBump and Bot-Hosting.
-
 1. Visit **[Pairing Site](https://pairing-site-rho.vercel.app/)** and pair your WhatsApp number.
 2. Go to the **Deploy** section on the pairing site.
 3. Enter your **Session ID** in the provided field.
 4. Click **Download** to get your custom `index.js` file.
 5. Upload the downloaded `index.js` to your Pterodactyl panel and start the server.
-
-No extra setup or `.env` file is needed — the session is embedded directly in the file.
-
 ---
 
 ### Option 2 — Node.js (VPS / Local)
@@ -108,7 +90,6 @@ npm start
 1. Click **[Deploy on Replit](https://replit.com/github/DemmyJay-99/Mellow-MD)** above, or fork the repo and import it manually.
 2. Add `SESSION_ID` and `PLATFORM` as **Secrets** in the Replit dashboard.
 3. The `Start application` workflow will run `npm start` automatically.
-
 ---
 
 ### Option 4 — Render
@@ -120,20 +101,6 @@ npm start
 
 ---
 
-## Starting the Bot
-
-```bash
-npm start
-```
-
-The bot will use your `SESSION_ID` to authenticate and connect to WhatsApp automatically. No QR scan is needed after pairing.
-
----
-
 <div align="center">
-
 Developed by **[Mellow](https://github.com/DemmyJay-99)**
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:7b2ff7,100:f107a3&height=100&section=footer" width="100%"/>
-
 </div>
