@@ -80,6 +80,7 @@ export default {
     }
   },
   onMessage: async (sock, msg) => {
+    if(!msg.key.fromMe) return;
     if (msg.message.templateButtonReplyMessage?.selectedId === "update now") {
       execSync("git pull", { stdio: "inherit" });
       const diff = execSync("git diff HEAD@{1} HEAD --name-only").toString();
