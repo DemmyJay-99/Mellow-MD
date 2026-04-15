@@ -2837,6 +2837,11 @@ module-details-from-path@^1.0.3:
   resolved "https://registry.npmjs.org/module-details-from-path/-/module-details-from-path-1.0.4.tgz"
   integrity sha512-EGWKgxALGMgzvxYF1UyGTy0HXX/2vHLkw6+NvDKW2jypWbHpjQuj4UMcqQWXHERJhVGKikolT06G3bcKe4fi7w==
 
+morsee@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/morsee/-/morsee-1.0.10.tgz#49eee6edab01539fa5d9587c9afe8889bd27cc15"
+  integrity sha512-VFfrNq8AJcnbkqslc6eomfAuznILEBLUhtTwv950EA/V5HAC1jlFD38nNpPD0+dwwlt3K0dPZses2PoIu1GzFw==
+
 mpg123-decoder@^1.0.0:
   version "1.0.3"
   resolved "https://registry.npmjs.org/mpg123-decoder/-/mpg123-decoder-1.0.3.tgz"

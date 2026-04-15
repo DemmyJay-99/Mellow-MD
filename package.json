@@ -35,6 +35,7 @@
     "fs-extra": "^11.3.3",
     "genius-lyrics": "^4.4.7",
     "mediaforge": "^0.0.1",
+    "morsee": "^1.0.10",
     "node-catbox": "^4.2.0",
     "pino": "^10.3.0",
     "pm2": "^6.0.14",
