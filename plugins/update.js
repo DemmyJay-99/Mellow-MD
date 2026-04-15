@@ -19,6 +19,15 @@ export default {
         if (local !== remote) {
           console.log("Your version of mellow-md is outdated");
           execSync("git pull", { stdio: "inherit" });
+          const diff = execSync(
+            "git diff HEAD@{1} HEAD --name-only",
+          ).toString();
+
+          if (diff.includes("package.json") || diff.includes("yarn.lock")) {
+            console.log("Dependencies changed. Installing...");
+            execSync("yarn install --frozen-lockfile", { stdio: "inherit" });
+            console.log("Dependencies installed successfully");
+          }
           console.log("Updated successfully. Restarting...");
           await sock.sendMessage(msg.key.remoteJid, {
             text: "Updated successfully. Restarting...",
@@ -71,13 +80,19 @@ export default {
     }
   },
   onMessage: async (sock, msg) => {
-    if(msg.message.templateButtonReplyMessage?.selectedId === 'update now'){
+    if (msg.message.templateButtonReplyMessage?.selectedId === "update now") {
       execSync("git pull", { stdio: "inherit" });
+      const diff = execSync("git diff HEAD@{1} HEAD --name-only").toString();
+      if (diff.includes("package.json") || diff.includes("yarn.lock")) {
+        console.log("Dependencies changed. Installing...");
+        execSync("yarn install --frozen-lockfile", { stdio: "inherit" });
+        console.log("Dependencies installed successfully");
+      }
       console.log("Updated successfully. Restarting...");
       await sock.sendMessage(msg.key.remoteJid, {
         text: "Updated successfully. Restarting...",
       });
       process.exit(0);
     }
-  }
+  },
 };
