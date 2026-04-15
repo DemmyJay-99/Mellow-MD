@@ -56,7 +56,7 @@ export default {
           `Missing ${commitLength} updates\n` +
           message.join("\n") +
           "\n" +
-          "*Use update now to update*";
+          "*Tap the button below to update (or use update now command)*";
         const buttons = generateQuickReplyButtons(
           commitMessage,
           [{ displayText: "Update now", id: "update now" }],
