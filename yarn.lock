@@ -1343,6 +1343,11 @@ dayjs@1.11.15:
   resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.11.15.tgz"
   integrity sha512-MC+DfnSWiM9APs7fpiurHGCoeIx0Gdl6QZBy+5lu8MbYKN5FZEXqOgrundfibdfhGZ15o9hzmZ2xJjZnbvgKXQ==
 
+dayjs@^1.11.20:
+  version "1.11.20"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.20.tgz#88d919fd639dc991415da5f4cb6f1b6650811938"
+  integrity sha512-YbwwqR/uYpeoP4pu043q+LTDLFBLApUP6VxRihdfNTqu4ubqMlGDLd6ErXhEgsyvY0K6nCs7nggYumAN+9uEuQ==
+
 dayjs@~1.8.24:
   version "1.8.36"
   resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.8.36.tgz"

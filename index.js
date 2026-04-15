@@ -13,10 +13,16 @@ configDotenv({
 });
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js"
+import messagem from "./lib/message.js"
+import fs from 'fs'
+const FLAG_FILE = './data/sent.json'
 
 checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60);
 let hasSent = false;
+if (fs.existsSync(FLAG_FILE)) {
+    hasSent = JSON.parse(fs.readFileSync(FLAG_FILE)).hasSent;
+}
 const startBot = async () => {
     let BOT_START_TIME = Infinity;
     let CONNECTED_AT_MS = 0;
@@ -51,20 +57,12 @@ const startBot = async () => {
         if (connection === "open") {
             CONNECTED_AT_MS = Date.now();
             BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
-            async function sendMessage() {
-                const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-                const ddd = await sock.sendMessage(user, {
-                    text: "Your bot has been deployed successfully",
-                });
-                await sock.sendMessage(
-                    user,
-                    { text: "Welcome to mellow md" },
-                    { quoted: ddd },
-                );
-                hasSent = true;
-            }
+            const user = sock.user.id.split(':')[0] + '@s.whatsapp.net'
             if (!hasSent) {
-                sendMessage();
+                
+                const text = await messagem()
+                await sock.sendMessage(user, { text:  text})
+                fs.writeFileSync(FLAG_FILE, JSON.stringify({ hasSent: true }));
             }
             console.log('Connected to whatsapp');
         } else if (connection === "close") {

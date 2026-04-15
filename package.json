@@ -28,6 +28,7 @@
     "@innovatorssoft/baileys": "https://github.com/DemmyJay-99/Baileys-.git",
     "axios": "^1.13.5",
     "convert-unicode-fonts": "^1.0.1",
+    "dayjs": "^1.11.20",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "file-type": "^22.0.1",
