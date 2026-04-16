@@ -3,7 +3,7 @@ import generateQR from "../lib/qr.js"
 export default {
   name: "qr",
   description: "Generate QR code",
-  isPublic: true,
+  isPublic: false,
   category: "Tools",
   usage: "qr <text>",
   execute: async (sock, msg, args, quotedMessage) => {
