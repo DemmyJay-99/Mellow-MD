@@ -2,7 +2,7 @@ export default {
   name: "vv",
   description: "Reveal a quoted view-once media",
   isPublic: false,
-  category: "Whatsapp",
+  category: "Media",
   usage: "Reply to a view-once message with .vv",
   execute: async (sock, msg, args) => {
     try {

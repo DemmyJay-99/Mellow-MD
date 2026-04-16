@@ -2,7 +2,7 @@ export default {
    name: "leave",
    description: "Leave a group",
    isPublic: false,
-   category: "Owner",
+   category: "Group",
    usage: "leave",
    execute: async (sock, msg, args) => {
       const jid = msg.key.remoteJid;

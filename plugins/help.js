@@ -8,7 +8,7 @@ export default {
   name: "help",
   description: "Get help for commands",
   isPublic: false,
-  category: "Bot",
+  category: "General",
   usage: "help to get a list of all commands, or help <command> to get help for a specific command",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
