@@ -18,8 +18,10 @@ import fs from 'fs'
 const FLAG_FILE = './data/sent.json'
 
 checkUpdates();
-setInterval(checkUpdates, 1000 * 60 * 60);
+setInterval(checkUpdates, 1000 * 60 * 60 * 24);
 let hasSent = false;
+let sock;
+let isRestarting= false;
 if (fs.existsSync(FLAG_FILE)) {
     hasSent = JSON.parse(fs.readFileSync(FLAG_FILE)).hasSent;
 }
@@ -37,7 +39,7 @@ const startBot = async () => {
     }
     const { state, saveCreds } = await useMultiFileAuthState("session");
     const logger = pino({ level: "fatal" });
-    const sock = makeWASocket({
+    sock = makeWASocket({
         auth: state,
         creds: state.creds,
         keys: makeCacheableSignalKeyStore(
@@ -46,7 +48,6 @@ const startBot = async () => {
         ),
         logger: logger.child({ level: "fatal" }),
         generateHighQualityLinkPreview: true,
-        markOnlineOnConnect: false,
         syncFullHistory: false,
         shouldSyncHistoryMessage: () => false,
         printQRInTerminal: false,
@@ -69,11 +70,26 @@ const startBot = async () => {
             const shouldReconnect =
                 lastDisconnect?.error?.output?.statusCode !==
                 DisconnectReason.loggedOut;
-            if (shouldReconnect) {
-                startBot();
+            if (shouldReconnect && !isRestarting) {
+                isRestarting = true
+                console.log("Reconnecting...")
+                try{
+                    if(sock){
+                        await sock.ev.removeAllListeners()
+                        await sock.ws.close()
+                    }
+                } catch(error){
+                    console.log(error)
+                }
+                
+                setTimeout(()=> {
+                    isRestarting = false
+                    startBot()
+                }, 5000)
             }
         }
     });
+    sock.ev.removeAllListeners("messages.upsert")
     sock.ev.on("messages.upsert", async ({ messages, type }) => {
          if (CONNECTED_AT_MS && Date.now() - CONNECTED_AT_MS < STARTUP_GRACE_MS) {
             return;
