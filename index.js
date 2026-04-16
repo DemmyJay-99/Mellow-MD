@@ -14,17 +14,13 @@ configDotenv({
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js"
 import messagem from "./lib/message.js"
-import fs from 'fs'
-const FLAG_FILE = './data/sent.json'
 
 checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60 * 24);
 let hasSent = false;
 let sock;
 let isRestarting= false;
-if (fs.existsSync(FLAG_FILE)) {
-    hasSent = JSON.parse(fs.readFileSync(FLAG_FILE)).hasSent;
-}
+
 const startBot = async () => {
     let BOT_START_TIME = Infinity;
     let CONNECTED_AT_MS = 0;
@@ -60,10 +56,9 @@ const startBot = async () => {
             BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
             const user = sock.user.id.split(':')[0] + '@s.whatsapp.net'
             if (!hasSent) {
-                
                 const text = await messagem()
                 await sock.sendMessage(user, { text:  text})
-                fs.writeFileSync(FLAG_FILE, JSON.stringify({ hasSent: true }));
+                hasSent = true;
             }
             console.log('Connected to whatsapp');
         } else if (connection === "close") {
