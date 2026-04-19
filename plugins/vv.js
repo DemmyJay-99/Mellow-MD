@@ -45,6 +45,8 @@ export default {
         sendObject.caption = args.join(" ") || "";
       } else if (type === "audio") {
         sendObject.audio = buffer;
+        sendObject.mimetype = media.mimetype || "audio/ogg; codecs=opus";
+        sendObject.ptt = media.ptt || false;
       } else {
         sendObject.document = buffer;
         sendObject.fileName = "file";
