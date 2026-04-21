@@ -105,11 +105,10 @@ const startBot = async () => {
         console.log("BOT_START_TIME:", BOT_START_TIME);
         console.log("messageTime:", messageTime);
         console.log("diff (mins):", (BOT_START_TIME - messageTime) / 60);
-        console.log(msg.message)
         seenMessages.add(msg.key.id);
         const body =
             msg.message?.conversation || msg.message?.extendedTextMessage?.text;
-        if(body.startsWith('!p')) {
+        if(body?.startsWith('!p')) {
             console.log("ping", messageTime, BOT_START_TIME)
         }
         try {
