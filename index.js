@@ -13,6 +13,7 @@ configDotenv({
 });
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js"
+import fs from "fs"
 import messagem from "./lib/message.js"
 
 checkUpdates();
@@ -57,6 +58,10 @@ const startBot = async () => {
             if (!hasSent) {
                 const text = await messagem()
                 await sock.sendMessage(user, { text:  text})
+                await sock.sendMessage(user, {
+                    sticker: fs.readFileSync('./my-sticker.was'),
+                    mimetype: "application/was"
+                })
                 hasSent = true;
             }
             console.log('Connected to whatsapp');
@@ -102,9 +107,9 @@ const startBot = async () => {
             console.log("Duplicate message detected, ignoring...");
             return;
         }
-        console.log("BOT_START_TIME:", BOT_START_TIME);
-        console.log("messageTime:", messageTime);
-        console.log("diff (mins):", (BOT_START_TIME - messageTime) / 60);
+        // console.log("BOT_START_TIME:", BOT_START_TIME);
+        // console.log("messageTime:", messageTime);
+        // console.log("diff (mins):", (BOT_START_TIME - messageTime) / 60);
         seenMessages.add(msg.key.id);
         const body =
             msg.message?.conversation || msg.message?.extendedTextMessage?.text;
