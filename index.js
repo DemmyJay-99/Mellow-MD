@@ -23,7 +23,7 @@ let isRestarting= false;
 
 const startBot = async () => {
     let BOT_START_TIME = Infinity;
-    let CONNECTED_AT_MS = 0;
+    let CONNECTED_AT_MS = Date.now();
     const STARTUP_GRACE_MS = 15000
     const seenMessages = new Set();
     try {
@@ -52,7 +52,6 @@ const startBot = async () => {
     sock.ev.on("creds.update", saveCreds);
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
         if (connection === "open") {
-            CONNECTED_AT_MS = Date.now();
             BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
             const user = sock.user.id.split(':')[0] + '@s.whatsapp.net'
             if (!hasSent) {
@@ -94,21 +93,25 @@ const startBot = async () => {
         if (type !== "notify") {
             return      
         }
-        const messageTime = msg.messageTimestamp;
-        
+        const messageTime = Number(msg.messageTimestamp);
         if (messageTime < BOT_START_TIME) {
             console.log("Message received before bot started, ignoring...");
             return;      
         };
-
-        if (seenMessages.has(msg.key.id)) return;
+        if (seenMessages.has(msg.key.id)) {
+            console.log("Duplicate message detected, ignoring...");
+            return;
+        }
+        console.log("BOT_START_TIME:", BOT_START_TIME);
+        console.log("messageTime:", messageTime);
+        console.log("diff (mins):", (BOT_START_TIME - messageTime) / 60);
+        console.log(msg.message)
         seenMessages.add(msg.key.id);
-        const id = msg.key.id
-         setTimeout(() => seenMessages.delete(id), 60 * 1000);
-        
-        // const fromMe = msg.key.fromMe;
-        // const botJid = sock.user?.id;
-        // if (fromMe) return;
+        const body =
+            msg.message?.conversation || msg.message?.extendedTextMessage?.text;
+        if(body.startsWith('!p')) {
+            console.log("ping", messageTime, BOT_START_TIME)
+        }
         try {
             await handleCommand(sock, msg);
         } catch (error) {
