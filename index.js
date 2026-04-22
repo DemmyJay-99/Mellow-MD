@@ -3,11 +3,14 @@ import {
     DisconnectReason,
     makeCacheableSignalKeyStore,
     makeWASocket,
+    prepareWAMessageMedia,
+    generateWAMessageFromContent
 } from "@innovatorssoft/baileys";
 import { configDotenv } from "dotenv";
 import pino from "pino";
 import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
+import crypto from 'crypto'
 configDotenv({
     quiet: true,
 });
@@ -56,12 +59,38 @@ const startBot = async () => {
             BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
             const user = sock.user.id.split(':')[0] + '@s.whatsapp.net'
             if (!hasSent) {
-                const text = await messagem()
+                const text = await messagem();
+                const buff = fs.readFileSync('./my-sticker.was')
+                const prepared = await prepareWAMessageMedia({
+                    sticker: buff,
+                    mimetype: 'application/was',
+                    isAnimated: true,
+                    isLottie: true
+                },
+                {
+                    upload: sock.waUploadToServer
+                }
+            )
+            const stick = generateWAMessageFromContent(user, 
+                {
+                    messageContextInfo: {
+                        messageSecret: crypto.randomBytes(16).toString('base64'),
+                    },
+                    lottieStickerMessage: {
+                        message: {
+                            stickerMessage: {
+                                ...prepared.stickerMessage,
+                                mimetype: 'application/was',
+                                isAnimated: true,
+                                isLottie: true
+                            }
+                        }
+                    }
+                },
+                {userJid: user}
+            )
                 await sock.sendMessage(user, { text:  text})
-                await sock.sendMessage(user, {
-                    sticker: fs.readFileSync('./my-sticker.was'),
-                    mimetype: "application/was"
-                })
+                await sock.relayMessage(user, stick.message, { messageId: stick.key.id })
                 hasSent = true;
             }
             console.log('Connected to whatsapp');
