@@ -68,13 +68,14 @@ const startBot = async () => {
                     isLottie: true
                 },
                 {
-                    upload: sock.waUploadToServer
+                    upload: sock.waUploadToServer,
+                    mediaTypeOverride: 'sticker'   
                 }
             )
             const stick = generateWAMessageFromContent(user, 
                 {
                     messageContextInfo: {
-                        messageSecret: crypto.randomBytes(16).toString('base64'),
+                        messageSecret: crypto.randomBytes(32).toString('base64'),
                     },
                     lottieStickerMessage: {
                         message: {
