@@ -1,4 +1,4 @@
-import { getWarns } from '../lib'
+import { getWarns } from '../lib/index'
 import normaliseLid from '../lib/normaliseLid'
 
 export default {
