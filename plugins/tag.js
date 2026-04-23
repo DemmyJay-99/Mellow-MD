@@ -21,14 +21,14 @@ export default {
         text: "Provide a message to tag members with.",
       });
     } else if (message === options[0]) {
-      const mentions = members.map((member) => `@${member.split("@")[0]}`).join("\n");
+      const mentions = members.map((member) => `* @${member.split("@")[0]}`).join("\n");
       await sock.sendMessage(remoteJid, {
         text: mentions,
         mentions: members,
       });
     } else if (message === options[1]) {
       const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
-      const mentions = admins.map((admin) => `@${admin.split("@")[0]}`).join("\n");
+      const mentions = admins.map((admin) => `* @${admin.split("@")[0]}`).join("\n");
       await sock.sendMessage(remoteJid, {
         text: mentions,
         mentions: admins,
@@ -36,7 +36,7 @@ export default {
     } else if (message === options[2]) {
       const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
       const nonAdmins = members.filter((member) => !admins.includes(member));
-      const mentions = nonAdmins.map((nonAdmin) => `@${nonAdmin.split("@")[0]}`).join("\n");
+      const mentions = nonAdmins.map((nonAdmin) => `* @${nonAdmin.split("@")[0]}`).join("\n");
       await sock.sendMessage(remoteJid, {
         text: mentions,
         mentions: nonAdmins,
