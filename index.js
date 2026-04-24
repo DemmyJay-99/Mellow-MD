@@ -10,7 +10,7 @@ import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
 configDotenv({
     quiet: true,
-    path: '/config.env'
+    path: './config.env'
 });
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js"
