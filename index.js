@@ -3,8 +3,6 @@ import {
     DisconnectReason,
     makeCacheableSignalKeyStore,
     makeWASocket,
-    prepareWAMessageMedia,
-    generateWAMessageFromContent
 } from "@innovatorssoft/baileys";
 import { configDotenv } from "dotenv";
 import pino from "pino";
@@ -13,6 +11,7 @@ import handleCommand from "./lib/commandHandler.js";
 import crypto from 'crypto'
 configDotenv({
     quiet: true,
+    path: '/config.env'
 });
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js"
@@ -59,39 +58,8 @@ const startBot = async () => {
             BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
             const user = sock.user.id.split(':')[0] + '@s.whatsapp.net'
             if (!hasSent) {
-                const text = await messagem();
-                const buff = fs.readFileSync('./my-sticker.was')
-                const prepared = await prepareWAMessageMedia({
-                    sticker: buff,
-                    mimetype: 'application/was',
-                    isAnimated: true,
-                    isLottie: true
-                },
-                {
-                    upload: sock.waUploadToServer,
-                    mediaTypeOverride: 'sticker'   
-                }
-            )
-            const stick = generateWAMessageFromContent(user, 
-                {
-                    messageContextInfo: {
-                        messageSecret: crypto.randomBytes(32).toString('base64'),
-                    },
-                    lottieStickerMessage: {
-                        message: {
-                            stickerMessage: {
-                                ...prepared.stickerMessage,
-                                mimetype: 'application/was',
-                                isAnimated: true,
-                                isLottie: true
-                            }
-                        }
-                    }
-                },
-                {userJid: user}
-            )
+                const text = await messagem();                
                 await sock.sendMessage(user, { text:  text})
-                await sock.relayMessage(user, stick.message, { messageId: stick.key.id })
                 hasSent = true;
             }
             console.log('Connected to whatsapp');
@@ -137,13 +105,11 @@ const startBot = async () => {
             console.log("Duplicate message detected, ignoring...");
             return;
         }
-        // console.log("BOT_START_TIME:", BOT_START_TIME);
-        // console.log("messageTime:", messageTime);
-        // console.log("diff (mins):", (BOT_START_TIME - messageTime) / 60);
+
         seenMessages.add(msg.key.id);
         const body =
             msg.message?.conversation || msg.message?.extendedTextMessage?.text;
-        if(body?.startsWith('!p')) {
+        if(body?.startsWith('!pi')) {
             console.log("ping", messageTime, BOT_START_TIME)
         }
         try {
