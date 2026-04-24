@@ -8,7 +8,6 @@ import { configDotenv } from "dotenv";
 import pino from "pino";
 import checkSessionID from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
-import crypto from 'crypto'
 configDotenv({
     quiet: true,
     path: '/config.env'
