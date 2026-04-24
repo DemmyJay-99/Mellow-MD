@@ -28,6 +28,6 @@ export default {
       return;
     }
     let {video} = await ttdl(url);
-    await sock.sendMessage(msg.key.remoteJid, {video: {url: video}, hd: true}, {quoted: msg});
+    await sock.sendMessage(msg.key.remoteJid, {video: {url: video}}, {quoted: msg});
   },
 };
