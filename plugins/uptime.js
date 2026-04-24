@@ -13,14 +13,10 @@ export default {
       const seconds = Math.floor(totalSeconds % 60);
 
       const parts = [];
-      if (days > 0) parts.push(days + " days");
-      else if (days === 1) parts.push(days + " day");
-      if (hours > 0) parts.push(hours + " hours")
-        else if (hours === 1) parts.push(hours + " hour");
-      if (minutes > 0) parts.push(minutes + " minutes")
-        else if (minutes === 1) parts.push(minutes + " minute");
-      if (seconds > 0 || parts.length === 0) parts.push(seconds + " seconds")
-        else if (seconds === 1) parts.push(seconds + " second");
+      if(days > 0) parts.push(days + (days === 1 ? ' day' : ' days'));
+      if(hours > 0) parts.push(hours + (hours === 1 ? ' hour' : ' hours'));
+      if(minutes > 0) parts.push(minutes + (minutes === 1 ? ' minute' : ' minutes'));
+      if(seconds > 0 || parts.length === 0) parts.push(seconds + (seconds === 1 ? ' second' : ' seconds'));
 
       return parts.join(" ");
     }
