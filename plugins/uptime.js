@@ -14,9 +14,13 @@ export default {
 
       const parts = [];
       if (days > 0) parts.push(days + " days");
-      if (hours > 0) parts.push(hours + " hours");
-      if (minutes > 0) parts.push(minutes + " minutes");
-      if (seconds > 0 || parts.length === 0) parts.push(seconds + " seconds"); // Always show seconds
+      else if (days === 1) parts.push(days + " day");
+      if (hours > 0) parts.push(hours + " hours")
+        else if (hours === 1) parts.push(hours + " hour");
+      if (minutes > 0) parts.push(minutes + " minutes")
+        else if (minutes === 1) parts.push(minutes + " minute");
+      if (seconds > 0 || parts.length === 0) parts.push(seconds + " seconds")
+        else if (seconds === 1) parts.push(seconds + " second");
 
       return parts.join(" ");
     }
