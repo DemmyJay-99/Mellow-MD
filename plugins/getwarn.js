@@ -5,7 +5,7 @@ export default {
     name: "getwarns",
     description: "Get the number of warnings a user has",
     isPublic: false,
-    category: "Moderation",
+    category: "Group",
     usage: ".getwarns @user",
     execute: async (sock, msg, args) => {
         const remoteJid = msg.key.remoteJid;
