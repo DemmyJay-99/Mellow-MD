@@ -18,7 +18,7 @@ export default {
     }
     const response = await axios.get(`https://api-rebix.zone.id/api/ytdl?format=mp3&url=${url}`);
     const {result} = response.data;
-    const songUrl = result?.url;
+    const songUrl = result?.download;
     if (!songUrl) {
       return sock.sendMessage(msg.key.remoteJid, {text: "Failed to retrieve the song."});
     }
