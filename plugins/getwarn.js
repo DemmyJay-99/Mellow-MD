@@ -41,6 +41,6 @@ export default {
       if(!warnCount){
          return sock.sendMessage(remoteJid, { text: `@${targetJid.split('@')[0]} has no warnings.`, mentions: [targetJid] });
       }
-      return sock.sendMessage(remoteJid, { text: `Warning count for ${targetJid.split('@')[0]}: ${warnCount}`, mentions: [targetJid] });
+      return sock.sendMessage(remoteJid, { text: `Warning count for @${targetJid.split('@')[0]}: ${warnCount}`, mentions: [targetJid] });
     }
 }
