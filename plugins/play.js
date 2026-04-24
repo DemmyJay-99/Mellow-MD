@@ -23,9 +23,5 @@ export default {
       return sock.sendMessage(msg.key.remoteJid, {text: "Failed to retrieve the song."});
     }
     await sock.sendMessage(msg.key.remoteJid, {audio: {url: songUrl}, mimetype: "audio/mpeg"});
-
-    if (results.length === 0) {
-      return sock.sendMessage(msg.key.remoteJid, {text: "No results found."});
-    }
   },
 };
