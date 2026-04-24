@@ -20,8 +20,8 @@ export default {
     }
     const {title, thumbnail, timestamp} = video;
     const fonts = getFonts();
-    const transformedTitle = transform(title, fonts["script-bold"]);
-    const mellow = transform("Mellow-MD✨".toUpperCase(), fonts["script-bold"]);
+    const transformedTitle = transform(title, fonts["scriptBold"]);
+    const mellow = transform("Mellow-MD✨".toUpperCase(), fonts["scriptBold"]);
     const message = `${mellow}\nDownloading *${transformedTitle}*\nDuration: ${timestamp}`;
     const m = await sock.sendMessage(msg.key.remoteJid, {
       image: {url: thumbnail},
