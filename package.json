@@ -34,6 +34,7 @@
     "file-type": "^22.0.1",
     "fs-extra": "^11.3.3",
     "genius-lyrics": "^4.4.7",
+    "is-emoji": "^0.1.1",
     "mediaforge": "^0.0.1",
     "morsee": "^1.0.10",
     "node-catbox": "^4.2.0",

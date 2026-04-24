@@ -2461,6 +2461,11 @@ is-date-object@^1.0.5, is-date-object@^1.1.0:
     call-bound "^1.0.2"
     has-tostringtag "^1.0.2"
 
+is-emoji@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/is-emoji/-/is-emoji-0.1.1.tgz#c51d27c4adaa8b9755558c4e1d63d4cfffaff325"
+  integrity sha512-F6sNankKcoelbgMTDZ/imKxir8l8pbPPk2nbTzr6C7uFiz2b3kq3Uzui9WhsHfPhxUJy/ClbxaE8u+i7wv6CMg==
+
 is-extglob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/is-extglob/-/is-extglob-2.1.1.tgz"
