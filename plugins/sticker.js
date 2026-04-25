@@ -15,13 +15,18 @@ export default {
         text: "Reply to an image or video message.",
       });
     }
-    const type = quotedMessage?.imageMessage ? "image" : quotedMessage?.videoMessage ? "video" : "document";
+    let type = quotedMessage?.imageMessage ? "image" : quotedMessage?.videoMessage ? "video" : "document";
+
+    const isGif = quotedMessage?.videoMessage?.gifPlayback;
+    if(isGif) {
+      type = 'gif'
+    }
 
     const stream = await downloadContentFromMessage(mediaMessage, type);
     const chunks = [];
     for await (const chunk of stream) {
       chunks.push(chunk);
-    }
+    }    
     const buffer = Buffer.concat(chunks);
     const [stickerNameRaw, stickerAuthorRaw] = (process.env.STICKER_PACKNAME || "").split(",");
     const stickerName = stickerNameRaw || "Mellow MD";
