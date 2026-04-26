@@ -1,6 +1,6 @@
 import {StickerTypes} from "stickers-formatter";
 import id from "../lib/id.js";
-import { getDurationFromBuffer } from "../lib/ffmpeg.js";
+import { getDurationFromFile } from "../lib/ffmpeg.js";
 export default {
   name: "sticker",
   description: "Convert an image or video to a sticker",
@@ -26,7 +26,7 @@ export default {
     }    
     const buffer = Buffer.concat(chunks);
     if(isVideo) {
-      const duration = await getDurationFromBuffer(buffer);
+      const duration = getDurationFromFile(buffer);
       if(duration > 5) {
         return sock.sendMessage(msg.key.remoteJid, {
           text: "GIF/videos must be 5 seconds or less.",
