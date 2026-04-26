@@ -41,8 +41,7 @@ export default {
       author: stickerAuthor,
       type: StickerTypes.CROPPED,
       id: id,
-      quality: isVideo ? 20 : 50,
-      fps: isVideo ? 15 : undefined,
+      quality: 50,
     });
     if(sticker.length > 500 * 1024) {
       return sock.sendMessage(msg.key.remoteJid, {
