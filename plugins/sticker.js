@@ -1,5 +1,6 @@
 import {StickerTypes} from "stickers-formatter";
 import id from "../lib/id.js";
+import { getDurationFromBuffer } from "../lib/ffmpeg.js";
 export default {
   name: "sticker",
   description: "Convert an image or video to a sticker",
@@ -16,24 +17,38 @@ export default {
       });
     }
     let type = quotedMessage?.imageMessage ? "image" : quotedMessage?.videoMessage ? "video" : "document";
-
+    const isVideo = type === "video";
+    const isGif = quotedMessage?.videoMessage?.gifPlayback
     const stream = await downloadContentFromMessage(mediaMessage, type);
     const chunks = [];
     for await (const chunk of stream) {
       chunks.push(chunk);
     }    
     const buffer = Buffer.concat(chunks);
+    if(isVideo) {
+      const duration = await getDurationFromBuffer(buffer);
+      if(duration > 5) {
+        return sock.sendMessage(msg.key.remoteJid, {
+          text: "GIF/videos must be 5 seconds or less.",
+        });
+      }
+    }
     const [stickerNameRaw, stickerAuthorRaw] = (process.env.STICKER_PACKNAME || "").split(",");
     const stickerName = stickerNameRaw || "Mellow MD";
     const stickerAuthor = stickerAuthorRaw || "Mellow";
     const sticker = await createSticker(buffer, {
       pack: stickerName,
       author: stickerAuthor,
-      type: StickerTypes.FULL,
+      type: StickerTypes.CROPPED,
       id: id,
-      quality: 50,
-      background: "transparent",
+      quality: isVideo ? 20 : 50,
+      fps: isVideo ? 15 : undefined,
     });
+    if(sticker.length > 500 * 1024) {
+      return sock.sendMessage(msg.key.remoteJid, {
+        text: "Sticker is too large to send.",
+      });
+    }
     await sock.sendMessage(msg.key.remoteJid, {sticker: sticker});
   },
 };
