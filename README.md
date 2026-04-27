@@ -8,14 +8,14 @@
 
 [![Fork](https://img.shields.io/badge/Fork%20Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DemmyJay-99/Mellow-MD/fork)
 [![Star](https://img.shields.io/badge/Star%20⭐%20Repo-f7c948?style=for-the-badge&logo=github&logoColor=black)](https://github.com/DemmyJay-99/Mellow-MD)
-[![Pair Now](https://img.shields.io/badge/Get%20Session%20ID-7b2ff7?style=for-the-badge&logo=whatsapp&logoColor=white)](https://pairing-site-rho.vercel.app/)
+[![Pair Now](https://img.shields.io/badge/Get%20Session%20ID-7b2ff7?style=for-the-badge&logo=whatsapp&logoColor=white)](https://mellow-md.zone.id/)
 
 </div>
 
 
 ## Getting Your Session ID
 
-Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?style=for-the-badge&logo=whatsapp&logoColor=white)](https://pairing-site-rho.vercel.app/)** to get session ID
+Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?style=for-the-badge&logo=whatsapp&logoColor=white)](https://mellow-md.zone.id/)** to get session ID
 ---
 
 ## Configuration
@@ -38,8 +38,7 @@ WARN_LIMIT =
 |---|---|
 | `SESSION_ID` | Session ID received after pairing at the pairing site |
 | `PLATFORM` | Label shown in the bot menu (e.g. `Replit`, `VPS`, `Panel`) |
-| `AUTO_UPDATE` | Set to `true` to enable automatic bot updates |
-| `OWNER_NUMBER` | Your WhatsApp number with country code, no `+` (e.g. `234123456789`) |
+| `AUTO_UPDATE_BOT` | Set to `true` to enable automatic bot updates |
 | `REACT_EMOJI` | Emoji the bot reacts with when a command is used (e.g. `✨`) |
 | `GENIUS_API_KEY` | API key from [genius.com](https://genius.com/api-clients) for lyrics features |
 | `ALWAYS_ONLINE` | Set to `true` to keep the bot's WhatsApp status always online |
@@ -65,7 +64,7 @@ WARN_LIMIT =
 
 ### Option 1 — Pterodactyl Panel
 
-1. Visit **[Pairing Site](https://pairing-site-rho.vercel.app/)** and pair your WhatsApp number.
+1. Visit **[Pairing Site](https://mellow-md.zone.id/)** and pair your WhatsApp number.
 2. Go to the **Deploy** section on the pairing site.
 3. Enter your **Session ID** in the provided field.
 4. Click **Download** to get your custom `index.js` file.
