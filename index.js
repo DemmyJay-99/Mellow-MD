@@ -24,8 +24,6 @@ let sock;
 let isRestarting = false;
 
 const startBot = async () => {
-    // let BOT_START_TIME = Infinity;
-    // let CONNECTED_AT_MS = Date.now();
     try {
         await initSession(process.env.SESSION_ID);
         await validateCreds();
@@ -53,7 +51,6 @@ const startBot = async () => {
     sock.ev.on("creds.update", saveCreds);
     sock.ev.on("connection.update", async ({ connection, lastDisconnect }) => {
         if (connection === "open") {
-            // BOT_START_TIME = Math.floor(CONNECTED_AT_MS / 1000);
             const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
             if (!hasSent) {
                 const text = await messagem();
@@ -86,40 +83,12 @@ const startBot = async () => {
     });
     sock.ev.removeAllListeners("messages.upsert");
     sock.ev.on("messages.upsert", async ({ messages, type }) => {
-        // if (
-        //     CONNECTED_AT_MS &&
-        //     Date.now() - CONNECTED_AT_MS < STARTUP_GRACE_MS
-        // ) {
-        //     return;
-        // }
-        // const msg = messages[0];
-        // if (!msg || !msg.message) return;
-        // if (type !== "notify") {
-        //     return;
-        // }
-        // const messageTime = Number(msg.messageTimestamp);
-        // if (messageTime < BOT_START_TIME) {
-        //     console.log("Message received before bot started, ignoring...");
-        //     return;
-        // }
-        // if (seenMessages.has(msg.key.id)) {
-        //     console.log("Duplicate message detected, ignoring...");
-        //     return;
-        // }
-
-        // seenMessages.add(msg.key.id);
         for (const msg of messages) {
             if (!msg || !msg.message) return;
             if (type !== "notify") {
                 return;
             }
-            // const messageTime = Number(msg.messageTimestamp);
-            // if (messageTime < BOT_START_TIME) {
-            //     console.log("Message received before bot started, ignoring...");
-            //     return;
-            // }
             if (hasSeenMessage(msg.key.id)) {
-                console.log("Duplicate message detected, ignoring...");
                 continue
             }
             markMessageSeen(msg.key.id);
@@ -128,13 +97,7 @@ const startBot = async () => {
             } catch (error) {
                 console.error("Error in message handler:", error);
             }
-            // const body =
-            //     msg.message?.conversation || msg.message?.extendedTextMessage?.text;
-            // if (body?.startsWith("!pi")) {
-            //     console.log("ping", messageTime, BOT_START_TIME);
-            // }
-        }
-        
+        }        
     });
 
     return sock;
