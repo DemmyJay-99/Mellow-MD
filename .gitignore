@@ -3,6 +3,7 @@ config.env
 *session
 test/
 database/
+temp/
 data/*.json
 *.mp4
 *pvv.js
