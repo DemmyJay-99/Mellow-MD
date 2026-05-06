@@ -1,13 +1,12 @@
 export default {
   name: "gclabel",
   description: "Set a label for a group",
-  isPublic: false,
   category: "Group",
   usage: "gclabel <label>",
   execute: async (sock, msg, args) => {
     const remoteJid = msg.key.remoteJid;
     if (!remoteJid.endsWith("@g.us")) {
-     return await sock.sendMessage(msg.key.remoteJid, {text: "This command can only be used in groups"});
+      return await sock.sendMessage(msg.key.remoteJid, {text: "This command can only be used in groups"});
     }
     const metadata = await sock.groupMetadata(remoteJid);
     const groupName = metadata.subject;

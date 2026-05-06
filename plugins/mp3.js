@@ -2,7 +2,6 @@ import {toAudio} from "../lib/ffmpeg.js";
 export default {
   name: "mp3",
   description: "Convert video to MP3",
-  isPublic: false,
   category: "Media",
   usage: "Reply to a video or document message with .mp3 to convert it to MP3",
   execute: async (sock, msg, args, quotedMessage) => {

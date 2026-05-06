@@ -1,7 +1,6 @@
 export default {
   name: "ping",
   description: "Replies with pong!",
-  isPublic: false,
   category: "Utility",
   usage: "ping",
   execute: async (sock, msg, args) => {

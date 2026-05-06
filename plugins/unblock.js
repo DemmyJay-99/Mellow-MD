@@ -1,7 +1,6 @@
 export default {
   name: "unblock",
   description: "unblock a user on WhatsApp",
-  isPublic: false,
   category: "Owner",
   usage: "Reply to a user, mention them, or use `.unblock <number>`.",
   execute: async (sock, msg, args) => {

@@ -3,7 +3,6 @@ import {ttdl} from "ruhend-scraper";
 export default {
   name: "tiktok",
   description: "Download Tiktok videos",
-  isPublic: false,
   category: "Downloaders",
   usage: "tiktok <TikTok URL> (or reply to a message with the URL)",
   execute: async (sock, msg, args, quotedMessage) => {

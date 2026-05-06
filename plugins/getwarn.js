@@ -4,7 +4,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "getwarn",
   description: "Get the number of warnings a user has",
-  isPublic: false,
   category: "Group",
   usage: ".getwarn @user",
   execute: async (sock, msg, args) => {

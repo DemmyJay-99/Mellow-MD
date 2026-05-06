@@ -3,7 +3,6 @@ import {fbdl} from "ruhend-scraper";
 export default {
   name: "fb",
   description: "Download Facebook videos",
-  isPublic: false,
   category: "Downloaders",
   usage: "fb <fb URL> (or reply to a message with the URL)",
   execute: async (sock, msg, args, quotedMessage) => {

@@ -4,7 +4,6 @@ import fs from "fs";
 export default {
   name: "delsudo",
   description: "Remove a user from sudo",
-  isPublic: false,
   category: "Sudo",
   usage: "Reply to a user or mention one, or use `.delsudo <number>`.",
   execute: async (sock, msg, args) => {

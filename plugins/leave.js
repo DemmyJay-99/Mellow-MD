@@ -1,14 +1,13 @@
 export default {
-   name: "leave",
-   description: "Leave a group",
-   isPublic: false,
-   category: "Group",
-   usage: "leave",
-   execute: async (sock, msg, args) => {
-      const jid = msg.key.remoteJid;
-     if(!jid.endsWith("@g.us")){
-        await sock.sendMessage(jid, {text: "This command only works in groups."});
-     }
-      await sock.groupLeave(jid);
-   }
-}
+  name: "leave",
+  description: "Leave a group",
+  category: "Group",
+  usage: "leave",
+  execute: async (sock, msg, args) => {
+    const jid = msg.key.remoteJid;
+    if (!jid.endsWith("@g.us")) {
+      await sock.sendMessage(jid, {text: "This command only works in groups."});
+    }
+    await sock.groupLeave(jid);
+  },
+};

@@ -8,7 +8,6 @@ import {formatSeconds} from "../lib/uptime.js";
 export default {
   name: "menu",
   description: "List all available commands",
-  isPublic: false,
   category: "General",
   usage: "menu",
   execute: async (sock, msg, args) => {

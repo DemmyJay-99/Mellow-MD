@@ -3,7 +3,6 @@ import {igdl} from "ruhend-scraper";
 export default {
   name: "insta",
   description: "Download IG reels",
-  isPublic: false,
   category: "Downloaders",
   usage: "insta <Insta URL> (or reply to a message with the URL)",
   execute: async (sock, msg, args, quotedMessage) => {

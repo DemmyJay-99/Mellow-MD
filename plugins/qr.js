@@ -1,9 +1,8 @@
-import generateQR from "../lib/qr.js"
+import generateQR from "../lib/qr.js";
 
 export default {
   name: "qr",
   description: "Generate QR code",
-  isPublic: false,
   category: "Tools",
   usage: "qr <text>",
   execute: async (sock, msg, args, quotedMessage) => {
@@ -31,5 +30,5 @@ export default {
         text: "Error generating QR code: " + error.message,
       });
     }
-  }
-}
+  },
+};

@@ -1,10 +1,9 @@
 import {StickerTypes} from "stickers-formatter";
 import id from "../lib/id.js";
-import { getDurationFromFile } from "../lib/ffmpeg.js";
+import {getDurationFromFile} from "../lib/ffmpeg.js";
 export default {
   name: "sticker",
   description: "Convert an image or video to a sticker",
-  isPublic: false,
   category: "Media",
   usage: "Reply to an image or video message with .sticker",
   execute: async (sock, msg, args, quotedMessage) => {
@@ -18,16 +17,16 @@ export default {
     }
     let type = quotedMessage?.imageMessage ? "image" : quotedMessage?.videoMessage ? "video" : "document";
     const isVideo = type === "video";
-    const isGif = quotedMessage?.videoMessage?.gifPlayback
+    const isGif = quotedMessage?.videoMessage?.gifPlayback;
     const stream = await downloadContentFromMessage(mediaMessage, type);
     const chunks = [];
     for await (const chunk of stream) {
       chunks.push(chunk);
-    }    
+    }
     const buffer = Buffer.concat(chunks);
-    if(isVideo) {
+    if (isVideo) {
       const duration = getDurationFromFile(buffer);
-      if(duration > 5) {
+      if (duration > 5) {
         return sock.sendMessage(msg.key.remoteJid, {
           text: "GIF/videos must be 5 seconds or less.",
         });
@@ -43,7 +42,7 @@ export default {
       id: id,
       quality: 50,
     });
-    if(sticker.length > 500 * 1024) {
+    if (sticker.length > 500 * 1024) {
       return sock.sendMessage(msg.key.remoteJid, {
         text: "Sticker is too large to send.",
       });

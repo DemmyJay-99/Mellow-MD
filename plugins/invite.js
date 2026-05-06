@@ -1,7 +1,6 @@
 export default {
   name: "invite",
   description: "Get group invite link",
-  isPublic: false,
   category: "Group",
   usage: "invite",
   execute: async (sock, msg) => {

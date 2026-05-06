@@ -3,7 +3,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "jid",
   description: "Get the JID of a user",
-  isPublic: false,
   category: "Dev",
   usage: "jid",
   execute: async (sock, msg, args) => {

@@ -1,7 +1,6 @@
 export default {
   name: "rmpp",
   description: "Remove profile picture",
-  isPublic: false,
   category: "Owner",
   usage: "Reply to an image with .rmpp",
   execute: async (sock, msg, args) => {

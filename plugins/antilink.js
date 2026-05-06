@@ -1,17 +1,11 @@
 import normalizeJid from "../lib/normaliseLid.js";
-import {
-  getGroupConfig,
-  setGroupConfig,
-  getWarns,
-  setWarns,
-} from "../lib/index.js";
+import {getGroupConfig, setGroupConfig, getWarns, setWarns} from "../lib/index.js";
 
 const WARN_LIMIT = Number(process.env.WARN_LIMIT) || 3;
 
 export default {
   name: "antilink",
   description: "Enable or disable antilink",
-  isPublic: false,
   category: "Group",
   usage: "antilink on|off|set <warn|kick|delete>",
   execute: async (sock, msg, args) => {
@@ -43,7 +37,7 @@ export default {
       });
     }
     if (action === "on") {
-      await setGroupConfig(remoteJid, { ...groupConfig, enabled: true });
+      await setGroupConfig(remoteJid, {...groupConfig, enabled: true});
       await sock.sendMessage(remoteJid, {
         text: "Antilink enabled.",
       });
@@ -71,8 +65,7 @@ export default {
     if (!remoteJid.endsWith("@g.us")) return;
     const groupConfig = await getGroupConfig(remoteJid);
     if (!groupConfig.enabled) return;
-    const linkRegex =
-      /(https?:\/\/|www\.|chat\.whatsapp\.com|t\.me|discord\.gg)/i;
+    const linkRegex = /(https?:\/\/|www\.|chat\.whatsapp\.com|t\.me|discord\.gg)/i;
     if (linkRegex.test(body)) {
       let sender = msg.key.participant || msg.key.remoteJid;
       if (sender.endsWith("@lid")) {

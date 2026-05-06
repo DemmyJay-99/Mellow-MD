@@ -1,9 +1,8 @@
-import normaliseLid from "../lib/normaliseLid.js"
+import normaliseLid from "../lib/normaliseLid.js";
 
 export default {
   name: "kick",
   description: "Remove a user from the group",
-  isPublic: false,
   category: "Group",
   usage: "Reply to a user, mention them, or use `.kick <number>`.",
   execute: async (sock, msg, args) => {
@@ -18,9 +17,9 @@ export default {
     const metadata = await sock.groupMetadata(remoteJid);
     const senderJid = msg.key.participant || msg.key.remoteJid;
     const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
-    if(senderJid.endsWith("@lid")) {
-      let pn = await normaliseLid(sock, senderJid)
-      senderJid = pn + "@s.whatsapp.net"
+    if (senderJid.endsWith("@lid")) {
+      let pn = await normaliseLid(sock, senderJid);
+      senderJid = pn + "@s.whatsapp.net";
     }
     if (!admins.includes(senderJid) && !msg.key.fromMe) {
       return sock.sendMessage(remoteJid, {text: "Admin only."});
@@ -28,9 +27,9 @@ export default {
 
     const ctxInfo = msg.message?.extendedTextMessage?.contextInfo;
     let targetJid = ctxInfo?.participant || (ctxInfo?.mentionedJid?.length ? ctxInfo.mentionedJid[0] : null);
-    if(targetJid.endsWith("@lid")) {
-      let pn = await normaliseLid(sock, targetJid)
-      targetJid = pn + "@s.whatsapp.net"
+    if (targetJid.endsWith("@lid")) {
+      let pn = await normaliseLid(sock, targetJid);
+      targetJid = pn + "@s.whatsapp.net";
     }
 
     if (!targetJid && args[0]) {

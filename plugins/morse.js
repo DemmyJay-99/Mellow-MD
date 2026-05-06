@@ -1,9 +1,8 @@
-import { encode } from "morsee";
+import {encode} from "morsee";
 
 export default {
   name: "morse",
   description: "Convert text to morse code",
-  isPublic: false,
   category: "Fun",
   usage: "morse <text>",
   execute: async (sock, msg, args, quotedMessage) => {
@@ -12,9 +11,7 @@ export default {
       if (args[0]) {
         text = args.join(" ");
       } else if (quotedMessage) {
-        text =
-          quotedMessage?.conversation ||
-          quotedMessage?.extendedTextMessage?.text;
+        text = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
       }
       if (!text) {
         await sock.sendMessage(msg.key.remoteJid, {

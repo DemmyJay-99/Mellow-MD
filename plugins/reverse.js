@@ -1,25 +1,21 @@
-import { reverseAudio, reverseVideo } from "../lib/ffmpeg.js";
+import {reverseAudio, reverseVideo} from "../lib/ffmpeg.js";
 
 export default {
   name: "reverse",
   description: "Reverse video or audio",
-  isPublic: false,
   category: "Media",
   usage: "Reply to a video or audio with .reverse",
   execute: async (sock, msg, args, quotedMessage) => {
-    const mediaMessage =
-      quotedMessage?.videoMessage || quotedMessage?.audioMessage;
+    const mediaMessage = quotedMessage?.videoMessage || quotedMessage?.audioMessage;
     if (!mediaMessage) {
       return sock.sendMessage(msg.key.remoteJid, {
         text: "Reply to a video or audio message.",
       });
     }
-    const { downloadContentFromMessage } = await import(
-      "@innovatorssoft/baileys"
-    );
+    const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
     const type = quotedMessage.videoMessage ? "video" : "audio";
     const stream = await downloadContentFromMessage(mediaMessage, type);
-    
+
     const chunks = [];
     for await (const chunk of stream) {
       chunks.push(chunk);
@@ -28,17 +24,11 @@ export default {
     try {
       let reversedBuffer;
       if (quotedMessage.videoMessage) {
-        reversedBuffer = await reverseVideo(
-          buffer,
-          mediaMessage.mimetype.split("/")[1],
-        );
+        reversedBuffer = await reverseVideo(buffer, mediaMessage.mimetype.split("/")[1]);
       } else {
-        reversedBuffer = await reverseAudio(
-          buffer,
-          mediaMessage.mimetype.split("/")[1],
-        );
+        reversedBuffer = await reverseAudio(buffer, mediaMessage.mimetype.split("/")[1]);
       }
-      const sendOptions = { quoted: msg };
+      const sendOptions = {quoted: msg};
       if (quotedMessage.videoMessage) {
         sendOptions.video = reversedBuffer;
         sendOptions.mimetype = "video/mp4";

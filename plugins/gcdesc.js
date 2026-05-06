@@ -3,7 +3,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "gcdesc",
   description: "Change the group description",
-  isPublic: false,
   category: "Group",
   usage: "gcdesc <new description>",
   execute: async (sock, msg, args) => {

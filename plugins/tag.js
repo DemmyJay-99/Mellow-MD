@@ -1,7 +1,6 @@
 export default {
   name: "tag",
   description: "Tag all members",
-  isPublic: false,
   category: "Group",
   usage: "tag all|admins|nonadmins or reply to a message with tag",
   execute: async (sock, msg, args, quotedMessage) => {

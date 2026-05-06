@@ -3,7 +3,6 @@ import clearReact from "../lib/clearReact.js";
 export default {
   name: "restart",
   description: "Restart the bot",
-  isPublic: false,
   category: "Bot",
   usage: "restart",
   execute: async (sock, msg, args) => {

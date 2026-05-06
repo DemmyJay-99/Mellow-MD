@@ -1,7 +1,6 @@
 export default {
   name: "block",
   description: "Block a user on WhatsApp",
-  isPublic: false,
   category: "Owner",
   usage: "Reply to a user, mention them, or use `.block <number>`.",
   execute: async (sock, msg, args) => {

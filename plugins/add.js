@@ -1,7 +1,6 @@
 export default {
   name: "add",
   description: "Add a user to the group",
-  isPublic: false,
   category: "Group",
   usage: ".add <number> ",
   execute: async (sock, msg, args, quotedMessage) => {

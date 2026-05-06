@@ -3,7 +3,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "gcname",
   description: "Change the group name",
-  isPublic: false,
   category: "Group",
   usage: "gcname <new name>",
   execute: async (sock, msg, args) => {

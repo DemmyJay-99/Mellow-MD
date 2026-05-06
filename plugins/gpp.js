@@ -3,7 +3,6 @@ import {downloadContentFromMessage} from "@innovatorssoft/baileys";
 export default {
   name: "gpp",
   description: "Set group profile picture",
-  isPublic: false,
   category: "Group",
   usage: "Reply to an image with .gpp",
   execute: async (sock, msg, args) => {

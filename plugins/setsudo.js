@@ -4,7 +4,6 @@ import isSudo from "../lib/isSudo.js";
 export default {
   name: "setsudo",
   description: "Add sudo user",
-  isPublic: false,
   category: "Sudo",
   usage: "Reply to a user or mention one, or use `setsudo <number>`.",
   execute: async (sock, msg, args) => {

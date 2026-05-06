@@ -1,7 +1,6 @@
 export default {
   name: "repo",
   description: "Get the repository link of the bot",
-  isPublic: false,
   category: "Bot",
   usage: "repo",
   execute: async (sock, msg, args) => {

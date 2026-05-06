@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 export default {
   name: "help",
   description: "Get help for commands",
-  isPublic: false,
   category: "General",
   usage: "help to get a list of all commands, or help <command> to get help for a specific command",
   execute: async (sock, msg, args) => {

@@ -3,7 +3,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "demote",
   description: "Demote a user",
-  isPublic: false,
   category: "Group",
   usage: "Reply to a user, mention them, or use `.demote <number>`.",
   execute: async (sock, msg, args) => {

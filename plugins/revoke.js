@@ -3,7 +3,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "revoke",
   description: "Revoke group invite link",
-  isPublic: false,
   category: "Group",
   usage: "revoke",
   execute: async (sock, msg, args) => {

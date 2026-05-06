@@ -3,7 +3,6 @@ import fs from "fs";
 export default {
   name: "getsudo",
   description: "Get sudo users",
-  isPublic: false,
   category: "Sudo",
   usage: "getsudo",
   execute: async (sock, msg, args) => {

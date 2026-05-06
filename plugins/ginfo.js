@@ -3,7 +3,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "ginfo",
   description: "Get group info",
-  isPublic: false,
   category: "Group",
   usage: "ginfo",
   execute: async (sock, msg, args) => {

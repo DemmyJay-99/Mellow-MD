@@ -1,9 +1,8 @@
-import { downloadContentFromMessage } from "@innovatorssoft/baileys";
+import {downloadContentFromMessage} from "@innovatorssoft/baileys";
 
 export default {
   name: "addpp",
   description: "Add profile picture",
-  isPublic: false,
   category: "Owner",
   usage: "Reply to an image with .addpp",
   execute: async (sock, msg, args, quotedMessage) => {
@@ -27,6 +26,6 @@ export default {
       return;
     }
     await sock.updateProfilePicture(remoteJid, buffer);
-    await sock.sendMessage(remoteJid, { text: "Profile picture updated" });
+    await sock.sendMessage(remoteJid, {text: "Profile picture updated"});
   },
 };

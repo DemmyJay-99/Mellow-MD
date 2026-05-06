@@ -1,7 +1,6 @@
 export default {
   name: "time",
   description: "Check the current time",
-  isPublic: false,
   category: "Utility",
   usage: "time",
   execute: async (sock, msg, args) => {

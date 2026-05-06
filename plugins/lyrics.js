@@ -5,7 +5,6 @@ const Client = new genius.Client(process.env.GENIUS_API_KEY);
 export default {
   name: "lyrics",
   description: "Get song lyrics",
-  isPublic: false,
   category: "Media",
   usage: "Reply to a song name with .lyrics, or use .lyrics <song name>",
   execute: async (sock, msg, args, quotedMessage) => {
@@ -13,7 +12,7 @@ export default {
     if (!API_KEY) {
       return sock.sendMessage(msg.key.remoteJid, {
         text: "set GENIUS_API_KEY",
-      })
+      });
     }
     let song;
     const repliedMessage = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
@@ -24,10 +23,10 @@ export default {
       });
     }
     const searches = await Client.songs.search(song);
-    if(!searches) {
+    if (!searches) {
       return sock.sendMessage(msg.key.remoteJid, {
         text: "Song not found.",
-      })
+      });
     }
     const search = searches[0];
     if (!search) {

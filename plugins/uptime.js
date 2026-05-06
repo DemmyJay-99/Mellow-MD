@@ -1,7 +1,6 @@
 export default {
   name: "uptime",
   description: "Check the bot's uptime",
-  isPublic: false,
   category: "Utility",
   usage: "uptime",
   execute: async (sock, msg, args) => {
@@ -13,10 +12,10 @@ export default {
       const seconds = Math.floor(totalSeconds % 60);
 
       const parts = [];
-      if(days > 0) parts.push(days + (days === 1 ? ' day' : ' days'));
-      if(hours > 0) parts.push(hours + (hours === 1 ? ' hour' : ' hours'));
-      if(minutes > 0) parts.push(minutes + (minutes === 1 ? ' minute' : ' minutes'));
-      if(seconds > 0 || parts.length === 0) parts.push(seconds + (seconds === 1 ? ' second' : ' seconds'));
+      if (days > 0) parts.push(days + (days === 1 ? " day" : " days"));
+      if (hours > 0) parts.push(hours + (hours === 1 ? " hour" : " hours"));
+      if (minutes > 0) parts.push(minutes + (minutes === 1 ? " minute" : " minutes"));
+      if (seconds > 0 || parts.length === 0) parts.push(seconds + (seconds === 1 ? " second" : " seconds"));
 
       return parts.join(" ");
     }

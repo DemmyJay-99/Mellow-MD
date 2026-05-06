@@ -4,7 +4,6 @@ import {transform, getFonts} from "convert-unicode-fonts";
 export default {
   name: "play",
   description: "Play a song from YouTube",
-  isPublic: false,
   category: "Downloaders",
   usage: ".play <song name>",
   execute: async (sock, msg, args) => {

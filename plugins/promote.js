@@ -3,7 +3,6 @@ import normaliseLid from "../lib/normaliseLid.js";
 export default {
   name: "promote",
   description: "Promote a user to admin",
-  isPublic: false,
   category: "Group",
   usage: "Reply to a user, mention them, or use `.promote <number>`.",
   execute: async (sock, msg, args) => {
