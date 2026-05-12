@@ -14,9 +14,18 @@ export default {
           text: "Reply to a view-once message with .vv",
         });
       }
+      let actualMessage = quoted;
 
-      const mediaType = Object.keys(quoted)[0];
-      const media = quoted[mediaType];
+      if (quoted?.viewOnceMessage?.message) {
+        actualMessage = quoted.viewOnceMessage.message;
+      } else if (quoted?.viewOnceMessageV2?.message) {
+        actualMessage = quoted.viewOnceMessageV2.message;
+      } else if (quoted?.viewOnceMessageV2Extension?.message) {
+        actualMessage = quoted.viewOnceMessageV2Extension.message;
+      }
+
+      const mediaType = Object.keys(actualMessage)[0];
+      const media = actualMessage[mediaType];
 
       if (!media?.viewOnce) {
         return sock.sendMessage(remoteJid, {
@@ -39,10 +48,10 @@ export default {
 
       if (type === "image") {
         sendObject.image = buffer;
-        sendObject.caption = args.join(" ") || "";
+        sendObject.caption = media.caption || "";
       } else if (type === "video") {
         sendObject.video = buffer;
-        sendObject.caption = args.join(" ") || "";
+        sendObject.caption = media.caption || "";
       } else if (type === "audio") {
         sendObject.audio = buffer;
         sendObject.mimetype = media.mimetype || "audio/ogg; codecs=opus";
@@ -51,7 +60,7 @@ export default {
         sendObject.document = buffer;
         sendObject.fileName = "file";
       }
-      if(args[0] === "me") {
+      if (args[0] === "me") {
         return await sock.sendMessage(user, sendObject);
       }
       await sock.sendMessage(remoteJid, sendObject);
