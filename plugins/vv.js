@@ -6,6 +6,7 @@ export default {
   execute: async (sock, msg, args) => {
     try {
       const remoteJid = msg.key.remoteJid;
+      const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
       const quoted = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
 
       if (!quoted) {
@@ -50,7 +51,9 @@ export default {
         sendObject.document = buffer;
         sendObject.fileName = "file";
       }
-
+      if(args[0] === "me") {
+        return await sock.sendMessage(user, sendObject);
+      }
       await sock.sendMessage(remoteJid, sendObject);
     } catch (err) {
       console.error("vv error:", err);
