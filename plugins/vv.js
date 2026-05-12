@@ -2,7 +2,7 @@ export default {
   name: "vv",
   description: "Reveal a quoted view-once media",
   category: "Media",
-  usage: "Reply to a view-once message with .vv",
+  usage: "Reply to a view-once message with .vv || .vv me (to send to yourself)",
   execute: async (sock, msg, args) => {
     try {
       const remoteJid = msg.key.remoteJid;
