@@ -9,7 +9,7 @@ export default {
     const remoteJid = msg.key.remoteJid;
     if (remoteJid.endsWith("@lid")) {
       const pn = await normaliseLid(sock, remoteJid);
-      await sock.sendMessage(remoteJid, {text: pn});
+      await sock.sendMessage(remoteJid, {text: pn + '@s.whatsapp.net'});
     } else {
       await sock.sendMessage(remoteJid, {text: remoteJid});
     }
