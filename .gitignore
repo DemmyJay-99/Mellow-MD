@@ -7,3 +7,4 @@ temp/
 data/*.json
 *.mp4
 *pvv.js
+bin/

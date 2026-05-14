@@ -16,7 +16,6 @@ import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js";
 import messagem from "./lib/message.js";
 import { hasSeenMessage, markMessageSeen } from "./lib/store.js";
-
 checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60 * 24);
 let hasSent = false;
