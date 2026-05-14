@@ -1,4 +1,4 @@
-import {setvar} from "../lib/index.js";
+import { setvar } from "../lib/index.js";
 
 export default {
   name: "setvar",
@@ -6,17 +6,26 @@ export default {
   category: "Vars",
   usage: "setvar <variable>=<value>",
   execute: async (sock, msg, args) => {
-    if (!args.join(" ").includes("=")) {
-      return await sock.sendMessage(msg.key.remoteJid, {text: "Please provide a variable and a value separated by =."});
+    const fullText = args.join(" ");
+    const equalIndex = fullText.indexOf("=");
+
+    if (equalIndex === -1) {
+      return await sock.sendMessage(msg.key.remoteJid, {
+        text: "Please provide a variable and a value separated by =.",
+      });
     }
-    const text = args.join(" ").split("=");
-    const variable = text[0].trim();
-    const value = text[1].trim();
+
+    const variable = fullText.substring(0, equalIndex).trim();
+    const value = fullText.substring(equalIndex + 1).trim();
+
     if (!variable || !value) {
-      await sock.sendMessage(msg.key.remoteJid, {text: "Please provide a variable and a value."});
-      return;
+      return await sock.sendMessage(msg.key.remoteJid, {
+        text: "Please provide a variable and a value.",
+      });
     }
     await setvar(variable, value);
-    await sock.sendMessage(msg.key.remoteJid, {text: `Set ${variable.toUpperCase()} to ${value}`});
+    await sock.sendMessage(msg.key.remoteJid, {
+      text: `Set ${variable.toUpperCase()} to ${value}`,
+    });
   },
 };
