@@ -2,7 +2,7 @@ import yts from "yt-search";
 import { ytAudio } from "../lib/yt.js";
 export default {
   name: "play",
-  description: "Play a song from YouTube",
+  description: "Search and download a song from YouTube",
   category: "Downloaders",
   usage: ".play <song name>",
   execute: async (sock, msg, args) => {
