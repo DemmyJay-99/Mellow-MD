@@ -19,12 +19,13 @@ export default {
       const video =
         results.videos.find((v) => v.seconds <= MAX_DURATION) || null;
       const url = video?.url ?? null;
+      const { title, author} = video || {};
       if (!url) {
         return sock.sendMessage(remoteJid, {
           text: "No results found.",
         });
       }
-      await sock.sendMessage(remoteJid, { text: `Downloading: ${url}\n\n*© MELLOW MD*` });
+      await sock.sendMessage(remoteJid, { text: `Downloading: ${title} | ${author} ${url}\n\n*© MELLOW MD*` });
       const COOKIE = process.env.YT_COOKIE;
       if (!COOKIE) {
         return sock.sendMessage(remoteJid, {
