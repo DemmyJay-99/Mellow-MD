@@ -2724,6 +2724,13 @@ link-preview-js@^3.0.14:
     cheerio "1.0.0-rc.11"
     url "0.11.0"
 
+link-preview-js@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/link-preview-js/-/link-preview-js-4.0.3.tgz#2828c05e2a87d5381e40e4fa6082cb29565fc8a1"
+  integrity sha512-y0pn6rTfWvqp75GDKHpyJ0OHZdzYY0+Qfkazq4MdFcLKaWKwGGBkOOijzfp2igKPqnChPFfxL1pH4wP3VyoLwA==
+  dependencies:
+    cheerio "1.0.0-rc.11"
+
 locate-path@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/locate-path/-/locate-path-5.0.0.tgz"

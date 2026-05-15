@@ -1,5 +1,5 @@
 import yts from "yt-search";
-import { ytAudio } from "../lib/yt.js";
+import {ytAudio} from "../lib/yt.js";
 export default {
   name: "play",
   description: "Play a song from YouTube",
@@ -16,15 +16,27 @@ export default {
     try {
       const results = await yts(query);
       const MAX_DURATION = 10 * 60;
-      const video =
-        results.videos.find((v) => v.seconds <= MAX_DURATION) || null;
+      const video = results.videos.find((v) => v.seconds <= MAX_DURATION) || null;
       const url = video?.url ?? null;
+      const {title, author, timestamp, image} = video || {};
       if (!url) {
         return sock.sendMessage(remoteJid, {
           text: "No results found.",
         });
       }
-      await sock.sendMessage(remoteJid, { text: `Downloading: ${url}\n\n*© MELLOW MD*` });
+      const msg = `Downloading: ${title} | ${author.name}\nDuration: ${timestamp}\n*© MELLOW MD*`;
+      await sock.sendMessage(remoteJid, {
+          text: msg,
+          contextInfo: {
+              externalAdReply: {
+                  title: title,
+                  thumbnailUrl: image,
+                  sourceUrl: url,
+                  mediaType: 1,
+                  renderLargerThumbnail: true
+              }
+          }
+      })
       const COOKIE = process.env.YT_COOKIE;
       if (!COOKIE) {
         return sock.sendMessage(remoteJid, {
@@ -43,7 +55,7 @@ export default {
       });
     } catch (e) {
       console.log("Play Error:", e.stack);
-      await sock.sendMessage(remoteJid, { text: e.message });
+      await sock.sendMessage(remoteJid, {text: e.message});
     }
   },
 };
