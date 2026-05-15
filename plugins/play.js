@@ -1,5 +1,6 @@
 import yts from "yt-search";
 import { ytAudio } from "../lib/yt.js";
+import writeTags from "../lib/id3.js";
 export default {
   name: "play",
   description: "Play a song from YouTube",
@@ -31,15 +32,31 @@ export default {
           text: "YT_COOKIE environment variable not set",
         });
       }
-
+      const { title, author, thumbnail } = video;
+      const tags = {
+        title,
+        artist: author.name,
+        image: {
+          mime: "image/jpeg",
+          type: {
+            id: 3,
+            name: "front cover",
+          },
+          description: "Thumbnail",
+          imageBuffer: Buffer.from(
+            await (await fetch(thumbnail)).arrayBuffer()
+          ),
+        },
+      };
       const buffer = await ytAudio(url);
-      if (!buffer || buffer.length === 0) {
+      const taggedBuffer = await writeTags(buffer, tags);
+      if (!taggedBuffer || taggedBuffer.length === 0) {
         return sock.sendMessage(msg.key.remoteJid, {
           text: "Downloaded file is empty",
         });
       }
       await sock.sendMessage(remoteJid, {
-        audio: buffer,
+        audio: taggedBuffer,
         mimetype: "audio/mp4",
       });
     } catch (e) {
