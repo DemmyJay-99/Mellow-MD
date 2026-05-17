@@ -44,6 +44,7 @@ WARN_LIMIT =
 | `ALWAYS_ONLINE` | Set to `true` to keep the bot's WhatsApp status always online |
 | `STICKER_PACKNAME` | Pack name and author for stickers, separated by a comma — e.g. `packname,author` |
 |`WARN_LIMIT =`| Number of warnings before a group member gets removed|
+|`YT_COOKIE` =| Youtube cookie in Netscape format|
 
 ---
 
@@ -76,8 +77,9 @@ WARN_LIMIT =
 ```bash
 git clone https://github.com/DemmyJay-99/Mellow-MD.git
 cd Mellow-MD
-npm install
-cp sample.env .env
+npm install -g yarn
+yarn install
+cp .env.example config.env
 # Fill in SESSION_ID and PLATFORM in .env
 npm start
 ```
