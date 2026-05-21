@@ -4,7 +4,7 @@ export default {
   name: "mp4",
   description: "Convert video to mp4 format",
   usage: ".mp4 <video> or reply to a video with .mp4",
-  category: "Converters",
+  category: "Media",
   execute: async (sock, msg, args, quotedMessage) => {
     const remoteJid = msg.key.remoteJid;
     const mediaMessage = quotedMessage?.videoMessage || quotedMessage?.documentMessage;
