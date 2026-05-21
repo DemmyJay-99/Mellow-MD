@@ -1,10 +1,10 @@
-import {ytVideo} from "../lib/yt.js";
 import fs from "fs";
+import {twitterVideo} from "../lib/yt.js";
 
 export default {
-  name: "ytv",
-  description: "Download YouTube videos",
-  usage: ".ytv <url> or reply to a YouTube video link with .ytv",
+  name: "twitter",
+  description: "Download Twitter videos",
+  usage: ".twitter <url> or reply to a Twitter video url with .twitter",
   category: "Downloaders",
   execute: async (sock, msg, args, quotedMessage) => {
     const remoteJid = msg.key.remoteJid;
@@ -16,21 +16,21 @@ export default {
     }
     if (!url) {
       return await sock.sendMessage(remoteJid, {
-        text: "Usage: .ytv <url> or reply to a YouTube video link with .ytv",
+        text: "Usage: .twitter <url> or reply to a Twitter video url with .twitter",
       });
     }
-    function isYouTubeUrl(url) {
-      const youtubeRegex =
-        /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([A-Za-z0-9_-]{11})(?:[&?][^\s]*)?$/;
-      return youtubeRegex.test(url);
+    function isTwitterUrl(url) {
+      const twitterRegex =
+        /https?:\/\/(?:www\.)?(?:twitter\.com|x\.com)\/(?:#!\/)?(\w+)\/status(?:es)?\/(\d+)(?:\?.*)?/i;
+      return twitterRegex.test(url);
     }
-    if (!isYouTubeUrl(url)) {
+    if (!isTwitterUrl(url)) {
       return await sock.sendMessage(remoteJid, {
-        text: "Please provide a valid YouTube video URL.",
+        text: "Invalid Twitter URL.",
       });
     }
     try {
-      const filepath = await ytVideo(url);
+      const filepath = await twitterVideo(url);
       const buffer = fs.readFileSync(filepath);
       await sock.sendMessage(remoteJid, {
         video: buffer,
@@ -41,10 +41,10 @@ export default {
       } catch (error) {
         // console.error('Failed to delete temp video file:', err);
       }
-    } catch (error) {
-      console.error("Error downloading YouTube video:", error);
+    } catch (e) {
+      console.error("twitter error:", e);
       await sock.sendMessage(remoteJid, {
-        text: "An error occurred while downloading the YouTube video.",
+        text: "Failed to download Twitter video.",
       });
     }
   },
