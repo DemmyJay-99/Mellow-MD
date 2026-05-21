@@ -51,7 +51,7 @@ Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?styl
 - Multi-device support without keeping your phone online
 - Plugin-based architecture for easy command management
 - Auto-update feature to keep your bot up-to-date with the latest features and fixes
-- Media downloaders (YouTube, Instagram, TikTok, Facebook, etc.)
+- Media downloaders (YouTube, Instagram, TikTok, Facebook,Twitter etc.)
 - Music and lyrics search with Genius API integration
 - File conversion (e.g. media to sticker)
 - Group management tools (e.g. warn system, anti-link)
