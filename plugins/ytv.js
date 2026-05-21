@@ -36,7 +36,7 @@ export default {
         video: buffer,
         mimetype: "video/mp4",
       });
-      // fs.unlinkSync(filepath);
+      fs.unlinkSync(filepath);
     } catch (error) {
       console.error("Error downloading YouTube video:", error);
       await sock.sendMessage(remoteJid, {
