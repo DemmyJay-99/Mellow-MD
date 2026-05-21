@@ -9,7 +9,7 @@ export default {
   execute: async (sock, msg, args) => {
     const store = sock.signalRepository.lidMapping;
     const sudoPath = "./data/sudo.json";
-    const sudoUsers = JSON.parse(fs.readFileSync(sudoPath));
+    const sudoUsers = JSON.parse(fs.readFileSync(sudoPath) || "[]");
     const remoteJid = msg.key.remoteJid;
     const ctxInfo = msg.message?.extendedTextMessage?.contextInfo;
     let targetJid;
