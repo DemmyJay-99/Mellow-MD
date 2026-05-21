@@ -1,10 +1,9 @@
-import {ytVideo} from "../lib/yt.js";
-import fs from "fs";
+import {ytAudio} from "../lib/yt.js";
 
 export default {
-  name: "ytv",
-  description: "Download YouTube videos",
-  usage: ".ytv <url> or reply to a YouTube video link with .ytv",
+  name: "yta",
+  description: "Download YouTube audio",
+  usage: ".yta <url> or reply to a YouTube video link with .yta",
   category: "Downloaders",
   execute: async (sock, msg, args, quotedMessage) => {
     const remoteJid = msg.key.remoteJid;
@@ -16,7 +15,7 @@ export default {
     }
     if (!url) {
       return await sock.sendMessage(remoteJid, {
-        text: "Usage: .ytv <url> or reply to a YouTube video link with .ytv",
+        text: "Usage: .yta <url> or reply to a YouTube video link with .yta",
       });
     }
     function isYouTubeUrl(url) {
@@ -36,22 +35,19 @@ export default {
       });
     }
     try {
-      const filepath = await ytVideo(url);
-      const buffer = fs.readFileSync(filepath);
-      await sock.sendMessage(remoteJid, {
-        video: buffer,
-        mimetype: "video/mp4",
-      });
-      try {
-        fs.unlinkSync(filepath);
-      } catch (error) {
-        // console.error('Failed to delete temp video file:', err);
+      const buffer = await ytAudio(url);
+      if (!buffer || buffer.length === 0) {
+        return sock.sendMessage(msg.key.remoteJid, {
+          text: "Downloaded file is empty",
+        });
       }
-    } catch (error) {
-      console.error("Error downloading YouTube video:", error);
       await sock.sendMessage(remoteJid, {
-        text: "An error occurred while downloading the YouTube video.",
+        audio: buffer,
+        mimetype: "audio/mp4",
       });
+    } catch (e) {
+      console.log("YTA Error:", e.stack);
+      await sock.sendMessage(remoteJid, {text: e.message});
     }
   },
 };
