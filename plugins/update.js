@@ -1,6 +1,7 @@
 import {execSync} from "child_process";
 import axios from "axios";
 import {generateQuickReplyButtons} from "@innovatorssoft/baileys";
+import isSudo from '../lib/isSudo.js'
 export default {
   name: "update",
   description: "Update the bot",
@@ -69,7 +70,9 @@ export default {
     }
   },
   onMessage: async (sock, msg) => {
-    if (!msg.key.fromMe) return;
+    const remoteJid = msg.key.remoteJid;
+    const newJid = remoteJid.split("@")[0];
+    if (!msg.key.fromMe || !await isSudo(newJid)) return;
     if (msg.message.templateButtonReplyMessage?.selectedId === "update now") {
       execSync("git pull", {stdio: "inherit"});
       const diff = execSync("git diff HEAD@{1} HEAD --name-only").toString();
