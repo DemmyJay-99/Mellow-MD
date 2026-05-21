@@ -1,4 +1,7 @@
+<div align="center">
+
 # MELLOW MD
+</div>
 
 <div align="center">
 
@@ -94,6 +97,7 @@ YT_COOKIE=
 [![Deploy on Optiklink](https://img.shields.io/badge/Optiklink-0e76a8?style=for-the-badge)](https://optiklink.net/)
 [![Deploy on Bot-Hosting Panel](https://img.shields.io/badge/Bot--Hosting.net-7b2ff7?style=for-the-badge&logo=serverless&logoColor=white)](https://bot-hosting.net/?aff=1280297606333071372)
 </div>
+
 1. Visit **[Pairing Site](https://mellow-md.zone.id/)** and pair your WhatsApp number.
 2. Go to the **Deploy** section on the pairing site.
 3. Enter your **Session ID** in the provided field.
@@ -137,7 +141,7 @@ npm start
 3. The application will start automatically using the configured workflow.
 
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 > [!CAUTION]
 > This project is **not affiliated with WhatsApp Inc.** Use responsibly and within [WhatsApp's Terms of Service](https://www.whatsapp.com/legal/terms-of-service). The developers are not responsible for account bans or misuse.
@@ -145,7 +149,7 @@ npm start
 ---
 
 
-## 📄 License
+## License
 
 [MIT License](LICENSE) · Made with ❤️ by [Mellow](https://github.com/DemmyJay-99)
 
