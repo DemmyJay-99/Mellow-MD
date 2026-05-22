@@ -1,8 +1,10 @@
 import {execSync} from "child_process";
 import axios from "axios";
 import {generateQuickReplyButtons} from "@innovatorssoft/baileys";
-import isSudo from '../lib/isSudo.js'
-import normaliseLid from '../lib/normaliseLid.js'
+import isSudo from "../lib/isSudo.js";
+import normaliseLid from "../lib/normaliseLid.js";
+import clearReact from "../lib/clearReact.js";
+
 export default {
   name: "update",
   description: "Update the bot",
@@ -29,7 +31,10 @@ export default {
           await sock.sendMessage(msg.key.remoteJid, {
             text: "Updated successfully. Restarting...",
           });
-          process.exit(0);
+          await clearReact(sock, msg);
+          setTimeout(() => {
+            process.exit(0);
+          }, 1500);
         } else {
           console.log("No updates found");
           await sock.sendMessage(msg.key.remoteJid, {
@@ -73,14 +78,14 @@ export default {
   onMessage: async (sock, msg) => {
     const remoteJid = msg.key.participant || msg.key.remoteJid;
     let newJid;
-    if(remoteJid.endsWith("@lid")) {
+    if (remoteJid.endsWith("@lid")) {
       newJid = await normaliseLid(sock, remoteJid);
     } else {
-      newJid = remoteJid.split('@')[0];
+      newJid = remoteJid.split("@")[0];
     }
     const fromMe = msg.key.fromMe;
     const isSudoUser = await isSudo(newJid);
-    if(fromMe || isSudoUser) {
+    if (fromMe || isSudoUser) {
     } else {
       return;
     }
@@ -97,7 +102,10 @@ export default {
       await sock.sendMessage(msg.key.remoteJid, {
         text: "Updated successfully. Restarting...",
       });
-      process.exit(0);
+      await clearReact(sock, msg);
+      setTimeout(() => {
+        process.exit(0);
+      }, 1500);
     }
   },
 };
