@@ -78,7 +78,13 @@ export default {
     } else {
       newJid = remoteJid.split('@')[0];
     }
-    if (!msg.key.fromMe || !await isSudo(newJid)) return;
+    const fromMe = msg.key.fromMe;
+    const isSudoUser = await isSudo(newJid);
+    if(fromMe || isSudoUser) {
+    } else {
+      return;
+    }
+    // if (!msg.key.fromMe || !await isSudo(newJid)) return;
     if (msg.message.templateButtonReplyMessage?.selectedId === "update now") {
       execSync("git pull", {stdio: "inherit"});
       const diff = execSync("git diff HEAD@{1} HEAD --name-only").toString();
