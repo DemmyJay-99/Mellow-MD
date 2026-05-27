@@ -85,7 +85,6 @@ const startBot = async () => {
     sock.ev.on("messages.upsert", async (message) => {
             try {
                 await handleMessage(sock, message);
-                await handleCommand(sock, message);
             } catch (error) {
                 console.error("Error in message handler:", error);
             }
