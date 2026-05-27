@@ -8,6 +8,7 @@ import { configDotenv } from "dotenv";
 import pino from "pino";
 import { initSession, validateCreds } from "./lib/session.js";
 import handleCommand from "./lib/commandHandler.js";
+import handleMessage from "./lib/messageHandler.js";
 configDotenv({
     quiet: true,
     path: "./config.env",
@@ -81,22 +82,13 @@ const startBot = async () => {
         }
     });
     sock.ev.removeAllListeners("messages.upsert");
-    sock.ev.on("messages.upsert", async ({ messages, type }) => {
-        for (const msg of messages) {
-            if (!msg || !msg.message) return;
-            if (type !== "notify") {
-                return;
-            }
-            if (hasSeenMessage(msg.key.id)) {
-                continue
-            }
-            markMessageSeen(msg.key.id);
+    sock.ev.on("messages.upsert", async (message) => {
             try {
-                await handleCommand(sock, msg);
+                await handleMessage(sock, message);
+                await handleCommand(sock, message);
             } catch (error) {
                 console.error("Error in message handler:", error);
             }
-        }        
     });
 
     return sock;
