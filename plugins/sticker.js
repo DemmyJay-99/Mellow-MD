@@ -23,9 +23,9 @@ export default {
     for await (const chunk of stream) {
       chunks.push(chunk);
     }
-    const buffer = Buffer.concat(chunks);
+    let buffer = Buffer.concat(chunks);
     if (isVideo) {
-      const duration = getDurationFromFile(buffer);
+      const duration = await getDurationFromFile(buffer);
       if (duration > 5) {
         buffer = await trimVideo(buffer, "mp4", 0, 5);
       }
