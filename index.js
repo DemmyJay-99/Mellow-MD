@@ -65,14 +65,14 @@ const startBot = async () => {
             if (shouldReconnect && !isRestarting) {
                 isRestarting = true;
                 console.log("Reconnecting...");
-                try {
-                    if (sock) {
-                        await sock.ev.removeAllListeners();
-                        await sock.ws.close();
-                    }
-                } catch (error) {
-                    console.log(error);
-                }
+                // try {
+                //     if (sock) {
+                //         await sock.ev.removeAllListeners();
+                //         await sock.ws.close();
+                //     }
+                // } catch (error) {
+                //     console.log(error);
+                // }
 
                 setTimeout(() => {
                     isRestarting = false;
@@ -81,13 +81,14 @@ const startBot = async () => {
             }
         }
     });
-    sock.ev.removeAllListeners("messages.upsert");
+    // sock.ev.removeAllListeners("messages.upsert");
+
     sock.ev.on("messages.upsert", async (message) => {
-            try {
-                await handleMessage(sock, message);
-            } catch (error) {
-                console.error("Error in message handler:", error);
-            }
+        try {
+            await handleMessage(sock, message);
+        } catch (error) {
+            console.error("Error in message handler:", error);
+        }
     });
 
     return sock;
