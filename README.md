@@ -159,5 +159,6 @@ npm start
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub%20Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DemmyJay-99/Mellow-MD)
 [![YouTube Channel](https://img.shields.io/badge/YouTube%20Channel-f00000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@mellow-w3s)
-[![Telegram Channel](https://img.shields.io/badge/Join%20Telegram%20Group-25D366?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/mellowmd)
+[![Telegram Channel](https://img.shields.io/badge/Join%20Telegram%20Channel-25D366?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/mellowmd)
+[![Telegram Group](https://img.shields.io/badge/Join%20Telegram%20Group-25D366?style=for-the-badge&logo=telegram&logoColor=blue)](https://t.me/mellowmdgc)
 </div>
