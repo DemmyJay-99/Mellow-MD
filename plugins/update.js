@@ -1,6 +1,6 @@
-import {execSync} from "child_process";
-import {generateQuickReplyButtons} from "@innovatorssoft/baileys";
-import {getLatestCommitMessages, pullLatestUpdates} from "../lib/update.js";
+import { execSync } from "child_process";
+import { generateQuickReplyButtons } from "@innovatorssoft/baileys";
+import { getLatestCommitMessages, pullLatestUpdates } from "../lib/update.js";
 import { clearReact } from "../lib/index.js";
 export default {
   name: "update",
@@ -9,10 +9,10 @@ export default {
   usage: "update(to check for updates), update now (to update immediately)",
   execute: async (sock, msg, args) => {
     try {
-      execSync("git fetch", {stdio: "ignore"});
+      execSync("git fetch", { stdio: "ignore" });
+      const local = execSync("git rev-parse HEAD").toString().trim();
+      const remote = execSync("git rev-parse origin/master").toString().trim();
       if (args[0] === "now") {
-        const local = execSync("git rev-parse HEAD").toString().trim();
-        const remote = execSync("git rev-parse origin/master").toString().trim();
         console.log("Updating...");
         if (local !== remote) {
           console.log("Your version of mellow-md is outdated");
@@ -33,7 +33,7 @@ export default {
           return;
         }
       } else {
-        const {commitLength, commits} = await getLatestCommitMessages();
+        const { commitLength, commits } = await getLatestCommitMessages();
         const commitMessage =
           `Missing ${commitLength} updates\n` +
           commits +
@@ -41,7 +41,7 @@ export default {
           "*Tap the button below to update (or use update now command)*";
         const buttons = generateQuickReplyButtons(
           commitMessage,
-          [{displayText: "Update now", id: "update now"}],
+          [{ displayText: "Update now", id: "update now" }],
           "Update now",
         );
         if (local !== remote) {
