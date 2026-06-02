@@ -47,7 +47,8 @@ export default {
       lines.push(`┏━━〔 ${category.toUpperCase()} 〕 `);
 
       for (const c of cmdsInCategory) {
-        lines.push(`┃  *${config.prefix}${c.name}*`);
+        const prefix = process.env.PREFIX ? process.env.PREFIX.split(",")[0] : config.prefix;
+        lines.push(`┃  *${prefix[0]}${c.name}*`);
       }
     }
 
