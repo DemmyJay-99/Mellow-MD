@@ -5,7 +5,6 @@ import p from "../package.json" with {type: "json"};
 import {formatSeconds} from "../lib/uptime.js";
 import { commandHandler } from "../lib/command.js";
 
-
 export default {
   name: "menu",
   description: "List all available commands",
