@@ -73,6 +73,7 @@ ALWAYS_ONLINE=
 STICKER_PACKNAME=
 WARN_LIMIT=
 YT_COOKIE=
+PREFIX=
 ```
 
 | Variable | Description |
@@ -86,6 +87,7 @@ YT_COOKIE=
 | `STICKER_PACKNAME` | Pack name and author for stickers, separated by a comma — e.g. `packname,author` |
 | `WARN_LIMIT` | Number of warnings before a group member gets removed |
 | `YT_COOKIE` | Youtube cookie in Netscape format |
+| `PREFIX` | Prefix for bot commands, separated by a comma — e.g. `!,.` |
 
 ---
 
