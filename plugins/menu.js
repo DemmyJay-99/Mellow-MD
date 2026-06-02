@@ -1,9 +1,10 @@
 import {transform, getFonts} from "convert-unicode-fonts";
-import {getCommands} from "../lib/commandHandler.js";
 import config from "../config.js";
 import getPlugins from "../lib/getPlugins.js";
 import p from "../package.json" with {type: "json"};
 import {formatSeconds} from "../lib/uptime.js";
+import { commandHandler } from "../lib/command.js";
+
 
 export default {
   name: "menu",
@@ -11,7 +12,7 @@ export default {
   category: "General",
   usage: "menu",
   execute: async (sock, msg, args) => {
-    const cmds = getCommands() || [];
+    const cmds = commandHandler.getCommands() || [];
     if (cmds.length === 0) {
       await sock.sendMessage(msg.key.remoteJid, {text: "No commands loaded."});
       return;
