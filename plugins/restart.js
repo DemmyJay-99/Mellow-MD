@@ -1,4 +1,4 @@
-import clearReact from "../lib/clearReact.js";
+import {clearReact} from "../lib/index.js";
 
 export default {
   name: "restart",

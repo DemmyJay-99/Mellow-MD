@@ -7,7 +7,6 @@ import {
 import { configDotenv } from "dotenv";
 import pino from "pino";
 import { initSession, validateCreds } from "./lib/session.js";
-import handleCommand from "./lib/commandHandler.js";
 import handleMessage from "./lib/messageHandler.js";
 configDotenv({
     quiet: true,
@@ -16,7 +15,6 @@ configDotenv({
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js";
 import messagem from "./lib/message.js";
-import { hasSeenMessage, markMessageSeen } from "./lib/store.js";
 checkUpdates();
 setInterval(checkUpdates, 1000 * 60 * 60 * 24);
 let hasSent = false;
