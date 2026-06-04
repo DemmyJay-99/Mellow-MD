@@ -1,5 +1,5 @@
 import fs from "fs";
-import isSudo from "../lib/isSudo.js";
+import {isSudo} from "../lib/sudo.js";
 
 export default {
   name: "setsudo",
