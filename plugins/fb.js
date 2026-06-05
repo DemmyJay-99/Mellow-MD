@@ -30,7 +30,7 @@ export default {
       return;
     }
     const res = await fbdl(url);
-    const video = res.data[0].url;
+    const video = res.data[0]?.url;
     await sock.sendMessage(chatID, {video: {url: video}});
   },
 };
