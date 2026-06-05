@@ -15,7 +15,7 @@ export default {
       });
     }
 
-    const metadata = await sock.groupMetadata(remoteJid);
+    const metadata = await sock.groupMetadata(chatID);
     let senderJid = msg.key.participant || msg.key.remoteJid;
     senderJid = (await normaliseJidToPN(sock, senderJid)) + "@s.whatsapp.net";
     const admins = metadata.participants.filter((p) => p.admin || p.admin === "superadmin").map((p) => p.id);
