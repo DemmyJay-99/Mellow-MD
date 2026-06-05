@@ -5,11 +5,11 @@ export default {
   description: "Add profile picture",
   category: "Owner",
   usage: "Reply to an image with .addpp",
-  execute: async (sock, msg, args, quotedMessage) => {
-    const remoteJid = msg.key.remoteJid;
+  execute: async (sock, msg, args, mellow = {}) => {
+    const { chatID, quotedMessage } = mellow;
     const media = quotedMessage?.imageMessage;
     if (!media) {
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Reply to an image with .addpp",
       });
       return;
@@ -19,13 +19,7 @@ export default {
     for await (const chunk of stream) {
       buffer = Buffer.concat([buffer, chunk]);
     }
-    if (!remoteJid.endsWith("@g.us")) {
-      const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-      await sock.updateProfilePicture(user, buffer);
-      await sock.sendMessage(remoteJid, {text: "Profile picture updated"});
-      return;
-    }
-    await sock.updateProfilePicture(remoteJid, buffer);
-    await sock.sendMessage(remoteJid, {text: "Profile picture updated"});
+    await sock.updateProfilePicture(chatID, buffer);
+    await sock.sendMessage(chatID, {text: "Profile picture updated"});
   },
 };
