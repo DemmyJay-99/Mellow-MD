@@ -29,6 +29,6 @@ export default {
     }
     let video = await ttdl(url)[0];
 
-    await sock.sendMessage(chatID, {video: {url: video}}}, {quoted: msg});
+    await sock.sendMessage(chatID, {video: {url: video}}, {quoted: msg});
   },
 };
