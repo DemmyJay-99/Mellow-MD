@@ -27,8 +27,8 @@ export default {
       await sock.sendMessage(chatID, {text: "Invalid url"});
       return;
     }
-    let video = await ttdl(url);
+    let video = await ttdl(url)[-];
 
-    await sock.sendMessage(chatID, {video: {url: video[0]}}, {quoted: msg});
+    await sock.sendMessage(chatID, {video: {url: video}}}, {quoted: msg});
   },
 };
