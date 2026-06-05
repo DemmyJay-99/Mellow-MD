@@ -1,4 +1,4 @@
-import normaliseJidToPN from "../lib/normaliseJidToPN";
+import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 import fs from "fs";
 
 export default {
