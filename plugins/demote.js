@@ -6,10 +6,10 @@ export default {
   category: "Group",
   usage: "Reply to a user, mention them, or use `.demote <number>`.",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID} = mellow;
+    const {chatID, chatIDisGroup} = mellow;
     const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
 
-    if (!remoteJid?.endsWith("@g.us")) {
+    if (!chatIDisGroup) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
       });
