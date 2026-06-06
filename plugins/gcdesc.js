@@ -5,7 +5,7 @@ export default {
   category: "Group",
   usage: "gcdesc <new description>",
   execute: async (sock, msg, args, mellow = {}) => {
-    const { chatID, senderID, botID } = mellow;
+    const {chatID, senderID, botID} = mellow;
     if (!chatID.endsWith("@g.us")) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
@@ -14,7 +14,7 @@ export default {
     const metadata = await sock.groupMetadata(chatID);
     const senderJid = await normaliseJidToPN(senderID);
     const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
-    if (!admins.includes(senderJid) && !msg.key.fromMe) {
+    if (!admins.includes(senderJid)) {
       return sock.sendMessage(chatID, {text: "Admin only."});
     }
 

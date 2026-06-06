@@ -6,12 +6,13 @@ export default {
   description: "Convert an image or video to a sticker",
   category: "Media",
   usage: "Reply to an image or video message with .sticker",
-  execute: async (sock, msg, args, quotedMessage) => {
+  execute: async (sock, msg, args, mellow = {}) => {
     const {createSticker} = await import("stickers-formatter");
     const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
+    const {chatID, quotedMessage} = mellow;
     const mediaMessage = quotedMessage?.imageMessage || quotedMessage?.videoMessage || quotedMessage?.documentMessage;
     if (!mediaMessage) {
-      return sock.sendMessage(msg.key.remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "Reply to an image or video message.",
       });
     }
@@ -41,10 +42,10 @@ export default {
       quality: 50,
     });
     if (sticker.length > 500 * 1024) {
-      return sock.sendMessage(msg.key.remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "Sticker is too large to send.",
       });
     }
-    await sock.sendMessage(msg.key.remoteJid, {sticker: sticker});
+    await sock.sendMessage(chatID, {sticker: sticker});
   },
 };

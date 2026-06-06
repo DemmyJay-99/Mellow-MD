@@ -5,11 +5,11 @@ export default {
   description: "Convert video to mp4 format",
   usage: ".mp4 <video> or reply to a video with .mp4",
   category: "Media",
-  execute: async (sock, msg, args, quotedMessage) => {
-    const remoteJid = msg.key.remoteJid;
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {quotedMessage, chatID} = mellow;
     const mediaMessage = quotedMessage?.videoMessage || quotedMessage?.documentMessage;
     if (!mediaMessage) {
-      return await sock.sendMessage(remoteJid, {
+      return await sock.sendMessage(chatID, {
         text: "Reply to a video or document message.",
       });
     }
@@ -22,10 +22,10 @@ export default {
       }
       const buffer = Buffer.concat(chunks);
       const videoBuffer = await toVideo(buffer, mediaMessage.mimetype.split("/")[1]);
-      await sock.sendMessage(remoteJid, {video: videoBuffer, mimetype: "video/mp4"}, {quoted: msg});
+      await sock.sendMessage(chatID, {video: videoBuffer, mimetype: "video/mp4"}, {quoted: msg});
     } catch (e) {
       console.error("tomp4 error:", e);
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Conversion to MP4 failed.",
       });
     }

@@ -1,28 +1,25 @@
-import normaliseLid from "../lib/normaliseLid.js";
+import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 
 export default {
   name: "promote",
   description: "Promote a user to admin",
   category: "Group",
   usage: "Reply to a user, mention them, or use `.promote <number>`.",
-  execute: async (sock, msg, args) => {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID, chatIDisGroup, senderID, ctxInfo} = mellow;
     const remoteJid = msg.key.remoteJid;
 
-    if (!remoteJid?.endsWith("@g.us")) {
-      return sock.sendMessage(remoteJid, {
+    if (!chatIDisGroup) {
+      return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
       });
     }
 
-    const metadata = await sock.groupMetadata(remoteJid);
-    let senderJid = msg.key.participant || msg.key.remoteJid;
-    if (senderJid.endsWith("@lid")) {
-      const pn = await normaliseLid(sock, senderJid);
-      senderJid = pn + "@s.whatsapp.net";
-    }
+    const metadata = await sock.groupMetadata(chatID);
+    const senderJid = await normaliseJidToPN(sock, senderID) + "@s.whatsapp.net";
     const admins = metadata.participants.filter((p) => p.admin || p.admin === "superadmin").map((p) => p.id);
     if (!admins.includes(senderJid)) {
-      return sock.sendMessage(remoteJid, {text: "Admin only."});
+      return sock.sendMessage(chatID, {text: "Admin only."});
     }
 
     const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
@@ -30,45 +27,41 @@ export default {
     const isBotAdmin = metadata.participants.find((p) => p.id === user)?.admin;
 
     if (!isBotAdmin) {
-      return sock.sendMessage(remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "I need to be an admin to promote users.",
       });
     }
 
-    const ctxInfo = msg.message?.extendedTextMessage?.contextInfo || {};
     let targetJid = ctxInfo?.participant || (ctxInfo?.mentionedJid?.length ? ctxInfo.mentionedJid[0] : null);
 
     if (!targetJid && args[0]) {
       const num = args[0].replace(/\D/g, "");
-      if (!num) return sock.sendMessage(remoteJid, {text: "Provide a valid number."});
+      if (!num) return sock.sendMessage(chatID, {text: "Provide a valid number."});
       targetJid = `${num}@s.whatsapp.net`;
     }
 
     if (!targetJid) {
-      return sock.sendMessage(remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "Reply to a user, mention them, or use `.promote <number>`.",
       });
     }
 
-    if (targetJid.endsWith("@lid")) {
-      const pn = await normaliseLid(sock, targetJid);
-      targetJid = pn + "@s.whatsapp.net";
-    }
+  targetJid = await normaliseJidToPN(sock, targetJid) + "@s.whatsapp.net";
 
     if (admins.includes(targetJid)) {
-      return sock.sendMessage(remoteJid, {text: "User is already an admin."});
+      return sock.sendMessage(chatID, {text: "User is already an admin."});
     }
 
     if (targetJid === user) {
-      return sock.sendMessage(remoteJid, {text: "I can't promote myself."});
+      return sock.sendMessage(chatID, {text: "I can't promote myself."});
     }
 
     try {
-      await sock.groupParticipantsUpdate(remoteJid, [targetJid], "promote");
-      await sock.sendMessage(remoteJid, {text: "Promoted."});
+      await sock.groupParticipantsUpdate(chatID, [targetJid], "promote");
+      await sock.sendMessage(chatID, {text: "Promoted."});
     } catch (e) {
       console.error("promote error:", e);
-      await sock.sendMessage(remoteJid, {text: "Failed to promote user."});
+      await sock.sendMessage(chatID, {text: "Failed to promote user."});
     }
   },
 };

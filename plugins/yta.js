@@ -5,16 +5,16 @@ export default {
   description: "Download YouTube audio",
   usage: ".yta <url> or reply to a YouTube video link with .yta",
   category: "Downloaders",
-  execute: async (sock, msg, args, quotedMessage) => {
-    const remoteJid = msg.key.remoteJid;
+  execute: async (sock, msg, args, mellow = {}) => {
+    const { quotedMessageText, chatID } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
-    } else if (quotedMessage) {
-      url = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
+    } else if (quotedMessageText) {
+      url = quotedMessageText;
     }
     if (!url) {
-      return await sock.sendMessage(remoteJid, {
+      return await sock.sendMessage(chatID, {
         text: "Usage: .yta <url> or reply to a YouTube video link with .yta",
       });
     }
@@ -37,17 +37,17 @@ export default {
     try {
       const buffer = await ytAudio(url);
       if (!buffer || buffer.length === 0) {
-        return sock.sendMessage(msg.key.remoteJid, {
+        return sock.sendMessage(chatID, {
           text: "Downloaded file is empty",
         });
       }
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         audio: buffer,
         mimetype: "audio/mp4",
       });
     } catch (e) {
       console.log("YTA Error:", e.stack);
-      await sock.sendMessage(remoteJid, {text: e.message});
+      await sock.sendMessage(chatID, {text: e.message});
     }
   },
 };

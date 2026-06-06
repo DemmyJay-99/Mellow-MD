@@ -5,11 +5,11 @@ export default {
   description: "Search and download a song from YouTube",
   category: "Downloaders",
   usage: ".play <song name>",
-  execute: async (sock, msg, args) => {
-    const remoteJid = msg.key.remoteJid;
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID} = mellow;
     const query = args.join(" ");
     if (!query) {
-      return sock.sendMessage(msg.key.remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "Please provide a song name.",
       });
     }
@@ -21,12 +21,12 @@ export default {
       const url = video?.url ?? null;
       const { title, author, timestamp, image } = video || {};
       if (!url) {
-        return sock.sendMessage(remoteJid, {
+        return sock.sendMessage(chatID, {
           text: "No results found.",
         });
       }
       const msg = `Downloading: ${title} | ${author.name}\nDuration: ${timestamp}\n*© MELLOW MD*`;
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: msg,
         contextInfo: {
           externalAdReply: {
@@ -40,23 +40,23 @@ export default {
       });
       const COOKIE = process.env.YT_COOKIE;
       if (!COOKIE) {
-        return sock.sendMessage(remoteJid, {
+        return sock.sendMessage(chatID, {
           text: "YT_COOKIE environment variable not set",
         });
       }
       const buffer = await ytAudio(url);
       if (!buffer || buffer.length === 0) {
-        return sock.sendMessage(msg.key.remoteJid, {
+        return sock.sendMessage(chatID, {
           text: "Downloaded file is empty",
         });
       }
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         audio: buffer,
         mimetype: "audio/mp4",
       });
     } catch (e) {
       console.log("Play Error:", e.stack);
-      await sock.sendMessage(remoteJid, { text: e.message });
+      await sock.sendMessage(chatID, { text: e.message });
     }
   },
 };

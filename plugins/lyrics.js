@@ -7,18 +7,18 @@ export default {
   description: "Get song lyrics",
   category: "Media",
   usage: "Reply to a song name with .lyrics, or use .lyrics <song name>",
-  execute: async (sock, msg, args, quotedMessage) => {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID, quotedMessageText} = mellow;
     const API_KEY = process.env.GENIUS_API_KEY;
     if (!API_KEY) {
-      return sock.sendMessage(msg.key.remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "set GENIUS_API_KEY",
       });
     }
     let song;
-    const repliedMessage = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
-    song = repliedMessage || args.join(" ");
+    song = quotedMessageText || args.join(" ");
     if (!song) {
-      return sock.sendMessage(msg.key.remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "Provide a song name.",
       });
     }
@@ -30,7 +30,7 @@ export default {
     }
     const search = searches[0];
     if (!search) {
-      return await sock.sendMessage(msg.key.remoteJid, {
+      return await sock.sendMessage(chatID, {
         text: "Song not found.",
       });
     }
@@ -38,7 +38,7 @@ export default {
     const title = search?.title;
     const songImage = search?.image;
     const lyrics = await getLyrics(artistName, title);
-    await sock.sendMessage(msg.key.remoteJid, {
+    await sock.sendMessage(chatID, {
       image: {url: songImage},
       caption: `*${title} by ${artistName} (lyrics)*\n\n${lyrics}`,
     });

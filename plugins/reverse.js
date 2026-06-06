@@ -5,7 +5,8 @@ export default {
   description: "Reverse video or audio",
   category: "Media",
   usage: "Reply to a video or audio with .reverse",
-  execute: async (sock, msg, args, quotedMessage) => {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {quotedMessage} = mellow;
     const mediaMessage = quotedMessage?.videoMessage || quotedMessage?.audioMessage;
     if (!mediaMessage) {
       return sock.sendMessage(msg.key.remoteJid, {

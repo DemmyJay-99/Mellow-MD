@@ -1,45 +1,39 @@
-import normaliseLid from "../lib/normaliseLid.js";
+import normaliseJidToPN from "../lib/normaliseJidToPN";
 
 export default {
   name: "gcname",
   description: "Change the group name",
   category: "Group",
   usage: "gcname <new name>",
-  execute: async (sock, msg, args) => {
-    const remoteJid = msg.key.remoteJid;
-    if (!remoteJid.endsWith("@g.us")) {
-      return sock.sendMessage(remoteJid, {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID, senderID, chatIDisGroup, botID} = mellow;
+    if (!chatIDisGroup) {
+      return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
       });
     }
-    const metadata = await sock.groupMetadata(remoteJid);
-    let senderJid = msg.key.participant || msg.key.remoteJid;
-    if (senderJid.endsWith("@lid")) {
-      let pn = await normaliseLid(sock, senderJid);
-      senderJid = pn + "@s.whatsapp.net";
-    }
+    const metadata = await sock.groupMetadata(chatID);
+    const senderJid = await normaliseJidToPN(sock, senderID);
     const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
     if (!admins.includes(senderJid) && !msg.key.fromMe) {
-      return sock.sendMessage(remoteJid, {text: "Admin only."});
+      return sock.sendMessage(chatID, {text: "Admin only."});
     }
 
-    const botJid = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-
-    if (!admins.includes(botJid)) {
-      return sock.sendMessage(remoteJid, {
+    if (!admins.includes(botID)) {
+      return sock.sendMessage(chatID, {
         text: "I need to be an admin to change the group name.",
       });
     }
     const newName = args.join(" ");
     if (!newName) {
-      return sock.sendMessage(remoteJid, {text: "Provide a new group name."});
+      return sock.sendMessage(chatID, {text: "Provide a new group name."});
     }
     try {
-      await sock.groupUpdateSubject(remoteJid, newName);
-      await sock.sendMessage(remoteJid, {text: "Group name updated."});
+      await sock.groupUpdateSubject(chatID, newName);
+      await sock.sendMessage(chatID, {text: "Group name updated."});
     } catch (e) {
       console.error("gcname error:", e);
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Failed to update group name.",
       });
     }

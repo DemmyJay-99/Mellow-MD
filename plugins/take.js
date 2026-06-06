@@ -6,16 +6,17 @@ export default {
   description: "Change the sticker by updating it's metadata",
   usage: "Reply to a sticker with .take",
   category: "Media",
-  execute: async (sock, msg, args, quotedMessage) => {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID, quotedMessage} = mellow;
     if (!quotedMessage) {
-      await sock.sendMessage(msg.key.remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Reply to a sticker with .take",
       });
       return;
     }
     const sticker = quotedMessage.stickerMessage;
     if (!sticker) {
-      await sock.sendMessage(msg.key.remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Reply to a sticker with .take",
       });
       return;
@@ -36,6 +37,6 @@ export default {
       quality: 50,
       background: "transparent",
     });
-    await sock.sendMessage(msg.key.remoteJid, {sticker: newSticker});
+    await sock.sendMessage(chatID, {sticker: newSticker});
   },
 };
