@@ -1,4 +1,4 @@
-import normaliseJidToPN from "../lib/normaliseJidToPN";
+import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 
 export default {
   name: "gcname",

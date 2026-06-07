@@ -1,5 +1,4 @@
 import normaliseJidToPN from "../lib/normaliseJidToPN.js";
-import normaliseLid from "../lib/normaliseLid.js";
 
 export default {
   name: "ginfo",

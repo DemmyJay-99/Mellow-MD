@@ -1,6 +1,5 @@
 import {getWarns, setWarns} from "../lib/index.js";
 import normaliseJidToPN from "../lib/normaliseJidToPN.js";
-import normalizeJid from "../lib/normaliseLid.js";
 const WARN_LIMIT = Number(process.env.WARN_LIMIT) || 3;
 
 export default {
