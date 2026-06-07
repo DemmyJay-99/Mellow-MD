@@ -6,16 +6,16 @@ export default {
   description: "Download YouTube videos",
   usage: ".ytv <url> or reply to a YouTube video link with .ytv",
   category: "Downloaders",
-  execute: async (sock, msg, args, quotedMessage) => {
-    const remoteJid = msg.key.remoteJid;
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {quotedMessageText, chatID} = mellow;
     let url;
     if (args[0]) {
       url = args[0];
-    } else if (quotedMessage) {
-      url = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
+    } else if (quotedMessageText) {
+      url = quotedMessageText;
     }
     if (!url) {
-      return await sock.sendMessage(remoteJid, {
+      return await sock.sendMessage(chatID, {
         text: "Usage: .ytv <url> or reply to a YouTube video link with .ytv",
       });
     }
@@ -25,20 +25,20 @@ export default {
       return youtubeRegex.test(url);
     }
     if (!isYouTubeUrl(url)) {
-      return await sock.sendMessage(remoteJid, {
+      return await sock.sendMessage(chatID, {
         text: "Please provide a valid YouTube video URL.",
       });
     }
     const COOKIE = process.env.YT_COOKIE;
     if (!COOKIE) {
-      return sock.sendMessage(remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "YT_COOKIE environment variable not set",
       });
     }
     try {
       const filepath = await ytVideo(url);
       const buffer = fs.readFileSync(filepath);
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         video: buffer,
         mimetype: "video/mp4",
       });
@@ -49,7 +49,7 @@ export default {
       }
     } catch (error) {
       console.error("Error downloading YouTube video:", error);
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "An error occurred while downloading the YouTube video.",
       });
     }

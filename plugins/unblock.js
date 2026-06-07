@@ -3,9 +3,8 @@ export default {
   description: "unblock a user on WhatsApp",
   category: "Owner",
   usage: "Reply to a user, mention them, or use `.unblock <number>`.",
-  execute: async (sock, msg, args) => {
-    const remoteJid = msg.key.remoteJid;
-    const ctxInfo = msg.message?.extendedTextMessage?.contextInfo;
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID, ctxInfo} = mellow;
     let targetJid;
     if (ctxInfo?.participant) {
       targetJid = ctxInfo.participant;
@@ -21,7 +20,7 @@ export default {
       }
       targetJid = num + "@s.whatsapp.net";
     } else {
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Reply to a user or mention one, or use `.unblock <number>`.",
       });
       return;
@@ -29,12 +28,12 @@ export default {
 
     try {
       await sock.updateBlockStatus(targetJid, "unblock");
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: `Unblocked`,
       });
     } catch (err) {
       console.error("block error:", err);
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Failed to unblock user.",
       });
     }

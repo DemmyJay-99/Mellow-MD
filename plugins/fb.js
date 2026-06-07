@@ -5,15 +5,16 @@ export default {
   description: "Download Facebook videos",
   category: "Downloaders",
   usage: "fb <fb URL> (or reply to a message with the URL)",
-  execute: async (sock, msg, args, quotedMessage) => {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
     } else if (quotedMessage) {
-      url = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
+      url = quotedMessageText;
     }
     if (!url) {
-      await sock.sendMessage(msg.key.remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Usage: fb <fb URL> (or reply to a message with the URL)",
       });
       return;
@@ -25,11 +26,11 @@ export default {
       return fbRegex.test(url);
     }
     if (!isFb(url)) {
-      await sock.sendMessage(msg.key.remoteJid, {text: "Invalid url"});
+      await sock.sendMessage(chatID, {text: "Invalid url"});
       return;
     }
     const res = await fbdl(url);
-    const video = res.data[0].url;
-    await sock.sendMessage(msg.key.remoteJid, {video: {url: video}});
+    const video = res[0]
+    await sock.sendMessage(chatID, {video: {url: video}});
   },
 };

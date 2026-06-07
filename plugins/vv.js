@@ -3,32 +3,30 @@ export default {
   description: "Reveal a quoted view-once media",
   category: "Media",
   usage: "Reply to a view-once message with .vv || .vv me (to send to yourself)",
-  execute: async (sock, msg, args) => {
+  execute: async (sock, msg, args, mellow = {}) => {
     try {
-      const remoteJid = msg.key.remoteJid;
-      const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-      const quoted = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+      const {chatID, quotedMessage, botID} = mellow;
 
-      if (!quoted) {
-        return sock.sendMessage(remoteJid, {
+      if (!quotedMessage) {
+        return sock.sendMessage(chatID, {
           text: "Reply to a view-once message with .vv",
         });
       }
-      let actualMessage = quoted;
+      let actualMessage = quotedMessage;
 
-      if (quoted?.viewOnceMessage?.message) {
-        actualMessage = quoted.viewOnceMessage.message;
-      } else if (quoted?.viewOnceMessageV2?.message) {
-        actualMessage = quoted.viewOnceMessageV2.message;
-      } else if (quoted?.viewOnceMessageV2Extension?.message) {
-        actualMessage = quoted.viewOnceMessageV2Extension.message;
+      if (quotedMessage?.viewOnceMessage?.message) {
+        actualMessage = quotedMessage.viewOnceMessage.message;
+      } else if (quotedMessage?.viewOnceMessageV2?.message) {
+        actualMessage = quotedMessage.viewOnceMessageV2.message;
+      } else if (quotedMessage?.viewOnceMessageV2Extension?.message) {
+        actualMessage = quotedMessage.viewOnceMessageV2Extension.message;
       }
 
       const mediaType = Object.keys(actualMessage)[0];
       const media = actualMessage[mediaType];
 
       if (!media?.viewOnce) {
-        return sock.sendMessage(remoteJid, {
+        return sock.sendMessage(chatID, {
           text: "Quoted message is not a view-once message.",
         });
       }
@@ -61,12 +59,12 @@ export default {
         sendObject.fileName = "file";
       }
       if (args[0] === "me") {
-        return await sock.sendMessage(user, sendObject);
+        return await sock.sendMessage(botID, sendObject);
       }
-      await sock.sendMessage(remoteJid, sendObject);
+      await sock.sendMessage(chatID, sendObject);
     } catch (err) {
       console.error("vv error:", err);
-      sock.sendMessage(msg.key.remoteJid, {
+      sock.sendMessage(chatID, {
         text: "❌ Failed to reveal view-once.",
       });
     }

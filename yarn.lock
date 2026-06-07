@@ -35,19 +35,6 @@
     hookified "^1.7.1"
     keyv "^5.3.1"
 
-"@distube/ytdl-core@npm:@ru-hend/ytdl-core":
-  version "4.16.15"
-  resolved "https://registry.npmjs.org/@ru-hend/ytdl-core/-/ytdl-core-4.16.15.tgz"
-  integrity sha512-JfZ9oNJotoGtjejK1J0SlSIV4xPwWXQahqQ/9/ixIojFETH7zRdGFIkP82wkfrlFmMc6jUSVTcB48JonHunACg==
-  dependencies:
-    http-cookie-agent "npm:@ru-hend/http-cookie-agent"
-    https-proxy-agent "^7.0.6"
-    m3u8stream "^0.8.6"
-    miniget "^4.2.3"
-    sax "^1.4.1"
-    tough-cookie "^5.1.2"
-    undici "npm:@ru-hend/undici"
-
 "@emnapi/runtime@^1.7.0":
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@emnapi/runtime/-/runtime-1.10.0.tgz#4b260c0d3534204e98c6110b8db1a987d26ec87c"
@@ -626,7 +613,7 @@ acorn@^8.15.0:
   resolved "https://registry.npmjs.org/acorn/-/acorn-8.16.0.tgz"
   integrity sha512-UVJyE9MttOsBQIDKw1skb9nAwQuR5wuGD3+82K6JgJlm/Y+KI92oNsMNGZCYdDsVtRHSak0pcV5Dno5+4jh9sw==
 
-agent-base@^7.0.2, agent-base@^7.1.0, agent-base@^7.1.2, agent-base@^7.1.4:
+agent-base@^7.0.2, agent-base@^7.1.0, agent-base@^7.1.2:
   version "7.1.4"
   resolved "https://registry.npmjs.org/agent-base/-/agent-base-7.1.4.tgz"
   integrity sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==
@@ -2261,13 +2248,6 @@ htmlparser2@^8.0.1:
     domutils "^3.0.1"
     entities "^4.4.0"
 
-"http-cookie-agent@npm:@ru-hend/http-cookie-agent":
-  version "7.0.2"
-  resolved "https://registry.npmjs.org/@ru-hend/http-cookie-agent/-/http-cookie-agent-7.0.2.tgz"
-  integrity sha512-eElnDVfSX442h/Vn0DuJXOIubrnVTDBl/HrFkPoRR25WndADgu6nYuD74FcjMW4GcO5EANAgmyvW+aELSBkfjQ==
-  dependencies:
-    agent-base "^7.1.4"
-
 http-errors@^2.0.0, http-errors@^2.0.1, http-errors@~2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/http-errors/-/http-errors-2.0.1.tgz"
@@ -2787,14 +2767,6 @@ lru-cache@^7.14.1:
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-7.18.3.tgz"
   integrity sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==
 
-m3u8stream@^0.8.6:
-  version "0.8.6"
-  resolved "https://registry.npmjs.org/m3u8stream/-/m3u8stream-0.8.6.tgz"
-  integrity sha512-LZj8kIVf9KCphiHmH7sbFQTVe4tOemb202fWwvJwR9W5ENW/1hxJN6ksAWGhQgSBSa3jyWhnjKU1Fw1GaOdbyA==
-  dependencies:
-    miniget "^4.2.2"
-    sax "^1.2.4"
-
 math-intrinsics@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/math-intrinsics/-/math-intrinsics-1.1.0.tgz"
@@ -2861,11 +2833,6 @@ min-indent@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz"
   integrity sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==
-
-miniget@^4.2.2, miniget@^4.2.3:
-  version "4.2.3"
-  resolved "https://registry.npmjs.org/miniget/-/miniget-4.2.3.tgz"
-  integrity sha512-SjbDPDICJ1zT+ZvQwK0hUcRY4wxlhhNpHL9nJOB2MEAXRGagTljsO8MEDzQMTFf0Q8g4QNi8P9lEm/g7e+qgzA==
 
 minimatch@^3.1.2, minimatch@^3.1.5:
   version "3.1.5"
@@ -3776,12 +3743,11 @@ router@^2.2.0:
     parseurl "^1.3.3"
     path-to-regexp "^8.0.0"
 
-ruhend-scraper@^9.0.8:
-  version "9.0.8"
-  resolved "https://registry.npmjs.org/ruhend-scraper/-/ruhend-scraper-9.0.8.tgz"
-  integrity sha512-92tB/7e0fhW+x0q0WY/9/tE0VcqiG3GzXpgi/Rql1+0PV6/lde3nNQaP9D/XxGZQsS4V5mtXtx8aZ8PDXMR97Q==
+ruhend-scraper@^10.0.3:
+  version "10.0.3"
+  resolved "http://package-firewall.replit.local/npm/ruhend-scraper/-/ruhend-scraper-10.0.3.tgz#6cfc33a036068abebd40ed7503b2b40f2cc5d560"
+  integrity sha512-6CotkF+8DgGTmJCUqPhdie77pFJ2nVbQtZ5ZSszNjQKXkAR2bW1g/3thV49VCW2gSUvv1wtGU76unzF64JlJrw==
   dependencies:
-    "@distube/ytdl-core" "npm:@ru-hend/ytdl-core"
     cheerio "1.0.0-rc.10"
     node-fetch "^2.6.1"
     yt-search "npm:@ru-hend/yt-search"
@@ -3841,7 +3807,7 @@ safe-stable-stringify@^2.3.1:
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sax@^1.2.4, sax@^1.4.1:
+sax@^1.2.4:
   version "1.6.0"
   resolved "https://registry.npmjs.org/sax/-/sax-1.6.0.tgz"
   integrity sha512-6R3J5M4AcbtLUdZmRv2SygeVaM7IhrLXu9BmnOGmmACak8fiUtOsYNWUS4uK7upbmHIBbLBeFeI//477BKLBzA==
@@ -4270,18 +4236,6 @@ thread-stream@^4.0.0:
   dependencies:
     real-require "^0.2.0"
 
-tldts-core@^6.1.86:
-  version "6.1.86"
-  resolved "https://registry.npmjs.org/tldts-core/-/tldts-core-6.1.86.tgz"
-  integrity sha512-Je6p7pkk+KMzMv2XXKmAE3McmolOQFdxkKw0R8EYNr7sELW46JqnNeTX8ybPiQgvg1ymCoF8LXs5fzFaZvJPTA==
-
-tldts@^6.1.32:
-  version "6.1.86"
-  resolved "https://registry.npmjs.org/tldts/-/tldts-6.1.86.tgz"
-  integrity sha512-WMi/OQ2axVTf/ykqCQgXiIct+mSQDFdH2fkwhPwgEwvJ1kSzZRiinb0zF2Xb8u4+OqPChmyI6MEu4EezNJz+FQ==
-  dependencies:
-    tldts-core "^6.1.86"
-
 to-regex-range@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/to-regex-range/-/to-regex-range-5.0.1.tgz"
@@ -4310,13 +4264,6 @@ token-types@^6.1.1, token-types@^6.1.2:
     "@borewit/text-codec" "^0.2.1"
     "@tokenizer/token" "^0.3.0"
     ieee754 "^1.2.1"
-
-tough-cookie@^5.1.2:
-  version "5.1.2"
-  resolved "https://registry.npmjs.org/tough-cookie/-/tough-cookie-5.1.2.tgz"
-  integrity sha512-FVDYdxtnj0G6Qm/DhNPSb8Ju59ULcup3tuJxkFb5K8Bv2pUXILbf0xZWU8PX8Ov19OXljbUyveOFwRMwkXzO+A==
-  dependencies:
-    tldts "^6.1.32"
 
 tr46@~0.0.3:
   version "0.0.3"
@@ -4448,11 +4395,6 @@ undici@^7.19.0:
   version "7.25.0"
   resolved "https://registry.npmjs.org/undici/-/undici-7.25.0.tgz"
   integrity sha512-xXnp4kTyor2Zq+J1FfPI6Eq3ew5h6Vl0F/8d9XU5zZQf1tX9s2Su1/3PiMmUANFULpmksxkClamIZcaUqryHsQ==
-
-"undici@npm:@ru-hend/undici":
-  version "0.0.1"
-  resolved "https://registry.npmjs.org/@ru-hend/undici/-/undici-0.0.1.tgz"
-  integrity sha512-dYELo66i3dERYKpF9HZn+mBsMYeGDr3sf9mwNe3FxhzWUfxDO7eCeB45ZpsF6r6L73cT5FS3ruwDyuaptj1q4A==
 
 unicode-text-styler@^1.0.6:
   version "1.0.6"

@@ -1,21 +1,26 @@
 import {downloadContentFromMessage} from "@innovatorssoft/baileys";
-
+import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 export default {
   name: "gpp",
   description: "Set group profile picture",
   category: "Group",
   usage: "Reply to an image with .gpp",
-  execute: async (sock, msg, args) => {
-    const remoteJid = msg.key.remoteJid;
-    if (!remoteJid.endsWith("@g.us")) {
-      return sock.sendMessage(remoteJid, {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID, chatIDisGroup, quotedMessage, senderID} = mellow;
+    if (!chatIDisGroup) {
+      return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
       });
     }
-    const quotedMessage = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
+    const metadata = await sock.groupMetadata(chatID);
+    const senderJid = await normaliseJidToPN(sock, senderID);
+    const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
+    if (!admins.includes(senderJid)) {
+      return sock.sendMessage(chatID, {text: "Admin only."});
+    }
     const media = quotedMessage?.imageMessage;
     if (!quotedMessage || !quotedMessage.imageMessage) {
-      return sock.sendMessage(remoteJid, {
+      return sock.sendMessage(chatID, {
         text: "Please quote an image to set as the group profile picture.",
       });
     }
@@ -24,6 +29,6 @@ export default {
     for await (const chunk of stream) {
       imageBuffer = Buffer.concat([imageBuffer, chunk]);
     }
-    await sock.updateProfilePicture(remoteJid, imageBuffer);
+    await sock.updateProfilePicture(chatID, imageBuffer);
   },
 };

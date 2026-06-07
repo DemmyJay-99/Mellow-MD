@@ -6,16 +6,16 @@ export default {
   description: "Download Twitter videos",
   usage: ".twitter <url> or reply to a Twitter video url with .twitter",
   category: "Downloaders",
-  execute: async (sock, msg, args, quotedMessage) => {
-    const remoteJid = msg.key.remoteJid;
+  execute: async (sock, msg, args, mellow = {}) => {
+    const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
     } else if (quotedMessage) {
-      url = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
+      url = quotedMessageText;
     }
     if (!url) {
-      return await sock.sendMessage(remoteJid, {
+      return await sock.sendMessage(chatID, {
         text: "Usage: .twitter <url> or reply to a Twitter video url with .twitter",
       });
     }
@@ -25,14 +25,14 @@ export default {
       return twitterRegex.test(url);
     }
     if (!isTwitterUrl(url)) {
-      return await sock.sendMessage(remoteJid, {
+      return await sock.sendMessage(chatID, {
         text: "Invalid Twitter URL.",
       });
     }
     try {
       const filepath = await twitterVideo(url);
       const buffer = fs.readFileSync(filepath);
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         video: buffer,
         mimetype: "video/mp4",
       });
@@ -43,7 +43,7 @@ export default {
       }
     } catch (e) {
       console.error("twitter error:", e);
-      await sock.sendMessage(remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Failed to download Twitter video.",
       });
     }

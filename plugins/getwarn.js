@@ -1,28 +1,24 @@
 import {getWarns} from "../lib/index.js";
-import normaliseLid from "../lib/normaliseLid.js";
+import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 
 export default {
   name: "getwarn",
   description: "Get the number of warnings a user has",
   category: "Group",
   usage: ".getwarn @user",
-  execute: async (sock, msg, args) => {
-    const remoteJid = msg.key.remoteJid;
-    if (!remoteJid.endsWith("@g.us")) {
-      return sock.sendMessage(remoteJid, {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const {chatID, chatIDisGroup, senderID} = mellow;
+    if (!chatIDisGroup) {
+      return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
       });
     }
-    const groupMetadata = await sock.groupMetadata(remoteJid);
+    const groupMetadata = await sock.groupMetadata(chatID);
     const groupAdmins = groupMetadata.participants.filter((p) => p.admin);
-    let sender = msg.key.participant || msg.key.remoteJid;
-    if (sender.endsWith("@lid")) {
-      const pn = await normaliseLid(sock, sender);
-      sender = pn + "@s.whatsapp.net";
-    }
+    const sender = await normaliseJidToPN(sock, senderID);
     const isAdmin = groupAdmins.some((admin) => admin.id === sender);
     if (!isAdmin) {
-      return sock.sendMessage(remoteJid, {text: "You are not an admin."});
+      return sock.sendMessage(chatID, {text: "You are not an admin."});
     }
     let targetJid =
       msg.message?.extendedTextMessage?.contextInfo?.participant ||
@@ -32,15 +28,12 @@ export default {
         text: "Please mention or reply to a user to get their warnings.",
       });
     }
-    if (targetJid.endsWith("@lid")) {
-      const pn = await normaliseLid(sock, targetJid);
-      targetJid = pn + "@s.whatsapp.net";
-    }
-    const warnCount = await getWarns(remoteJid, targetJid);
+    targetJid = await normaliseJidToPN(sock, targetJid) + "@s.whatsapp.net";
+    const warnCount = await getWarns(chatID, targetJid);
     if (!warnCount) {
-      return sock.sendMessage(remoteJid, {text: `@${targetJid.split("@")[0]} has no warnings.`, mentions: [targetJid]});
+      return sock.sendMessage(chatID, {text: `@${targetJid.split("@")[0]} has no warnings.`, mentions: [targetJid]});
     }
-    return sock.sendMessage(remoteJid, {
+    return sock.sendMessage(chatID, {
       text: `Warning count for @${targetJid.split("@")[0]}: ${warnCount}`,
       mentions: [targetJid],
     });

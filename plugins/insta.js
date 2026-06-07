@@ -5,15 +5,16 @@ export default {
   description: "Download IG reels",
   category: "Downloaders",
   usage: "insta <Insta URL> (or reply to a message with the URL)",
-  execute: async (sock, msg, args, quotedMessage) => {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
     } else if (quotedMessage) {
-      url = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
+      url = quotedMessageText;
     }
     if (!url) {
-      await sock.sendMessage(msg.key.remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Usage: insta <Insta URL> (or reply to a message with the URL)",
       });
       return;
@@ -24,11 +25,11 @@ export default {
       return igRegex.test(url);
     }
     if (!checkInstagram(url)) {
-      await sock.sendMessage(msg.key.remoteJid, {text: "Invalid url"});
+      await sock.sendMessage(chatID, {text: "Invalid url"});
       return;
     }
     const res = await igdl(url);
-    const data = res.data[0].url;
-    await sock.sendMessage(msg.key.remoteJid, {video: {url: data}});
+    const data = res[0];
+    await sock.sendMessage(chatID, {video: {url: data}});
   },
 };

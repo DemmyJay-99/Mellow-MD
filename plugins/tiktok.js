@@ -5,15 +5,16 @@ export default {
   description: "Download Tiktok videos",
   category: "Downloaders",
   usage: "tiktok <TikTok URL> (or reply to a message with the URL)",
-  execute: async (sock, msg, args, quotedMessage) => {
+  execute: async (sock, msg, args, mellow = {}) => {
+    const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
     } else if (quotedMessage) {
-      url = quotedMessage?.conversation || quotedMessage?.extendedTextMessage?.text;
+      url = quotedMessageText;
     }
     if (!url) {
-      await sock.sendMessage(msg.key.remoteJid, {
+      await sock.sendMessage(chatID, {
         text: "Usage: tiktok <TikTok URL> (or reply to a message with the URL)",
       });
       return;
@@ -23,10 +24,10 @@ export default {
       return tiktokRegex.test(url);
     }
     if (!isTikTokUrlRegex(url)) {
-      await sock.sendMessage(msg.key.remoteJid, {text: "Invalid url"});
+      await sock.sendMessage(chatID, {text: "Invalid url"});
       return;
     }
-    let {video} = await ttdl(url);
-    await sock.sendMessage(msg.key.remoteJid, {video: {url: video}}, {quoted: msg});
+    let {video_hd} = await ttdl(url);
+    await sock.sendMessage(chatID, {video: {url: video_hd}}, {quoted: msg});
   },
 };
