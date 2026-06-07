@@ -3745,7 +3745,7 @@ router@^2.2.0:
 
 ruhend-scraper@^10.0.3:
   version "10.0.3"
-  resolved "http://package-firewall.replit.local/npm/ruhend-scraper/-/ruhend-scraper-10.0.3.tgz#6cfc33a036068abebd40ed7503b2b40f2cc5d560"
+  resolved "https://registry.yarnpkg.com/ruhend-scraper/-/ruhend-scraper-10.0.3.tgz#6cfc33a036068abebd40ed7503b2b40f2cc5d560"
   integrity sha512-6CotkF+8DgGTmJCUqPhdie77pFJ2nVbQtZ5ZSszNjQKXkAR2bW1g/3thV49VCW2gSUvv1wtGU76unzF64JlJrw==
   dependencies:
     cheerio "1.0.0-rc.10"
