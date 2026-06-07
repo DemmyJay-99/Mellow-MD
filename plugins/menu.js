@@ -4,6 +4,12 @@ import getPlugins from "../lib/getPlugins.js";
 import p from "../package.json" with {type: "json"};
 import {formatSeconds} from "../lib/uptime.js";
 import { commandHandler } from "../lib/command.js";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export default {
   name: "menu",
@@ -53,15 +59,8 @@ export default {
 
     const joinedText = lines.join("\n").toUpperCase();
     const fonts = getFonts();
-    const time = new Date().toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: true,
-    });
-    const date = new Date();
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const day = days[date.getDay()];
+    const day = dayjs().format("dddd");
+    const time = dayjs().tz(process.env.TIMEZONE || "UTC").format("HH:mm:ss");
     const plugins = await getPlugins();
     const version = p.version;
     const uptime = process.uptime();

@@ -74,6 +74,7 @@ STICKER_PACKNAME=
 WARN_LIMIT=
 YT_COOKIE=
 PREFIX=
+TIMEZONE =
 ```
 
 | Variable | Description |
@@ -88,6 +89,7 @@ PREFIX=
 | `WARN_LIMIT` | Number of warnings before a group member gets removed |
 | `YT_COOKIE` | Youtube cookie in Netscape format |
 | `PREFIX` | Prefix for bot commands, separated by a comma — e.g. `!,.` |
+| `TIMEZONE` | Timezone for time-related features (e.g. `Asia/Kolkata`) |
 
 ---
 
