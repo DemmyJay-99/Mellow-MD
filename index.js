@@ -63,15 +63,6 @@ const startBot = async () => {
             if (shouldReconnect && !isRestarting) {
                 isRestarting = true;
                 console.log("Reconnecting...");
-                // try {
-                //     if (sock) {
-                //         await sock.ev.removeAllListeners();
-                //         await sock.ws.close();
-                //     }
-                // } catch (error) {
-                //     console.log(error);
-                // }
-
                 setTimeout(() => {
                     isRestarting = false;
                     startBot();
@@ -79,7 +70,6 @@ const startBot = async () => {
             }
         }
     });
-    // sock.ev.removeAllListeners("messages.upsert");
 
     sock.ev.on("messages.upsert", async (message) => {
         try {
