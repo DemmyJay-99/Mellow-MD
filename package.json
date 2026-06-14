@@ -27,6 +27,7 @@
   "dependencies": {
     "@innovatorssoft/baileys": "github:DemmyJay-99/Baileys-",
     "axios": "^1.13.5",
+    "better-sqlite3": "^12.10.1",
     "convert-unicode-fonts": "^1.0.1",
     "dayjs": "^1.11.20",
     "dotenv": "^17.2.3",
@@ -50,5 +51,8 @@
   },
   "engines": {
     "node": ">=22"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13"
   }
 }

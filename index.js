@@ -8,6 +8,7 @@ import { configDotenv } from "dotenv";
 import pino from "pino";
 import { initSession, validateCreds } from "./lib/session.js";
 import handleMessage from "./lib/messageHandler.js";
+import { getMessage } from "./lib/db.js";
 configDotenv({
     quiet: true,
     path: "./config.env",
@@ -42,6 +43,11 @@ const startBot = async () => {
         logger: logger.child({ level: "fatal" }),
         generateHighQualityLinkPreview: true,
         syncFullHistory: false,
+        getMessage: async (key) => {
+            const msgId = key.id;
+            const message = await getMessage(msgId);
+            return message || "";
+        },
         shouldSyncHistoryMessage: () => false,
         printQRInTerminal: false,
         markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false,
