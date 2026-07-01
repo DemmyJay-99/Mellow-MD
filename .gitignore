@@ -12,3 +12,4 @@ bin/
 baileys_store.db
 baileys_store.db-wal
 baileys_store.db-shm
+yarn.lock

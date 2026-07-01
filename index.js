@@ -45,6 +45,7 @@ const startBot = async () => {
         syncFullHistory: false,
         getMessage: async (key) => {
             const msgId = key.id;
+            console.log("Getting message from DB")
             const message = await getMessage(msgId);
             return message || "";
         },
