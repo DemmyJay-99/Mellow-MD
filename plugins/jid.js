@@ -6,8 +6,14 @@ export default {
   category: "Dev",
   usage: "jid",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID} = mellow;
-    const newJid = await normaliseJidToPN(sock, chatID) + '@s.whatsapp.net';
-    await sock.sendMessage(chatID, {text: newJid});
+    const { chatID, chatIDisGroup } = mellow;
+    if (chatIDisGroup) {
+      return sock.sendMessage(chatID, {
+        text: chatID,
+      });
+    } else {
+      const newJid = (await normaliseJidToPN(sock, chatID)) + "@s.whatsapp.net";
+      await sock.sendMessage(chatID, { text: newJid });
+    }
   },
 };
