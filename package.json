@@ -25,7 +25,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@innovatorssoft/baileys": "https://github.com/innovatorssoft/baileys",
+    "@innovatorssoft/baileys": "^7.4.7",
     "axios": "^1.13.5",
     "better-sqlite3": "^12.10.1",
     "convert-unicode-fonts": "^1.0.1",
