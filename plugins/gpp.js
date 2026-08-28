@@ -1,4 +1,4 @@
-import {downloadContentFromMessage} from "@innovatorssoft/baileys";
+import {downloadContentFromMessage} from "@whiskeysockets/baileys";
 import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 export default {
   name: "gpp",

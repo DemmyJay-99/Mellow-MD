@@ -5,6 +5,7 @@ package-lock.json
 test/
 database/
 temp/
+tmp/
 data/*.json
 *.mp4
 *pvv.js

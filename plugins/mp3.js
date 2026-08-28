@@ -13,7 +13,7 @@ export default {
           text: "Reply to a video or document message.",
         });
       }
-      const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
+      const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
       const stream = await downloadContentFromMessage(mediaMessage, "video");
       const chunks = [];
       for await (const chunk of stream) {
