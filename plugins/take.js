@@ -1,4 +1,4 @@
-import {downloadContentFromMessage} from "@innovatorssoft/baileys";
+import {downloadContentFromMessage} from "@whiskeysockets/baileys";
 import {StickerTypes, createSticker} from "stickers-formatter";
 
 export default {

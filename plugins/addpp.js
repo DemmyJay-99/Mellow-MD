@@ -1,4 +1,4 @@
-import {downloadContentFromMessage} from "@innovatorssoft/baileys";
+import {downloadContentFromMessage} from "@whiskeysockets/baileys";
 
 export default {
   name: "addpp",

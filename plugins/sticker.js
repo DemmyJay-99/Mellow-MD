@@ -8,7 +8,7 @@ export default {
   usage: "Reply to an image or video message with .sticker",
   execute: async (sock, msg, args, mellow = {}) => {
     const {createSticker} = await import("stickers-formatter");
-    const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
+    const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
     const {chatID, quotedMessage} = mellow;
     const mediaMessage = quotedMessage?.imageMessage || quotedMessage?.videoMessage || quotedMessage?.documentMessage;
     if (!mediaMessage) {

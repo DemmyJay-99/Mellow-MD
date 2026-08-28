@@ -13,7 +13,7 @@ export default {
         text: "Reply to a video or audio message.",
       });
     }
-    const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
+    const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
     const type = quotedMessage.videoMessage ? "video" : "audio";
     const stream = await downloadContentFromMessage(mediaMessage, type);
 

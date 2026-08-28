@@ -1,5 +1,4 @@
 import { execSync } from "child_process";
-import { generateQuickReplyButtons } from "@innovatorssoft/baileys";
 import { getLatestCommitMessages, pullLatestUpdates } from "../lib/update.js";
 import { clearReact } from "../lib/index.js";
 export default {
@@ -34,19 +33,12 @@ export default {
         }
       } else {
         const { commitLength, commits } = await getLatestCommitMessages();
-        const commitMessage =
-          `Missing ${commitLength} updates\n` +
-          commits +
-          "\n" +
-          "*Tap the button below to update (or use update now command)*";
-        const buttons = generateQuickReplyButtons(
-          commitMessage,
-          [{ displayText: "Update now", id: "update now" }],
-          "Update now",
-        );
+        const commitMessage = `Missing ${commitLength} updates\n` + commits;
         if (local !== remote) {
           console.log("Your version of mellow-md is outdated");
-          await sock.sendMessage(msg.key.remoteJid, buttons);
+          await sock.sendMessage(msg.key.remoteJid, {
+            text: commitMessage,
+          });
         } else {
           await sock.sendMessage(msg.key.remoteJid, {
             text: "No updates found",

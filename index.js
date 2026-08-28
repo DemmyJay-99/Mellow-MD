@@ -3,12 +3,13 @@ import {
     DisconnectReason,
     makeCacheableSignalKeyStore,
     makeWASocket,
-} from "@innovatorssoft/baileys";
+    Browsers
+} from "@whiskeysockets/baileys";
 import { configDotenv } from "dotenv";
 import pino from "pino";
 import { initSession, validateCreds } from "./lib/session.js";
 import handleMessage from "./lib/messageHandler.js";
-import { getMessage } from "./lib/db.js";
+import store from "./lib/store.js";
 configDotenv({
     quiet: true,
     path: "./config.env",
@@ -16,8 +17,8 @@ configDotenv({
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js";
 import messagem from "./lib/message.js";
-checkUpdates();
-setInterval(checkUpdates, 1000 * 60 * 60 * 24);
+// checkUpdates();
+// setInterval(checkUpdates, 1000 * 60 * 60 * 24);
 let hasSent = false;
 let sock;
 let isRestarting = false;
@@ -45,11 +46,13 @@ const startBot = async () => {
         syncFullHistory: false,
         getMessage: async (key) => {
             const msgId = key.id;
-            const message = await getMessage(msgId);
+            console.log("Getting message from DB")
+            const message = await store.getMessage(msgId);
             return message || "";
         },
         shouldSyncHistoryMessage: () => false,
         printQRInTerminal: false,
+        browser: Browsers.android("Mellow"),
         markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false,
     });
     sock.ev.on("creds.update", saveCreds);

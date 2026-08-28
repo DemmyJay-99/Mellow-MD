@@ -14,7 +14,7 @@ export default {
       });
     }
     try {
-      const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
+      const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
       const stream = await downloadContentFromMessage(mediaMessage, "video");
       const chunks = [];
       for await (const chunk of stream) {

@@ -31,7 +31,7 @@ export default {
         });
       }
 
-      const {downloadContentFromMessage} = await import("@innovatorssoft/baileys");
+      const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
 
       const type = mediaType.replace("Message", "").toLowerCase();
 
