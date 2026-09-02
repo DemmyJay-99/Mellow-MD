@@ -1,5 +1,4 @@
-import { execSync } from "child_process";
-import { getLatestCommitMessages, pullLatestUpdates } from "../lib/update.js";
+import { pullLatestUpdates, checkForUpdates } from "../lib/update.js";
 import { clearReact } from "../lib/index.js";
 export default {
   name: "update",
@@ -8,15 +7,10 @@ export default {
   usage: "update(to check for updates), update now (to update immediately)",
   execute: async (sock, msg, args) => {
     try {
-      execSync("git fetch", { stdio: "ignore" });
-      const local = execSync("git rev-parse HEAD").toString().trim();
-      const remote = execSync("git rev-parse origin/master").toString().trim();
       if (args[0] === "now") {
         console.log("Updating...");
-        if (local !== remote) {
-          console.log("Your version of mellow-md is outdated");
-          await pullLatestUpdates();
-          console.log("Updated successfully. Restarting...");
+        const { updated } = await pullLatestUpdates();
+        if (updated) {
           await sock.sendMessage(msg.key.remoteJid, {
             text: "Updated successfully. Restarting...",
           });
@@ -26,15 +20,14 @@ export default {
           }, 1500);
         } else {
           console.log("No updates found");
-          await sock.sendMessage(msg.key.remoteJid, {
+          return await sock.sendMessage(msg.key.remoteJid, {
             text: "No updates found",
           });
-          return;
         }
       } else {
-        const { commitLength, commits } = await getLatestCommitMessages();
+        const { commitLength, commits, available } = await checkForUpdates();
         const commitMessage = `Missing ${commitLength} updates\n` + commits;
-        if (local !== remote) {
+        if (available) {
           console.log("Your version of mellow-md is outdated");
           await sock.sendMessage(msg.key.remoteJid, {
             text: commitMessage,
@@ -48,9 +41,11 @@ export default {
       }
     } catch (e) {
       console.log("Error checking for updates:", e.message);
-      await sock.sendMessage(msg.key.remoteJid, {
-        text: "Error checking for updates: " + e.message,
-      });
+      const text =
+        e.response?.status === 404
+          ? "Couldn't find this branch on GitHub — skipping update check."
+          : "Error checking for updates: " + e.message;
+      await sock.sendMessage(msg.key.remoteJid, { text });
     }
   },
 };
