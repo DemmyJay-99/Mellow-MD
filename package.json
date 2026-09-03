@@ -37,6 +37,7 @@
     "genius-lyrics": "^4.4.7",
     "is-emoji": "^0.1.1",
     "link-preview-js": "^4.0.3",
+    "linkify-it": "^6.1.0",
     "mediaforge": "^0.0.1",
     "morsee": "^1.0.10",
     "node-catbox": "^4.2.0",
@@ -47,6 +48,7 @@
     "ruhend-scraper": "^10.0.3",
     "simple-git": "^3.36.0",
     "stickers-formatter": "^0.0.2",
+    "tlds": "^1.261.0",
     "unicode-text-styler": "^1.0.6",
     "yt-search": "^2.13.1"
   },
