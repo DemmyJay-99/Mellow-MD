@@ -1,4 +1,4 @@
-import {getWarns, setWarns} from "../lib/index.js";
+import {getWarns, setWarns, isSenderAdmin} from "../lib/index.js";
 import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 const WARN_LIMIT = Number(process.env.WARN_LIMIT) || 3;
 
@@ -14,10 +14,7 @@ export default {
         text: "This command only works in groups.",
       });
     }
-    const groupMetadata = await sock.groupMetadata(chatID);
-    const groupAdmins = groupMetadata.participants.filter((p) => p.admin);
-   const sender = await normaliseJidToPN(sock, senderID) + "@s.whatsapp.net";
-    const isAdmin = groupAdmins.some((admin) => admin.id === sender);
+    const isAdmin = await isSenderAdmin(sock, senderID, chatID);
     if (!isAdmin) {
       return sock.sendMessage(chatID, {text: "You are not an admin."});
     }

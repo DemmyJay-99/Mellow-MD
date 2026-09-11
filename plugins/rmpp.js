@@ -4,10 +4,9 @@ export default {
   category: "Owner",
   usage: "Reply to an image with .rmpp",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, chatIDisGroup} = mellow;
+    const {chatID, chatIDisGroup, botID} = mellow;
     if (!chatIDisGroup) {
-      const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-      await sock.removeProfilePicture(user);
+      await sock.removeProfilePicture(botID);
       await sock.sendMessage(chatID, {text: "Profile picture removed"});
       return;
     }
