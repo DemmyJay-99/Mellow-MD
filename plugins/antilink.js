@@ -1,4 +1,3 @@
-import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 import { getGroupConfig, setGroupConfig, getWarns, setWarns, isSenderAdmin } from "../lib/index.js";
 import { LinkifyIt } from "linkify-it";
 import tlds from "tlds" with { type: "json" };
@@ -85,7 +84,6 @@ export default {
         text: "This command only works in groups.",
       });
     }
-    // const sender = (await normaliseJidToPN(sock, senderID)) + "@s.whatsapp.net";
     const isAdmin = await isSenderAdmin(sock, senderID, chatID);
     if (!isAdmin) {
       return sock.sendMessage(chatID, {

@@ -92,9 +92,7 @@ const startBot = async () => {
     sock.ev.on("group-participants.update", async (update) => {
         try {
             const groupId = update.id;
-            console.log(`Group participants update in group: ${groupId}`);
             groupCache.delete(groupId);
-            console.log(groupCache);
         } catch (error) {
             console.error("Error in group participants update handler:", error);
         }
