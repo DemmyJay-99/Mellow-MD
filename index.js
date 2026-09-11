@@ -17,6 +17,7 @@ configDotenv({
 import { exec } from "child_process";
 import checkUpdates from "./lib/checkUpdates.js";
 import messagem from "./lib/message.js";
+import { groupCache } from "./lib/index.js";
 // checkUpdates();
 // setInterval(checkUpdates, 1000 * 60 * 60 * 24);
 let hasSent = false;
@@ -85,6 +86,17 @@ const startBot = async () => {
             await handleMessage(sock, message);
         } catch (error) {
             console.error("Error in message handler:", error);
+        }
+    });
+
+    sock.ev.on("group-participants.update", async (update) => {
+        try {
+            const groupId = update.id;
+            console.log(`Group participants update in group: ${groupId}`);
+            groupCache.delete(groupId);
+            console.log(groupCache);
+        } catch (error) {
+            console.error("Error in group participants update handler:", error);
         }
     });
 

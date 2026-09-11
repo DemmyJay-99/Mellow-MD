@@ -1,3 +1,5 @@
+import { isSenderAdmin } from "../lib/index.js";
+
 export default {
   name: "add",
   description: "Add a user to the group",
@@ -14,9 +16,9 @@ export default {
 
     const metadata = await sock.groupMetadata(chatID);
     const senderJid = msg.key.participant || msg.key.remoteJid;
-    const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
+    const isAdmin = await isSenderAdmin(sock, senderJid, chatID);
 
-    if (!admins.includes(senderJid) && !msg.key.fromMe) {
+    if (!isAdmin && !msg.key.fromMe) {
       return sock.sendMessage(chatID, {text: "Admin only."});
     }
 
