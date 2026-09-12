@@ -12,12 +12,13 @@ export const handleLinkDetection = async (sock, chatID, senderID, messageText, m
     }
     const action = groupConfig.action || "delete";
     if (!linkify.test(messageText)) return;
+    if (senderID === botID) return;
     const isAdmin = await isSenderAdmin(sock, senderID, chatID);
     if (isAdmin) {
       console.log(`Sender ${senderID} is an admin. No action taken.`);
       return;
     };
-    if (senderID === botID) return;
+    
     if (action === "warn") {
       const WARN_LIMIT = process.env.WARN_LIMIT || 3;
       const warns = await getWarns(chatID, senderID);

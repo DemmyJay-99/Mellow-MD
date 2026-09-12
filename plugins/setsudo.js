@@ -1,6 +1,5 @@
-import fs from "fs";
-import {isSudo} from "../lib/sudo.js";
-import normaliseJidToPN from "../lib/normaliseJidToPN.js";
+import fs from "fs/promises";
+import { isSudo, refreshSudoCache, loadSudoUsers} from "../lib/sudo.js";
 
 export default {
   name: "setsudo",
@@ -8,41 +7,29 @@ export default {
   category: "Sudo",
   usage: "Reply to a user or mention one, or use `setsudo <number>`.",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {ctxInfo, chatID} = mellow;
+    const { ctxInfo, chatID, botID } = mellow;
     const sudoPath = "./data/sudo.json";
-    const sudoUsers = JSON.parse(fs.readFileSync(sudoPath) || "[]");
+    const sudoUsers = await loadSudoUsers();
     let targetJid;
 
     if (ctxInfo?.participant) {
       targetJid = ctxInfo.participant;
     } else if (ctxInfo?.mentionedJid?.length) {
       targetJid = ctxInfo.mentionedJid[0];
-    } else if (args[0]) {
-      const num = args[0].replace(/\D/g, "");
-      if (!num) {
-        await sock.sendMessage(chatID, {
-          text: "Provide a valid number.",
-        });
-        return;
-      }
-      targetJid = num;
     } else {
       await sock.sendMessage(chatID, {
         text: "Reply to a user or mention one, or use `setsudo <number>`.",
       });
       return;
     }
-
-    targetJid = await normaliseJidToPN(sock, targetJid) + "@s.whatsapp.net";
-    const botId = sock.user.id.split(":")[0];
-    if (targetJid === botId) {
+    if (targetJid === botID) {
       await sock.sendMessage(chatID, {
         text: "You can't add bot as sudo.",
       });
       return;
     }
 
-    if (await isSudo(targetJid)) {
+    if (isSudo(targetJid)) {
       await sock.sendMessage(chatID, {
         text: "User is already sudo.",
       });
@@ -50,7 +37,8 @@ export default {
     }
 
     sudoUsers.push(targetJid);
-    fs.writeFileSync(sudoPath, JSON.stringify(sudoUsers));
-    await sock.sendMessage(chatID, {text: `${targetJid} is now sudo`});
+    await fs.writeFile(sudoPath, JSON.stringify(sudoUsers));
+    await refreshSudoCache();
+    await sock.sendMessage(chatID, { text: `${targetJid} is now sudo` });
   },
 };
