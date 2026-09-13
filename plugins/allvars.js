@@ -5,6 +5,7 @@ export default {
   description: "Get all environment variables",
   category: "Vars",
   usage: "allvars",
+  ownerOnly: true,
   execute: async (sock, msg, args) => {
     const vars = await allvars();
     const text = Object.entries(vars)

@@ -6,6 +6,7 @@ export default {
   description: "Remove a user from sudo",
   category: "Sudo",
   usage: "Reply to a user or mention one.",
+  ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, ctxInfo } = mellow;
     const sudoPath = "./data/sudo.json";

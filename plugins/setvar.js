@@ -5,6 +5,7 @@ export default {
   description: "Set environment variables",
   category: "Vars",
   usage: "setvar <variable>=<value>",
+  ownerOnly: true,
   execute: async (sock, msg, args) => {
     const fullText = args.join(" ");
     const equalIndex = fullText.indexOf("=");

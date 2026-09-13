@@ -6,6 +6,7 @@ export default {
   description: "Add sudo user",
   category: "Sudo",
   usage: "Reply to a user or mention one, or use `setsudo <number>`.",
+  ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { ctxInfo, chatID, botID } = mellow;
     const sudoPath = "./data/sudo.json";

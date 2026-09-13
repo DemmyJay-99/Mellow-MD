@@ -3,6 +3,7 @@ export default {
   description: "Block a user on WhatsApp",
   category: "Owner",
   usage: "Reply to a user, mention them, or use `.block <number>`.",
+  ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, ctxInfo } = mellow;
     let targetJid;
