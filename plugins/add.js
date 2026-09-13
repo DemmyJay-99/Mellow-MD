@@ -39,8 +39,6 @@ export default {
     try {
       const res = await sock.groupParticipantsUpdate(chatID, [targetJid], "add");
       const status = res?.[0]?.status;
-      console.log(status);
-      console.log(res);
       if (status === 200 || status === "200") {
         await sock.sendMessage(chatID, {text: "User added successfully."});
       } else {

@@ -5,6 +5,7 @@ export default {
   description: "Enable a command for a specific group",
   category: "Group",
   usage: "enable <command>",
+  ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, chatIDisGroup } = mellow;
     if (!chatIDisGroup) {
@@ -18,7 +19,13 @@ export default {
       });
     }
     const command = args[0].toLowerCase();
-    enableCommand(chatID, command);
-    await sock.sendMessage(chatID, {text: `Command ${command} enabled for this group`});
+    const result = await enableCommand(chatID, command);
+    if (result.success) {
+      await sock.sendMessage(chatID, {text: `Command ${command} enabled for this group`});
+    } else if (result.message === 'not_exist.') {
+      await sock.sendMessage(chatID, {text: "That command does not exist."});
+    } else if (result.message === 'owner_only.') {
+      await sock.sendMessage(chatID, {text: "That command is owner-only and cannot be enabled for groups."});
+    }
   },
 };

@@ -5,6 +5,7 @@ export default {
   description: "Update the bot",
   category: "Bot",
   usage: "update(to check for updates), update now (to update immediately)",
+  ownerOnly: true,
   execute: async (sock, msg, args) => {
     try {
       if (args[0] === "now") {

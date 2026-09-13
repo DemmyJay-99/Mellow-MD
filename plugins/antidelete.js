@@ -117,6 +117,7 @@ export default {
   description: "Prevents message deletion and notifies the user.",
   category: "utility",
   usage: "antidelete <me|jid|off>",
+  ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID } = mellow;
     const action = args[0];

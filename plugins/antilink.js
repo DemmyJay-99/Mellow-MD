@@ -1,4 +1,3 @@
-import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 import { getGroupConfig, setGroupConfig, getWarns, setWarns, isSenderAdmin } from "../lib/index.js";
 import { LinkifyIt } from "linkify-it";
 import tlds from "tlds" with { type: "json" };
@@ -13,12 +12,13 @@ export const handleLinkDetection = async (sock, chatID, senderID, messageText, m
     }
     const action = groupConfig.action || "delete";
     if (!linkify.test(messageText)) return;
+    if (senderID === botID) return;
     const isAdmin = await isSenderAdmin(sock, senderID, chatID);
     if (isAdmin) {
       console.log(`Sender ${senderID} is an admin. No action taken.`);
       return;
     };
-    if (senderID === botID) return;
+    
     if (action === "warn") {
       const WARN_LIMIT = process.env.WARN_LIMIT || 3;
       const warns = await getWarns(chatID, senderID);
@@ -85,7 +85,6 @@ export default {
         text: "This command only works in groups.",
       });
     }
-    // const sender = (await normaliseJidToPN(sock, senderID)) + "@s.whatsapp.net";
     const isAdmin = await isSenderAdmin(sock, senderID, chatID);
     if (!isAdmin) {
       return sock.sendMessage(chatID, {

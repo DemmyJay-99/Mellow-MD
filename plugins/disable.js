@@ -5,6 +5,7 @@ export default {
   description: "Disable a command for a specific group",
   category: "Group",
   usage: "disable <command>",
+  ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, chatIDisGroup } = mellow;
     if (!chatIDisGroup) {

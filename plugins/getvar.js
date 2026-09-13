@@ -5,6 +5,7 @@ export default {
   description: "Get environment variables",
   category: "Owner",
   usage: "getvar <variable>",
+  ownerOnly: true,
   execute: async (sock, msg, args) => {
     const variable = args[0];
     if (!variable) {

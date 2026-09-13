@@ -15,11 +15,13 @@ configDotenv({
     path: "./config.env",
 });
 import { exec } from "child_process";
-import checkUpdates from "./lib/checkUpdates.js";
+import { pullLatestUpdates } from "./lib/update.js";
 import messagem from "./lib/message.js";
 import { groupCache } from "./lib/index.js";
-// checkUpdates();
-// setInterval(checkUpdates, 1000 * 60 * 60 * 24);
+await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
+setInterval(async () => {
+    await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
+}, 1000 * 60 * 60 * 24);
 let hasSent = false;
 let sock;
 let isRestarting = false;
@@ -92,9 +94,7 @@ const startBot = async () => {
     sock.ev.on("group-participants.update", async (update) => {
         try {
             const groupId = update.id;
-            console.log(`Group participants update in group: ${groupId}`);
             groupCache.delete(groupId);
-            console.log(groupCache);
         } catch (error) {
             console.error("Error in group participants update handler:", error);
         }
