@@ -5,6 +5,7 @@ export default {
   name: "twitter",
   description: "Download Twitter videos",
   usage: ".twitter <url> or reply to a Twitter video url with .twitter",
+  aliases: ["tw", "twitterdl", "xdl", "twdl", "xitter"],
   category: "Downloaders",
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, quotedMessageText, chatID } = mellow;

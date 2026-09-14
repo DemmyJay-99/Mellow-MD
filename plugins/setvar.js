@@ -5,6 +5,7 @@ export default {
   description: "Set environment variables",
   category: "Vars",
   usage: "setvar <variable>=<value>",
+  aliases: ["addvar", "updatevar", "setenv", 'avar'],
   ownerOnly: true,
   execute: async (sock, msg, args) => {
     const fullText = args.join(" ");

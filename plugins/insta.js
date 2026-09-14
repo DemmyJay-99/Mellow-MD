@@ -5,6 +5,7 @@ export default {
   description: "Download IG reels",
   category: "Downloaders",
   usage: "insta <Insta URL> (or reply to a message with the URL)",
+  aliases: ['ig', 'igdl'],
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;

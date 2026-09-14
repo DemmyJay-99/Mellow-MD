@@ -78,6 +78,7 @@ export default {
   description: "Enable or disable antilink",
   category: "Group",
   usage: "antilink on|off|set <warn|kick|delete>",
+  aliases: ['alink'],
   execute: async (sock, msg, args, mellow) => {
     const { chatID, chatIDisGroup, senderID } = mellow;
     if (!chatIDisGroup) {

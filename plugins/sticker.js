@@ -6,6 +6,7 @@ export default {
   description: "Convert an image or video to a sticker",
   category: "Media",
   usage: "Reply to an image or video message with .sticker",
+  aliases: ["s"],
   execute: async (sock, msg, args, mellow = {}) => {
     const {createSticker} = await import("stickers-formatter");
     const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");

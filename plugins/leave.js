@@ -3,6 +3,7 @@ export default {
   description: "Leave a group",
   category: "Group",
   usage: "leave",
+  aliases: ["exit", "part", "leavegroup", 'left'],
   ownerOnly: true,
   execute: async (sock, msg, args) => {
     const jid = msg.key.remoteJid;
