@@ -47,6 +47,7 @@ Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?styl
 
 
 ## Features
+- Antidelete feature to recover deleted messages
 - Fast and lightweight WhatsApp bot built with Baileys
 - Multi-device support without keeping your phone online
 - Plugin-based architecture for easy command management
@@ -55,8 +56,8 @@ Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?styl
 - Music and lyrics search with Genius API integration
 - File conversion (e.g. media to sticker)
 - Group management tools (e.g. warn system, anti-link)
-- Role System (Owner, Admin, Sudo)
 - Multi-prefix support
+- Timezone configuration for time-related features
 
 
 ## Configuration
