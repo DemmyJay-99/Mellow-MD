@@ -6,14 +6,14 @@ import {
     Browsers
 } from "@whiskeysockets/baileys";
 import { configDotenv } from "dotenv";
-import pino from "pino";
-import { initSession, validateCreds } from "./lib/session.js";
-import handleMessage from "./lib/messageHandler.js";
-import store from "./lib/store.js";
 configDotenv({
     quiet: true,
     path: "./config.env",
 });
+import pino from "pino";
+import { initSession, validateCreds } from "./lib/session.js";
+import handleMessage from "./lib/messageHandler.js";
+import store from "./lib/store.js";
 import { exec } from "child_process";
 import { pullLatestUpdates } from "./lib/update.js";
 import messagem from "./lib/message.js";
