@@ -31,11 +31,13 @@ export default {
       const description = command.description || "No description available";
       const category = command.category || "No category available";
       const usage = command.usage || "No usage available";
+      const aliases = command.aliases ? command.aliases.join(", ") : "No aliases available";
 
       let helpText = `*${commandName}* \n\n`;
       helpText += `*Description:* ${description}\n`;
       helpText += `*Category:* ${category}\n`;
       helpText += `*Usage:* ${usage}\n`;
+      helpText += `*Aliases:* ${aliases}\n`;
       return await sock.sendMessage(remoteJid, {text: helpText});
     }
 
