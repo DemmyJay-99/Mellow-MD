@@ -6,6 +6,7 @@ export default {
   description: "Promote a user to admin",
   category: "Group",
   usage: "Reply to a user or mention them.",
+  aliases: ["promoteuser", "makeadmin", 'prom'],
   execute: async (sock, msg, args, mellow = {}) => {
     const {chatID, chatIDisGroup, senderID, ctxInfo, botID} = mellow;
     if (!chatIDisGroup) {

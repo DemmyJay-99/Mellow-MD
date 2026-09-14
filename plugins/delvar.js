@@ -5,6 +5,7 @@ export default {
   description: "Delete environment variables",
   category: "Vars",
   usage: "delvar <variable>",
+  aliases: ["deletevar", "removevar", "unsetvar", 'dvar'],
   ownerOnly: true,
   execute: async (sock, msg, args) => {
     const variable = args[0];

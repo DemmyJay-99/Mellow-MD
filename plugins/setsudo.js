@@ -6,6 +6,7 @@ export default {
   description: "Add sudo user",
   category: "Sudo",
   usage: "Reply to a user or mention one, or use `setsudo <number>`.",
+  aliases: ["addsudo", "sudoadd", "addsudouser", 'asudo'],
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { ctxInfo, chatID, botID } = mellow;

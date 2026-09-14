@@ -5,6 +5,7 @@ export default {
   description: "Download Facebook videos",
   category: "Downloaders",
   usage: "fb <fb URL> (or reply to a message with the URL)",
+  aliases: ['fbdl', 'facebook', 'facebookdl'],
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;

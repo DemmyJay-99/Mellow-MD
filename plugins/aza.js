@@ -5,6 +5,7 @@ export default {
   description: "Send bank account details",
   category: "Owner",
   usage: ".aza",
+  aliases: ["bank", "bankinfo", "bankdetails"],
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID } = mellow;
     const { bank, number, AccName } = config.aza;

@@ -5,6 +5,7 @@ export default {
   description: "Download Tiktok videos",
   category: "Downloaders",
   usage: "tiktok <TikTok URL> (or reply to a message with the URL)",
+  aliases: ["tt", "tiktokdl", "tiktokdownload", "ttdl"],
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;

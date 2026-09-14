@@ -5,6 +5,7 @@ export default {
   description: "Remove a user from the group",
   category: "Group",
   usage: "Reply to a user or mention them.",
+  aliases: ["remove", "kickuser", "removeuser", 'k'],
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, chatIDisGroup, senderID, ctxInfo, botID } = mellow;
     if (!chatIDisGroup) {
