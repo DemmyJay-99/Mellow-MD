@@ -10,12 +10,12 @@ export default {
     const { chatID } = mellow;
     const { bank, number, AccName } = config.aza;
     const text =
-      `╭━━━━━━━━━━━━━━━━━━━╮\n` +
+      `╭━━━━━━━━━━━━━━━━━╮\n` +
       `┃  *BANK INFO*\n` +
       `┣━━━━━━━━━━━━━━━━\n` +
-      `┃★*Bank*: ${bank}\n` +
-      `┃★*Acc*: ${number}\n` +
-      `┃★*Name*: ${AccName}    \n` +
+      `┃★Bank: *${bank}*\n` +
+      `┃★Acc: *${number}*\n` +
+      `┃★Name: *${AccName}*    \n` +
       `╰━━━━━━━━━━━━━━━━╯`;
     await sock.sendMessage(chatID, { text });
   },
