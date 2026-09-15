@@ -5,7 +5,7 @@ export default {
   description: "Mute the group",
   category: "Group",
   aliases: ["silence"],
-  usage: "mute <user>",
+  usage: "mute <Time in minutes>",
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, senderID, botID, chatIDisGroup } = mellow;
     if (!chatIDisGroup) {
