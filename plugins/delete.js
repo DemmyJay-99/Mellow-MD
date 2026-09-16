@@ -10,7 +10,7 @@ export default {
     const { chatID, chatIDisGroup, senderID, botID, ctxInfo } = mellow;
     try {
       if (!ctxInfo) {
-        return await sock.sendMessage(chatID, { text: "Reply to a message with edit" });
+        return await sock.sendMessage(chatID, { text: "Reply to a message with delete" });
       }
       if (chatIDisGroup) {
         const senderIsAdmin = await isSenderAdmin(sock, senderID, chatID);
