@@ -5,6 +5,7 @@ export default {
   description: "Delete quoted message",
   category: "Utility",
   usage: "Reply to a message with delete",
+  aliases: ['dlt'],
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, chatIDisGroup, senderID, botID, msgID, ctxInfo } = mellow;
     try {
