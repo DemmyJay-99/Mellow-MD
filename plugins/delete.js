@@ -5,10 +5,13 @@ export default {
   description: "Delete quoted message",
   category: "Utility",
   usage: "Reply to a message with delete",
-  aliases: ['dlt'],
+  aliases: ["dlt"],
   execute: async (sock, msg, args, mellow = {}) => {
-    const { chatID, chatIDisGroup, senderID, botID, msgID, ctxInfo } = mellow;
+    const { chatID, chatIDisGroup, senderID, botID, ctxInfo } = mellow;
     try {
+      if (!ctxInfo) {
+        return await sock.sendMessage(chatID, { text: "Reply to a message with edit" });
+      }
       if (chatIDisGroup) {
         const senderIsAdmin = await isSenderAdmin(sock, senderID, chatID);
         if (!senderIsAdmin) {
