@@ -16,6 +16,7 @@ import { handleGroupUpdate, handleMessage } from "./lib/handlers.js";
 import store from "./lib/store.js";
 import { exec } from "child_process";
 import { pullLatestUpdates } from "./lib/update.js";
+import { explicitLog } from "./lib/log.js";
 import messagem from "./lib/message.js";
 await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
 setInterval(
@@ -48,7 +49,7 @@ const startBot = async () => {
     syncFullHistory: false,
     getMessage: async (key) => {
       const msgId = key.id;
-      console.log("Getting message from DB");
+      explicitLog("Getting message from DB")
       const message = await store.getMessage(msgId);
       return message || "";
     },
