@@ -1,4 +1,5 @@
 import { readData, writeData, isJid } from "../lib/index.js";
+import { explicitLog } from "../lib/log.js";
 import store from "../lib/store.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -14,10 +15,10 @@ export const handleMessageRevocation = async (sock, message) => {
       return;
     }
     const msgID = message.message.protocolMessage.key.id;
-    console.log(`Message with ID ${msgID} has been revoked.`);
+    explicitLog(`Message with ID ${msgID} has been revoked.`);
     const original = await store.getMessage(msgID);
     if (!original) {
-      console.log(`Original message with ID ${msgID} not found in the database.`);
+      explicitLog(`Original message with ID ${msgID} not found in the database.`);
       return;
     }
     let jid;
@@ -117,7 +118,7 @@ export default {
   description: "Prevents message deletion and notifies the user.",
   category: "utility",
   usage: "antidelete <me|jid|off>",
-  aliases: ['antidel', 'adel'],
+  aliases: ["antidel", "adel"],
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID } = mellow;
