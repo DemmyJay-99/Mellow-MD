@@ -13,17 +13,15 @@ export default {
   usage: "delplugin <plugin name>",
   category: "Bot",
   ownerOnly: true,
-
+  aliases: ["uninstall"],
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID } = mellow;
     const text = args[0]?.toLowerCase();
-
     if (!text) {
       return await sock.sendMessage(chatID, {
         text: "No plugin name provided",
       });
     }
-
     try {
       const plugin = commandHandler.getCommand(text);
       if (!plugin || !plugin.file) {
