@@ -13,6 +13,7 @@ export default {
   description: "Install external plugins",
   usage: "plugin <url> or reply to url with plugin",
   category: "Bot",
+  aliases: ['install'],
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, quotedMessageText } = mellow;
