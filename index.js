@@ -11,6 +11,7 @@ configDotenv({
   path: "./config.env",
 });
 import pino from "pino";
+import { print } from "./lib/log.js";
 import { initSession, validateCreds } from "./lib/session.js";
 import { handleGroupUpdate, handleMessage } from "./lib/handlers.js";
 import store from "./lib/store.js";
@@ -67,12 +68,12 @@ const startBot = async () => {
         await sock.sendMessage(user, { text: text });
         hasSent = true;
       }
-      console.log("Connected to whatsapp");
+      print("connection", "Connected to whatsapp");
     } else if (connection === "close") {
       const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut;
       if (shouldReconnect && !isRestarting) {
         isRestarting = true;
-        console.log("Reconnecting...");
+        print("connection", "Reconnecting...")
         setTimeout(() => {
           isRestarting = false;
           startBot();
