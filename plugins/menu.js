@@ -1,6 +1,5 @@
 import {transform, getFonts} from "convert-unicode-fonts";
 import config from "../config.js";
-import getPlugins from "../lib/getPlugins.js";
 import p from "../package.json" with {type: "json"};
 import {formatSeconds} from "../lib/uptime.js";
 import { commandHandler } from "../lib/command.js";
@@ -61,7 +60,7 @@ export default {
     const fonts = getFonts();
     const day = dayjs().format("dddd");
     const time = dayjs().tz(process.env.TIMEZONE || "UTC").format("HH:mm:ss");
-    const plugins = await getPlugins();
+    const plugins = await commandHandler.getPlugins();
     const version = p.version;
     const uptime = process.uptime();
     const formattedSeconds = formatSeconds(uptime);
