@@ -15,8 +15,8 @@ export default {
   category: "Bot",
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
-    const { chatID } = mellow;
-    const text = args[0];
+    const { chatID, quotedMessageText } = mellow;
+    const text = args[0] || quotedMessageText;
     if (!text) {
       return await sock.sendMessage(chatID, { text: "No URL provided" });
     }
