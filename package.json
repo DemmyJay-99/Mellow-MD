@@ -20,7 +20,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start . --attach --name mellow",
+    "start": "pm2 start . --attach -- --color --name mellow",
     "stop": "pm2 stop mellow",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "patch-package",
@@ -30,6 +30,7 @@
     "@whiskeysockets/baileys": "^7.0.0-rc14",
     "axios": "^1.13.5",
     "better-sqlite3": "^12.10.1",
+    "chalk": "^6.0.0",
     "convert-unicode-fonts": "^1.0.1",
     "dayjs": "^1.11.20",
     "dotenv": "^17.2.3",
