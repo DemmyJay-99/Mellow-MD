@@ -77,6 +77,7 @@ YT_COOKIE=
 PREFIX=
 TIMEZONE=
 EXPLICIT_LOGS=
+MSG_MAX_AGE=
 ```
 
 | Variable           | Description                                                                      |
@@ -93,6 +94,7 @@ EXPLICIT_LOGS=
 | `PREFIX`           | Prefix for bot commands, separated by a comma — e.g. `!,.`                       |
 | `TIMEZONE`         | Timezone for time-related features (e.g. `Asia/Kolkata`)                         |
 | `EXPLICIT_LOGS`    | Toggle explicit logs (`true/false`)                                              |
+| `MSG_MAX_AGE`      | Max age for stored messages)                                                     |
 
 ---
 
