@@ -1,4 +1,4 @@
-import { refreshSudoCache, loadSudoUsers} from "../lib/sudo.js";
+import { refreshSudoCache, loadSudoUsers } from "../lib/sudo.js";
 import fs from "fs/promises";
 
 export default {
@@ -6,7 +6,7 @@ export default {
   description: "Remove a user from sudo",
   category: "Sudo",
   usage: "Reply to a user or mention one.",
-  aliases: ["removesudo", "unsudo", 'dsudo'],
+  aliases: ["removesudo", "unsudo", "dsudo"],
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, ctxInfo } = mellow;

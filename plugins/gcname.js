@@ -6,7 +6,7 @@ export default {
   category: "Group",
   usage: "gcname <new name>",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, senderID, chatIDisGroup, botID} = mellow;
+    const { chatID, senderID, chatIDisGroup, botID } = mellow;
     if (!chatIDisGroup) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
@@ -16,7 +16,7 @@ export default {
     const senderJid = await normaliseJidToPN(sock, senderID);
     const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
     if (!admins.includes(senderJid) && !msg.key.fromMe) {
-      return sock.sendMessage(chatID, {text: "Admin only."});
+      return sock.sendMessage(chatID, { text: "Admin only." });
     }
 
     if (!admins.includes(botID)) {
@@ -26,11 +26,11 @@ export default {
     }
     const newName = args.join(" ");
     if (!newName) {
-      return sock.sendMessage(chatID, {text: "Provide a new group name."});
+      return sock.sendMessage(chatID, { text: "Provide a new group name." });
     }
     try {
       await sock.groupUpdateSubject(chatID, newName);
-      await sock.sendMessage(chatID, {text: "Group name updated."});
+      await sock.sendMessage(chatID, { text: "Group name updated." });
     } catch (e) {
       console.error("gcname error:", e);
       await sock.sendMessage(chatID, {

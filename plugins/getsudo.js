@@ -9,6 +9,6 @@ export default {
     const chatID = msg.key.remoteJid;
     const sudo = JSON.parse(fs.readFileSync("./data/sudo.json") || "[]");
     const sudoUsers = sudo.map((user) => `${user}`).join("\n");
-    await sock.sendMessage(chatID, {text: `Sudo users are: ${sudoUsers}`});
+    await sock.sendMessage(chatID, { text: `Sudo users are: ${sudoUsers}` });
   },
 };

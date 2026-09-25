@@ -1,4 +1,4 @@
-import {reverseAudio, reverseVideo} from "../lib/ffmpeg.js";
+import { reverseAudio, reverseVideo } from "../lib/ffmpeg.js";
 
 export default {
   name: "reverse",
@@ -6,14 +6,14 @@ export default {
   category: "Media",
   usage: "Reply to a video or audio with .reverse",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {quotedMessage} = mellow;
+    const { quotedMessage } = mellow;
     const mediaMessage = quotedMessage?.videoMessage || quotedMessage?.audioMessage;
     if (!mediaMessage) {
       return sock.sendMessage(msg.key.remoteJid, {
         text: "Reply to a video or audio message.",
       });
     }
-    const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
+    const { downloadContentFromMessage } = await import("@whiskeysockets/baileys");
     const type = quotedMessage.videoMessage ? "video" : "audio";
     const stream = await downloadContentFromMessage(mediaMessage, type);
 
@@ -29,7 +29,7 @@ export default {
       } else {
         reversedBuffer = await reverseAudio(buffer, mediaMessage.mimetype.split("/")[1]);
       }
-      const sendOptions = {quoted: msg};
+      const sendOptions = { quoted: msg };
       if (quotedMessage.videoMessage) {
         sendOptions.video = reversedBuffer;
         sendOptions.mimetype = "video/mp4";

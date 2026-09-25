@@ -1,4 +1,4 @@
-import {encode} from "morsee";
+import { encode } from "morsee";
 
 export default {
   name: "morse",
@@ -8,7 +8,7 @@ export default {
   execute: async (sock, msg, args, mellow = {}) => {
     try {
       let text;
-      const {quotedMessageText, chatID} = mellow;
+      const { quotedMessageText, chatID } = mellow;
       if (args[0]) {
         text = args.join(" ");
       } else if (quotedMessageText) {

@@ -6,7 +6,7 @@ export default {
   description: "Restart the bot",
   category: "Bot",
   usage: "restart",
-  aliases: ["reboot", "reload", "rs"], 
+  aliases: ["reboot", "reload", "rs"],
   ownerOnly: true,
   execute: async (sock, msg, agrs, mellow = {}) => {
     const { chatID, fromMe, senderID } = mellow;

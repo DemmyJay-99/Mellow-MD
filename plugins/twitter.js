@@ -1,5 +1,5 @@
 import fs from "fs";
-import {twitterVideo} from "../lib/yt.js";
+import { twitterVideo } from "../lib/yt.js";
 
 export default {
   name: "twitter",

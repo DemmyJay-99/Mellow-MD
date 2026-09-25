@@ -1,5 +1,5 @@
 import genius from "genius-lyrics";
-import {getLyrics} from "../lib/lyrics.js";
+import { getLyrics } from "../lib/lyrics.js";
 const Client = new genius.Client(process.env.GENIUS_API_KEY);
 
 export default {
@@ -8,7 +8,7 @@ export default {
   category: "Media",
   usage: "Reply to a song name with .lyrics, or use .lyrics <song name>",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, quotedMessageText} = mellow;
+    const { chatID, quotedMessageText } = mellow;
     const API_KEY = process.env.GENIUS_API_KEY;
     if (!API_KEY) {
       return sock.sendMessage(chatID, {
@@ -39,7 +39,7 @@ export default {
     const songImage = search?.image;
     const lyrics = await getLyrics(artistName, title);
     await sock.sendMessage(chatID, {
-      image: {url: songImage},
+      image: { url: songImage },
       caption: `*${title} by ${artistName} (lyrics)*\n\n${lyrics}`,
     });
   },

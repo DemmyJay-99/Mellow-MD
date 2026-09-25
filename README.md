@@ -1,6 +1,7 @@
 <div align="center">
 
 # MELLOW MD
+
 </div>
 
 <div align="center">
@@ -16,6 +17,7 @@
 </div>
 
 ## Table of Contents
+
 - [Requirements](#requirements)
 - [Getting Your Session ID](#getting-your-session-id)
 - [Features](#features)
@@ -36,17 +38,16 @@
 - Git
 - FFmpeg (for media processing features)
 
-
 > [!WARNING]
 > Use a dedicated WhatsApp account for the bot. Using your personal number may increase the risk of account restrictions or bans.
 
-
 ## Getting Your Session ID
+
 Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?style=for-the-badge&logo=whatsapp&logoColor=white)](https://mellow-md.zone.id/)** to get session ID
 ---
 
-
 ## Features
+
 - Antidelete feature to recover deleted messages
 - Fast and lightweight WhatsApp bot built with Baileys
 - Multi-device support without keeping your phone online
@@ -58,7 +59,6 @@ Visit **[![Pairing Site](https://img.shields.io/badge/Pairing%20Site-7b2ff7?styl
 - Group management tools (e.g. warn system, anti-link)
 - Multi-prefix support
 - Timezone configuration for time-related features
-
 
 ## Configuration
 
@@ -78,25 +78,26 @@ PREFIX=
 TIMEZONE =
 ```
 
-| Variable | Description |
-|---|---|
-| `SESSION_ID` | Session ID received after pairing at the pairing site |
-| `PLATFORM` | Label shown in the bot menu (e.g. `Replit`, `VPS`, `Panel`) |
-| `AUTO_UPDATE_BOT` | Set to `true` to enable automatic bot updates |
-| `REACT_EMOJI` | Emoji the bot reacts with when a command is used (e.g. `✨`) |
-| `GENIUS_API_KEY` | API key from [genius.com](https://genius.com/api-clients) for lyrics features |
-| `ALWAYS_ONLINE` | Set to `true` to keep the bot's WhatsApp status always online |
+| Variable           | Description                                                                      |
+| ------------------ | -------------------------------------------------------------------------------- |
+| `SESSION_ID`       | Session ID received after pairing at the pairing site                            |
+| `PLATFORM`         | Label shown in the bot menu (e.g. `Replit`, `VPS`, `Panel`)                      |
+| `AUTO_UPDATE_BOT`  | Set to `true` to enable automatic bot updates                                    |
+| `REACT_EMOJI`      | Emoji the bot reacts with when a command is used (e.g. `✨`)                     |
+| `GENIUS_API_KEY`   | API key from [genius.com](https://genius.com/api-clients) for lyrics features    |
+| `ALWAYS_ONLINE`    | Set to `true` to keep the bot's WhatsApp status always online                    |
 | `STICKER_PACKNAME` | Pack name and author for stickers, separated by a comma — e.g. `packname,author` |
-| `WARN_LIMIT` | Number of warnings before a group member gets removed |
-| `YT_COOKIE` | Youtube cookie in Netscape format |
-| `PREFIX` | Prefix for bot commands, separated by a comma — e.g. `!,.` |
-| `TIMEZONE` | Timezone for time-related features (e.g. `Asia/Kolkata`) |
+| `WARN_LIMIT`       | Number of warnings before a group member gets removed                            |
+| `YT_COOKIE`        | Youtube cookie in Netscape format                                                |
+| `PREFIX`           | Prefix for bot commands, separated by a comma — e.g. `!,.`                       |
+| `TIMEZONE`         | Timezone for time-related features (e.g. `Asia/Kolkata`)                         |
 
 ---
 
 ## Deployment
 
 ### Deploy on Panel
+
 <div align="center">
 
 [![Panel Tutorial](https://img.shields.io/badge/Panel%20Tutorial-f00000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/gm0VcsKGAE4?si=PryYKGYqeaOp3FNT)
@@ -110,18 +111,18 @@ TIMEZONE =
 4. Click **Download** to get your custom `index.js` file.
 5. Upload the downloaded `index.js` to your Pterodactyl panel and start the server.
 
-
 ---
+
 ### Deploy on Render
 
 [![Deploy on Render](https://img.shields.io/badge/Deploy-46e3b7?style=for-the-badge&logo=render&logoColor=black)](https://dashboard.render.com)
-
 
 1. Create a repository and upload the official **Dockerfile**.
 2. Go to the Render Dashboard and create a new **Web Service**.
 3. Connect your repository and use the **Docker** runtime.
 4. Configure the mandatory environment variables (`SESSION_ID`, `PORT`).
 5. Deploy the service and monitor logs for successful startup.
+
 ---
 
 ### Deploy on VPS or Local Machine
@@ -146,7 +147,6 @@ npm start
 2. Add `SESSION_ID` and `PLATFORM` as **Secrets** in the Replit dashboard.
 3. The application will start automatically using the configured workflow.
 
-
 ## Disclaimer
 
 > [!CAUTION]
@@ -154,13 +154,12 @@ npm start
 
 ---
 
-
 ## License
 
 [MIT License](LICENSE) · Made with ❤️ by [Mellow](https://github.com/DemmyJay-99)
 
-
 ## Support
+
 <div align="center">
 
 [![GitHub Repo](https://img.shields.io/badge/GitHub%20Repo-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/DemmyJay-99/Mellow-MD)

@@ -19,14 +19,14 @@ export default {
     const isAdmin = await isSenderAdmin(sock, senderJid, chatID);
 
     if (!isAdmin && !msg.key.fromMe) {
-      return sock.sendMessage(chatID, {text: "Admin only."});
+      return sock.sendMessage(chatID, { text: "Admin only." });
     }
 
     let targetJid = quotedMessageText + "@s.whatsapp.net";
 
     if (!targetJid && args[0]) {
       const num = args[0].replace(/\D/g, "");
-      if (!num) return sock.sendMessage(chatID, {text: "Provide a valid number."});
+      if (!num) return sock.sendMessage(chatID, { text: "Provide a valid number." });
       targetJid = `${num}@s.whatsapp.net`;
     }
 
@@ -40,13 +40,13 @@ export default {
       const res = await sock.groupParticipantsUpdate(chatID, [targetJid], "add");
       const status = res?.[0]?.status;
       if (status === 200 || status === "200") {
-        await sock.sendMessage(chatID, {text: "User added successfully."});
+        await sock.sendMessage(chatID, { text: "User added successfully." });
       } else {
-        await sock.sendMessage(chatID, {text: "Failed to add user."});
+        await sock.sendMessage(chatID, { text: "Failed to add user." });
       }
     } catch (e) {
       console.error("add error:", e);
-      await sock.sendMessage(chatID, {text: "Failed to add user."});
+      await sock.sendMessage(chatID, { text: "Failed to add user." });
     }
   },
 };

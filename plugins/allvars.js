@@ -1,4 +1,4 @@
-import {allvars} from "../lib/index.js";
+import { allvars } from "../lib/index.js";
 
 export default {
   name: "allvars",
@@ -11,6 +11,6 @@ export default {
     const text = Object.entries(vars)
       .map(([key, value]) => `${key} = ${value}`)
       .join("\n");
-    await sock.sendMessage(msg.key.remoteJid, {text: text});
+    await sock.sendMessage(msg.key.remoteJid, { text: text });
   },
 };

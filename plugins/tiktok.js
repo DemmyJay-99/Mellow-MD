@@ -1,4 +1,4 @@
-import {ttdl} from "ruhend-scraper";
+import { ttdl } from "ruhend-scraper";
 
 export default {
   name: "tiktok",
@@ -25,10 +25,10 @@ export default {
       return tiktokRegex.test(url);
     }
     if (!isTikTokUrlRegex(url)) {
-      await sock.sendMessage(chatID, {text: "Invalid url"});
+      await sock.sendMessage(chatID, { text: "Invalid url" });
       return;
     }
-    let {video_hd} = await ttdl(url);
-    await sock.sendMessage(chatID, {video: {url: video_hd}}, {quoted: msg});
+    let { video_hd } = await ttdl(url);
+    await sock.sendMessage(chatID, { video: { url: video_hd } }, { quoted: msg });
   },
 };

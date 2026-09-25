@@ -5,7 +5,7 @@ export default {
   category: "Group",
   usage: "gcdesc <new description>",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, senderID, botID} = mellow;
+    const { chatID, senderID, botID } = mellow;
     if (!chatID.endsWith("@g.us")) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
@@ -15,7 +15,7 @@ export default {
     const senderJid = await normaliseJidToPN(senderID);
     const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
     if (!admins.includes(senderJid)) {
-      return sock.sendMessage(chatID, {text: "Admin only."});
+      return sock.sendMessage(chatID, { text: "Admin only." });
     }
 
     if (!admins.includes(botID)) {
@@ -31,7 +31,7 @@ export default {
     }
     try {
       await sock.groupUpdateDescription(chatID, newName);
-      await sock.sendMessage(chatID, {text: "Group description updated."});
+      await sock.sendMessage(chatID, { text: "Group description updated." });
     } catch (e) {
       console.error("gcname error:", e);
       await sock.sendMessage(chatID, {

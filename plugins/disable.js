@@ -27,7 +27,7 @@ export default {
     }
     disableCommand(chatID, command);
     await sock.sendMessage(chatID, {
-      text: `*${command}* command has been disabled for this group`
-    })
+      text: `*${command}* command has been disabled for this group`,
+    });
   },
 };

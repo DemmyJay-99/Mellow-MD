@@ -1,4 +1,4 @@
-import {getWarns, setWarns, isSenderAdmin} from "../lib/index.js";
+import { getWarns, setWarns, isSenderAdmin } from "../lib/index.js";
 import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 const WARN_LIMIT = Number(process.env.WARN_LIMIT) || 3;
 
@@ -8,7 +8,7 @@ export default {
   category: "Group",
   usage: "warn <@user>",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, chatIDisGroup, senderID, ctxInfo} = mellow;
+    const { chatID, chatIDisGroup, senderID, ctxInfo } = mellow;
     if (!chatIDisGroup) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
@@ -16,17 +16,15 @@ export default {
     }
     const isAdmin = await isSenderAdmin(sock, senderID, chatID);
     if (!isAdmin) {
-      return sock.sendMessage(chatID, {text: "You are not an admin."});
+      return sock.sendMessage(chatID, { text: "You are not an admin." });
     }
-    let targetJid =
-      ctxInfo?.participant ||
-      ctxInfo?.mentionedJid?.[0];
+    let targetJid = ctxInfo?.participant || ctxInfo?.mentionedJid?.[0];
     if (!targetJid) {
       return sock.sendMessage(chatID, {
         text: "Please mention a user to warn.",
       });
     }
-   targetJid = await normaliseJidToPN(sock, targetJid) + "@s.whatsapp.net";
+    targetJid = (await normaliseJidToPN(sock, targetJid)) + "@s.whatsapp.net";
     const warnCount = await getWarns(chatID, targetJid);
     if (warnCount + 1 >= WARN_LIMIT) {
       await sock.groupParticipantsUpdate(chatID, [targetJid], "remove");

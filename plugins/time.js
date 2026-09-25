@@ -11,12 +11,12 @@ export default {
     dayjs.extend(utc);
     dayjs.extend(timezone);
     let TZ;
-    if(args[0]) {
+    if (args[0]) {
       TZ = args[0];
     } else {
       TZ = process.env.TIMEZONE || "UTC";
     }
     const time = dayjs().tz(TZ).format("HH:mm:ss");
-    await sock.sendMessage(msg.key.remoteJid, {text: `Time: ${time}`}, {quoted: msg});
+    await sock.sendMessage(msg.key.remoteJid, { text: `Time: ${time}` }, { quoted: msg });
   },
 };

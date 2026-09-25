@@ -1,4 +1,4 @@
-import {ytVideo} from "../lib/yt.js";
+import { ytVideo } from "../lib/yt.js";
 import fs from "fs";
 
 export default {
@@ -7,7 +7,7 @@ export default {
   usage: ".ytv <url> or reply to a YouTube video link with .ytv",
   category: "Downloaders",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {quotedMessageText, chatID} = mellow;
+    const { quotedMessageText, chatID } = mellow;
     let url;
     if (args[0]) {
       url = args[0];

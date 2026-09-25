@@ -17,10 +17,10 @@ export default {
     const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
 
     if (!admins.includes(senderJid) && !msg.key.fromMe) {
-      return sock.sendMessage(remoteJid, {text: "Admin only."});
+      return sock.sendMessage(remoteJid, { text: "Admin only." });
     }
     const inviteCode = await sock.groupInviteCode(remoteJid);
     const inviteLink = `https://chat.whatsapp.com/${inviteCode}`;
-    await sock.sendMessage(remoteJid, {text: inviteLink});
+    await sock.sendMessage(remoteJid, { text: inviteLink });
   },
 };

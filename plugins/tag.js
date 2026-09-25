@@ -4,7 +4,7 @@ export default {
   category: "Group",
   usage: "tag all|admins|nonadmins or reply to a message with tag",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, quotedMessage, chatIDisGroup, quotedMessageText} = mellow;
+    const { chatID, quotedMessage, chatIDisGroup, quotedMessageText } = mellow;
     if (!chatIDisGroup) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
