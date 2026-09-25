@@ -6,7 +6,7 @@ export default {
   category: "Downloaders",
   usage: ".play <song name>",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID} = mellow;
+    const { chatID } = mellow;
     const query = args.join(" ");
     if (!query) {
       return sock.sendMessage(chatID, {
@@ -16,8 +16,7 @@ export default {
     try {
       const results = await yts(query);
       const MAX_DURATION = 10 * 60;
-      const video =
-        results.videos.find((v) => v.seconds <= MAX_DURATION) || null;
+      const video = results.videos.find((v) => v.seconds <= MAX_DURATION) || null;
       const url = video?.url ?? null;
       const { title, author, timestamp, image } = video || {};
       if (!url) {

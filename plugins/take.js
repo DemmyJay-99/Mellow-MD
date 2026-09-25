@@ -1,5 +1,5 @@
-import {downloadContentFromMessage} from "@whiskeysockets/baileys";
-import {StickerTypes, createSticker} from "stickers-formatter";
+import { downloadContentFromMessage } from "@whiskeysockets/baileys";
+import { StickerTypes, createSticker } from "stickers-formatter";
 
 export default {
   name: "take",
@@ -7,7 +7,7 @@ export default {
   usage: "Reply to a sticker with .take",
   category: "Media",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, quotedMessage} = mellow;
+    const { chatID, quotedMessage } = mellow;
     if (!quotedMessage) {
       await sock.sendMessage(chatID, {
         text: "Reply to a sticker with .take",
@@ -37,6 +37,6 @@ export default {
       quality: 50,
       background: "transparent",
     });
-    await sock.sendMessage(chatID, {sticker: newSticker});
+    await sock.sendMessage(chatID, { sticker: newSticker });
   },
 };

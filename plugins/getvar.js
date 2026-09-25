@@ -1,4 +1,4 @@
-import {getvar} from "../lib/index.js";
+import { getvar } from "../lib/index.js";
 
 export default {
   name: "getvar",
@@ -9,10 +9,10 @@ export default {
   execute: async (sock, msg, args) => {
     const variable = args[0];
     if (!variable) {
-      await sock.sendMessage(msg.key.remoteJid, {text: "Please provide a variable."});
+      await sock.sendMessage(msg.key.remoteJid, { text: "Please provide a variable." });
       return;
     }
     const value = await getvar(variable);
-    await sock.sendMessage(msg.key.remoteJid, {text: `${variable.toUpperCase()} = ${value}`});
+    await sock.sendMessage(msg.key.remoteJid, { text: `${variable.toUpperCase()} = ${value}` });
   },
 };

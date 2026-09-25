@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import {fileURLToPath} from "url";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,7 +14,7 @@ export default {
     const commands = new Map();
     const commandFiles = fs.readdirSync(path.join(__dirname, "../plugins")).filter((file) => file.endsWith(".js"));
     for (const file of commandFiles) {
-      const {default: command} = await import(`../plugins/${file}`);
+      const { default: command } = await import(`../plugins/${file}`);
       commands.set(command.name, command);
     }
 
@@ -38,13 +38,13 @@ export default {
       helpText += `*Category:* ${category}\n`;
       helpText += `*Usage:* ${usage}\n`;
       helpText += `*Aliases:* ${aliases}\n`;
-      return await sock.sendMessage(remoteJid, {text: helpText});
+      return await sock.sendMessage(remoteJid, { text: helpText });
     }
 
     let helpText = "Available commands:\n\n";
     for (const [name, command] of commands) {
       helpText += `*${name}* - ${command.description}\n`;
     }
-    await sock.sendMessage(remoteJid, {text: helpText});
+    await sock.sendMessage(remoteJid, { text: helpText });
   },
 };

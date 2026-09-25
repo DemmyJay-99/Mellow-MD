@@ -3,11 +3,11 @@ export default {
   description: "Replies with pong!",
   category: "Utility",
   usage: "ping",
-  aliases: ["p", "pong", 'latency'],
+  aliases: ["p", "pong", "latency"],
   execute: async (sock, msg, args) => {
     const start = Date.now();
-    await sock.sendMessage(msg.key.remoteJid, {text: "Pong!"});
+    await sock.sendMessage(msg.key.remoteJid, { text: "Pong!" });
     const latency = Date.now() - start;
-    await sock.sendMessage(msg.key.remoteJid, {text: `${latency}ms`}, {quoted: msg});
+    await sock.sendMessage(msg.key.remoteJid, { text: `${latency}ms` }, { quoted: msg });
   },
 };

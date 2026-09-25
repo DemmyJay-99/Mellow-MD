@@ -5,7 +5,7 @@ export default {
   usage: "Reply to a user, mention them, or use `.unblock <number>`.",
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, ctxInfo} = mellow;
+    const { chatID, ctxInfo } = mellow;
     let targetJid;
     if (ctxInfo?.participant) {
       targetJid = ctxInfo.participant;

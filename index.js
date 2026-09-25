@@ -49,7 +49,7 @@ const startBot = async () => {
     syncFullHistory: false,
     getMessage: async (key) => {
       const msgId = key.id;
-      explicitLog("Getting message from DB")
+      explicitLog("Getting message from DB");
       const message = await store.getMessage(msgId);
       return message || "";
     },
@@ -91,7 +91,7 @@ const startBot = async () => {
 
   sock.ev.on("group-participants.update", async (update) => {
     try {
-     await handleGroupUpdate(sock, update);
+      await handleGroupUpdate(sock, update);
     } catch (error) {
       console.error("Error in group participants update handler:", error);
     }

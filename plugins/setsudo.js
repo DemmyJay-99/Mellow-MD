@@ -1,12 +1,12 @@
 import fs from "fs/promises";
-import { isSudo, refreshSudoCache, loadSudoUsers} from "../lib/sudo.js";
+import { isSudo, refreshSudoCache, loadSudoUsers } from "../lib/sudo.js";
 
 export default {
   name: "setsudo",
   description: "Add sudo user",
   category: "Sudo",
   usage: "Reply to a user or mention one, or use `setsudo <number>`.",
-  aliases: ["addsudo", "sudoadd", "addsudouser", 'asudo'],
+  aliases: ["addsudo", "sudoadd", "addsudouser", "asudo"],
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { ctxInfo, chatID, botID } = mellow;

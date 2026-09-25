@@ -4,13 +4,13 @@ export default {
   category: "Owner",
   usage: "rmpp",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, chatIDisGroup, botID, senderID} = mellow;
+    const { chatID, chatIDisGroup, botID, senderID } = mellow;
     if (!chatIDisGroup && senderID === botID) {
       await sock.removeProfilePicture(botID);
-      await sock.sendMessage(chatID, {text: "Profile picture removed"});
+      await sock.sendMessage(chatID, { text: "Profile picture removed" });
       return;
     }
     await sock.removeProfilePicture(chatID);
-    await sock.sendMessage(chatID, {text: "Profile picture removed"});
+    await sock.sendMessage(chatID, { text: "Profile picture removed" });
   },
 };

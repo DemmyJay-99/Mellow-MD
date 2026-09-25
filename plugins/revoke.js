@@ -6,19 +6,19 @@ export default {
   category: "Group",
   usage: "revoke",
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, chatIDisGroup, senderID} = mellow;
-    if (!chatIDisGroup){
+    const { chatID, chatIDisGroup, senderID } = mellow;
+    if (!chatIDisGroup) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
       });
     }
     const metadata = await sock.groupMetadata(chatID);
-    const senderJid = await normaliseJidToPN(sock, senderID) + "@s.whatsapp.net";
+    const senderJid = (await normaliseJidToPN(sock, senderID)) + "@s.whatsapp.net";
     const admins = metadata.participants.filter((p) => p.admin).map((p) => p.id);
     if (!admins.includes(senderJid)) {
-      return sock.sendMessage(chatID, {text: "Admin only."});
+      return sock.sendMessage(chatID, { text: "Admin only." });
     }
     await sock.groupRevokeInvite(chatID);
-    await sock.sendMessage(chatID, {text: "Invite link reset"});
+    await sock.sendMessage(chatID, { text: "Invite link reset" });
   },
 };

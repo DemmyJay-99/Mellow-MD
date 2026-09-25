@@ -1,9 +1,9 @@
 import { configDotenv } from "dotenv";
 
 configDotenv({
-    path: "./config.env",
-    quiet: true 
-})
+  path: "./config.env",
+  quiet: true,
+});
 export default {
   prefix: ["!", "."],
   botName: "Mellow MD",

@@ -1,4 +1,4 @@
-import {ytAudio} from "../lib/yt.js";
+import { ytAudio } from "../lib/yt.js";
 
 export default {
   name: "yta",
@@ -47,7 +47,7 @@ export default {
       });
     } catch (e) {
       console.log("YTA Error:", e.stack);
-      await sock.sendMessage(chatID, {text: e.message});
+      await sock.sendMessage(chatID, { text: e.message });
     }
   },
 };

@@ -13,7 +13,7 @@ export default {
   description: "Install external plugins",
   usage: "plugin <url> or reply to url with plugin",
   category: "Bot",
-  aliases: ['install'],
+  aliases: ["install"],
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, quotedMessageText } = mellow;
@@ -72,7 +72,7 @@ export default {
       explicitLog("Installing....");
       const command = await commandHandler.loadCommand(filePath);
       await sock.sendMessage(chatID, { text: `Installed ${command}` });
-      explicitLog(`Installed ${command}`)
+      explicitLog(`Installed ${command}`);
     } catch (err) {
       console.error("Error installing plugin:", err);
       await sock.sendMessage(chatID, { text: "Failed to install plugin" });

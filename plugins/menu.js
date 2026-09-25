@@ -1,7 +1,7 @@
-import {transform, getFonts} from "convert-unicode-fonts";
+import { transform, getFonts } from "convert-unicode-fonts";
 import config from "../config.js";
-import p from "../package.json" with {type: "json"};
-import {formatSeconds} from "../lib/uptime.js";
+import p from "../package.json" with { type: "json" };
+import { formatSeconds } from "../lib/uptime.js";
 import { commandHandler } from "../lib/command.js";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
@@ -18,7 +18,7 @@ export default {
   execute: async (sock, msg, args) => {
     const cmds = commandHandler.getCommands() || [];
     if (cmds.length === 0) {
-      await sock.sendMessage(msg.key.remoteJid, {text: "No commands loaded."});
+      await sock.sendMessage(msg.key.remoteJid, { text: "No commands loaded." });
       return;
     }
 
@@ -59,7 +59,9 @@ export default {
     const joinedText = lines.join("\n").toUpperCase();
     const fonts = getFonts();
     const day = dayjs().format("dddd");
-    const time = dayjs().tz(process.env.TIMEZONE || "UTC").format("HH:mm:ss");
+    const time = dayjs()
+      .tz(process.env.TIMEZONE || "UTC")
+      .format("HH:mm:ss");
     const plugins = await commandHandler.getPlugins();
     const version = p.version;
     const uptime = process.uptime();
@@ -81,6 +83,6 @@ export default {
 
     const styledText = transform(text, fonts["bold"]);
 
-    await sock.sendMessage(msg.key.remoteJid, {text: styledText});
+    await sock.sendMessage(msg.key.remoteJid, { text: styledText });
   },
 };

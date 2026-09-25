@@ -1,6 +1,6 @@
-import {StickerTypes} from "stickers-formatter";
+import { StickerTypes } from "stickers-formatter";
 import id from "../lib/id.js";
-import {getDurationFromFile, trimVideo} from "../lib/ffmpeg.js";
+import { getDurationFromFile, trimVideo } from "../lib/ffmpeg.js";
 export default {
   name: "sticker",
   description: "Convert an image or video to a sticker",
@@ -8,9 +8,9 @@ export default {
   usage: "Reply to an image or video message with .sticker",
   aliases: ["s"],
   execute: async (sock, msg, args, mellow = {}) => {
-    const {createSticker} = await import("stickers-formatter");
-    const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
-    const {chatID, quotedMessage} = mellow;
+    const { createSticker } = await import("stickers-formatter");
+    const { downloadContentFromMessage } = await import("@whiskeysockets/baileys");
+    const { chatID, quotedMessage } = mellow;
     const mediaMessage = quotedMessage?.imageMessage || quotedMessage?.videoMessage || quotedMessage?.documentMessage;
     if (!mediaMessage) {
       return sock.sendMessage(chatID, {
@@ -47,6 +47,6 @@ export default {
         text: "Sticker is too large to send.",
       });
     }
-    await sock.sendMessage(chatID, {sticker: sticker});
+    await sock.sendMessage(chatID, { sticker: sticker });
   },
 };

@@ -1,4 +1,4 @@
-import {decode} from "morsee";
+import { decode } from "morsee";
 
 export default {
   name: "demorse",
@@ -7,7 +7,7 @@ export default {
   usage: "demorse <morse code>",
   execute: async (sock, msg, args, mellow = {}) => {
     try {
-      const {quotedMessage, quotedMessageText, chatID} = mellow;
+      const { quotedMessage, quotedMessageText, chatID } = mellow;
       let text;
       if (args[0]) {
         text = args.join(" ");

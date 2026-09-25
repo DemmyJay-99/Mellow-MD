@@ -20,6 +20,6 @@ export default {
       return parts.join(" ");
     }
     const formattedSeconds = formatSeconds(uptime);
-    await sock.sendMessage(msg.key.remoteJid, {text: `Your bot has been up for ${formattedSeconds}!`});
+    await sock.sendMessage(msg.key.remoteJid, { text: `Your bot has been up for ${formattedSeconds}!` });
   },
 };

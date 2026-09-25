@@ -5,7 +5,7 @@ export default {
   usage: "Reply to a view-once message with .vv || .vv me (to send to yourself)",
   execute: async (sock, msg, args, mellow = {}) => {
     try {
-      const {chatID, quotedMessage, botID} = mellow;
+      const { chatID, quotedMessage, botID } = mellow;
 
       if (!quotedMessage) {
         return sock.sendMessage(chatID, {
@@ -31,7 +31,7 @@ export default {
         });
       }
 
-      const {downloadContentFromMessage} = await import("@whiskeysockets/baileys");
+      const { downloadContentFromMessage } = await import("@whiskeysockets/baileys");
 
       const type = mediaType.replace("Message", "").toLowerCase();
 

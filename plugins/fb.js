@@ -1,11 +1,11 @@
-import {fbdl} from "ruhend-scraper";
+import { fbdl } from "ruhend-scraper";
 
 export default {
   name: "fb",
   description: "Download Facebook videos",
   category: "Downloaders",
   usage: "fb <fb URL> (or reply to a message with the URL)",
-  aliases: ['fbdl', 'facebook', 'facebookdl'],
+  aliases: ["fbdl", "facebook", "facebookdl"],
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;
@@ -27,11 +27,11 @@ export default {
       return fbRegex.test(url);
     }
     if (!isFb(url)) {
-      await sock.sendMessage(chatID, {text: "Invalid url"});
+      await sock.sendMessage(chatID, { text: "Invalid url" });
       return;
     }
     const res = await fbdl(url);
-    const video = res[0]
-    await sock.sendMessage(chatID, {video: {url: video}});
+    const video = res[0];
+    await sock.sendMessage(chatID, { video: { url: video } });
   },
 };

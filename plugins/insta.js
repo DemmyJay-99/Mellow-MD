@@ -1,11 +1,11 @@
-import {igdl} from "ruhend-scraper";
+import { igdl } from "ruhend-scraper";
 
 export default {
   name: "insta",
   description: "Download IG reels",
   category: "Downloaders",
   usage: "insta <Insta URL> (or reply to a message with the URL)",
-  aliases: ['ig', 'igdl'],
+  aliases: ["ig", "igdl"],
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, quotedMessageText, chatID } = mellow;
     let url;
@@ -26,11 +26,11 @@ export default {
       return igRegex.test(url);
     }
     if (!checkInstagram(url)) {
-      await sock.sendMessage(chatID, {text: "Invalid url"});
+      await sock.sendMessage(chatID, { text: "Invalid url" });
       return;
     }
     const res = await igdl(url);
     const data = res[0];
-    await sock.sendMessage(chatID, {video: {url: data}});
+    await sock.sendMessage(chatID, { video: { url: data } });
   },
 };

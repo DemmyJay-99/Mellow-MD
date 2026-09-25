@@ -1,14 +1,13 @@
 import { isSenderAdmin } from "../lib/index.js";
 
-
 export default {
   name: "promote",
   description: "Promote a user to admin",
   category: "Group",
   usage: "Reply to a user or mention them.",
-  aliases: ["promoteuser", "makeadmin", 'prom'],
+  aliases: ["promoteuser", "makeadmin", "prom"],
   execute: async (sock, msg, args, mellow = {}) => {
-    const {chatID, chatIDisGroup, senderID, ctxInfo, botID} = mellow;
+    const { chatID, chatIDisGroup, senderID, ctxInfo, botID } = mellow;
     if (!chatIDisGroup) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
@@ -45,15 +44,15 @@ export default {
     }
 
     if (targetJid === botID) {
-      return sock.sendMessage(chatID, {text: "I can't promote myself."});
+      return sock.sendMessage(chatID, { text: "I can't promote myself." });
     }
 
     try {
       await sock.groupParticipantsUpdate(chatID, [targetJid], "promote");
-      await sock.sendMessage(chatID, {text: "Promoted."});
+      await sock.sendMessage(chatID, { text: "Promoted." });
     } catch (e) {
       console.error("promote error:", e);
-      await sock.sendMessage(chatID, {text: "Failed to promote user."});
+      await sock.sendMessage(chatID, { text: "Failed to promote user." });
     }
   },
 };

@@ -17,8 +17,8 @@ export const handleLinkDetection = async (sock, chatID, senderID, messageText, m
     if (isAdmin) {
       console.log(`Sender ${senderID} is an admin. No action taken.`);
       return;
-    };
-    
+    }
+
     if (action === "warn") {
       const WARN_LIMIT = process.env.WARN_LIMIT || 3;
       const warns = await getWarns(chatID, senderID);
@@ -78,7 +78,7 @@ export default {
   description: "Enable or disable antilink",
   category: "Group",
   usage: "antilink on|off|set <warn|kick|delete>",
-  aliases: ['alink'],
+  aliases: ["alink"],
   execute: async (sock, msg, args, mellow) => {
     const { chatID, chatIDisGroup, senderID } = mellow;
     if (!chatIDisGroup) {
