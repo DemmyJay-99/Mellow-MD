@@ -56,9 +56,7 @@ export default {
         });
       }
       const plugin = jsFiles[0];
-
       const pluginRes = await fetch(plugin.raw_url);
-
       if (!pluginRes.ok) {
         throw new Error(`Failed to download ${plugin.filename}`);
       }
@@ -74,6 +72,7 @@ export default {
       explicitLog("Installing....");
       const command = await commandHandler.loadCommand(filePath);
       await sock.sendMessage(chatID, { text: `Installed ${command}` });
+      explicitLog(`Installed ${command}`)
     } catch (err) {
       console.error("Error installing plugin:", err);
       await sock.sendMessage(chatID, { text: "Failed to install plugin" });
