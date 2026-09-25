@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 export default {
   name: "plugin",
   description: "Install external plugins",
-  usage: "plugin <url>",
+  usage: "plugin <url> or reply to url with plugin",
   category: "Bot",
   ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
