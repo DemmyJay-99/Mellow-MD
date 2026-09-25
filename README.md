@@ -75,7 +75,8 @@ STICKER_PACKNAME=
 WARN_LIMIT=
 YT_COOKIE=
 PREFIX=
-TIMEZONE =
+TIMEZONE=
+EXPLICIT_LOGS=
 ```
 
 | Variable           | Description                                                                      |
@@ -91,6 +92,7 @@ TIMEZONE =
 | `YT_COOKIE`        | Youtube cookie in Netscape format                                                |
 | `PREFIX`           | Prefix for bot commands, separated by a comma — e.g. `!,.`                       |
 | `TIMEZONE`         | Timezone for time-related features (e.g. `Asia/Kolkata`)                         |
+| `EXPLICIT_LOGS`    | Toggle explicit logs (`true/false`)                                              |
 
 ---
 
