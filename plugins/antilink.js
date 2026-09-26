@@ -1,6 +1,7 @@
 import { getGroupConfig, setGroupConfig, getWarns, setWarns, isSenderAdmin } from "../lib/index.js";
 import { LinkifyIt } from "linkify-it";
 import tlds from "tlds" with { type: "json" };
+import { explicitLog, print } from "../lib/log.js";
 
 const linkify = new LinkifyIt().tlds(tlds);
 
@@ -15,7 +16,7 @@ export const handleLinkDetection = async (sock, chatID, senderID, messageText, m
     if (senderID === botID) return;
     const isAdmin = await isSenderAdmin(sock, senderID, chatID);
     if (isAdmin) {
-      console.log(`Sender ${senderID} is an admin. No action taken.`);
+      explicitLog(`Sender ${senderID} is an admin. No action taken.`);
       return;
     }
 
@@ -69,7 +70,7 @@ export const handleLinkDetection = async (sock, chatID, senderID, messageText, m
       });
     }
   } catch (e) {
-    console.error("Error in handleLinkDetection:", e);
+    print("error", `Error in handleLinkDetection:${e}`);
   }
 };
 
