@@ -21,7 +21,7 @@ export default {
     let targetJid = ctxInfo?.participant || ctxInfo?.mentionedJid?.[0];
     if (!targetJid) {
       return sock.sendMessage(chatID, {
-        text: "Please mention a user to warn.",
+        text: "Please mention a user or reply to their message to reset their warn count.",
       });
     }
     targetJid = (await normaliseJidToPN(sock, targetJid)) + "@s.whatsapp.net";
