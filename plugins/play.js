@@ -1,6 +1,9 @@
 import yts from "yt-search";
 import { ytAudio } from "../lib/yt.js";
 import fs from "fs";
+import { fetchBuffer } from "../lib/index.js";
+import id3 from "node-id3";
+
 export default {
   name: "play",
   description: "Search and download a song from YouTube",
@@ -19,7 +22,7 @@ export default {
       const MAX_DURATION = 10 * 60;
       const video = results.videos.find((v) => v.seconds <= MAX_DURATION) || null;
       const url = video?.url ?? null;
-      const { title, author, timestamp, image } = video || {};
+      const { title, author, timestamp, image, description } = video || {};
       if (!url) {
         return sock.sendMessage(chatID, {
           text: "No results found.",
@@ -45,6 +48,20 @@ export default {
         });
       }
       const filepath = await ytAudio(url);
+      const tags = {
+        title,
+        artist: author.name,
+        image: {
+          mime: "image/jpeg",
+          type: {
+            id: 3,
+            name: "front cover",
+          },
+          imageBuffer: await fetchBuffer(image),
+        },
+        description
+      };
+      id3.write(tags, filepath);
       const buffer = fs.readFileSync(filepath);
       if (!buffer || buffer.length === 0) {
         return sock.sendMessage(chatID, {
