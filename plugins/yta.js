@@ -1,4 +1,5 @@
 import { ytAudio } from "../lib/yt.js";
+import fs from "fs";
 
 export default {
   name: "yta",
@@ -35,7 +36,8 @@ export default {
       });
     }
     try {
-      const buffer = await ytAudio(url);
+      const filepath = await ytAudio(url);
+      const buffer = fs.readFileSync(filepath);
       if (!buffer || buffer.length === 0) {
         return sock.sendMessage(chatID, {
           text: "Downloaded file is empty",
@@ -45,6 +47,11 @@ export default {
         audio: buffer,
         mimetype: "audio/mp4",
       });
+      try {
+        fs.unlinkSync(filepath);
+      } catch (error) {
+        // console.error('Failed to delete temp video file:', err);
+      }
     } catch (e) {
       console.log("YTA Error:", e.stack);
       await sock.sendMessage(chatID, { text: e.message });
