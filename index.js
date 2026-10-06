@@ -35,7 +35,7 @@ const startBot = async () => {
     await initSession(process.env.SESSION_ID);
     await validateCreds();
   } catch (error) {
-    console.error("Failed to validate session:", error.message);
+    print("error", "Error initializing session: " + error.message);
     exec("npm stop");
     process.exit(0);
   }
@@ -94,7 +94,7 @@ const startBot = async () => {
     try {
       await handleGroupUpdate(sock, update);
     } catch (error) {
-      console.error("Error in group participants update handler:", error);
+      print("error", "Error in group participants update handler: " + error.message);
     }
   });
 
@@ -104,7 +104,7 @@ const startBot = async () => {
         store.saveContact(contact);
       }
     } catch (error) {
-      console.error("Error in contacts update handler:", error);
+      print("error", "Error in contacts update handler: " + error.message);
     }
   });
   sock.ev.on("contacts.upsert", async (update) => {
