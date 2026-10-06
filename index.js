@@ -119,7 +119,7 @@ const startBot = async () => {
   });
 
   sock.ev.on("messaging-history.set", async (update) => {
-    const { messages, contacts} = update
+    const { messages, contacts } = update;
     try {
       if (!messages || !contacts) {
         print("error", "Received messaging history set without messages or contacts");
