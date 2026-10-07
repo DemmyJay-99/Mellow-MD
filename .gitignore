@@ -6,7 +6,7 @@ test/
 database/
 temp/
 tmp/
-plugins/eplugins
+plugins/eplugins/*.js
 data/*.json
 *.mp4
 *pvv.js
