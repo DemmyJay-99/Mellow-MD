@@ -23,7 +23,7 @@
     "start": "pm2 start . --attach --name mellow -- --color",
     "stop": "pm2 stop mellow",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "node -e \"try { require('sharp') } catch (e) { process.exit(1); }\" || yarn add --ignore-engines sharp@0.34.5 && yarn patch-package",
+    "postinstall": "(node -e \"try { require('sharp') } catch (e) { process.exit(1); }\" || yarn add --ignore-engines sharp@0.34.5) && patch-package",
     "format": "yarn prettier . --write"
   },
   "dependencies": {
@@ -44,6 +44,7 @@
     "morsee": "^1.0.10",
     "node-catbox": "^4.2.0",
     "node-id3": "^0.2.9",
+    "patch-package": "^8.0.1",
     "pino": "^10.3.0",
     "pm2": "^6.0.14",
     "qrcode-terminal": "^0.12.0",
@@ -60,7 +61,6 @@
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
-    "patch-package": "^8.0.1",
     "prettier": "^3.9.9"
   }
 }
