@@ -23,7 +23,7 @@
     "start": "pm2 start . --attach --name mellow -- --color",
     "stop": "pm2 stop mellow",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "patch-package",
+    "postinstall": "node -e \"try { require('sharp') } catch (e) { process.exit(1); }\" || yarn add --ignore-engines sharp@0.34.5 && yarn patch-package",
     "format": "yarn prettier . --write"
   },
   "dependencies": {
@@ -48,7 +48,7 @@
     "pm2": "^6.0.14",
     "qrcode-terminal": "^0.12.0",
     "ruhend-scraper": "^10.0.3",
-    "sharp": "^0.35.5",
+    "sharp": "^0.34.5",
     "simple-git": "^3.36.0",
     "stickers-formatter": "^0.0.2",
     "tlds": "^1.261.0",
