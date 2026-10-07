@@ -19,7 +19,11 @@ import { exec } from "child_process";
 import { pullLatestUpdates } from "./lib/update.js";
 import { explicitLog } from "./lib/log.js";
 import messagem from "./lib/message.js";
-await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
+if (process.env.AUTO_UPDATE_BOT !== "true") {
+  print("info", "Auto-update is disabled.");
+} else {
+  await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
+}
 setInterval(
   async () => {
     await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
