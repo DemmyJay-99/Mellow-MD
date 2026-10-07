@@ -114,7 +114,6 @@ const startBot = async () => {
   sock.ev.on("contacts.upsert", async (update) => {
     try {
       for (const contact of update) {
-        console.log(contact);
         store.saveContact(contact);
       }
     } catch (error) {
