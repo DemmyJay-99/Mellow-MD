@@ -1,5 +1,5 @@
 import { readData, writeData, isJid } from "../lib/index.js";
-import { explicitLog } from "../lib/log.js";
+import { explicitLog, print } from "../lib/log.js";
 import store from "../lib/store.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -30,7 +30,7 @@ export const handleMessageRevocation = async (sock, message) => {
     if (original.mediaType === "image") {
       const media = await store.getMedia(original);
       if (!media) {
-        console.log(`Media for message ID ${msgID} not found.`);
+        print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
       await sock.sendMessage(
@@ -44,7 +44,7 @@ export const handleMessageRevocation = async (sock, message) => {
     } else if (original.mediaType === "video") {
       const media = await store.getMedia(original);
       if (!media) {
-        console.log(`Media for message ID ${msgID} not found.`);
+        print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
       await sock.sendMessage(
@@ -58,7 +58,7 @@ export const handleMessageRevocation = async (sock, message) => {
     } else if (original.mediaType === "sticker") {
       const media = await store.getMedia(original);
       if (!media) {
-        console.log(`Media for message ID ${msgID} not found.`);
+        print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
       await sock.sendMessage(
@@ -71,7 +71,7 @@ export const handleMessageRevocation = async (sock, message) => {
     } else if (original.mediaType === "document") {
       const media = await store.getMedia(original);
       if (!media) {
-        console.log(`Media for message ID ${msgID} not found.`);
+        print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
       await sock.sendMessage(
@@ -87,7 +87,7 @@ export const handleMessageRevocation = async (sock, message) => {
     } else if (original.mediaType === "audio") {
       const media = await store.getMedia(original);
       if (!media) {
-        console.log(`Media for message ID ${msgID} not found.`);
+        print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
       await sock.sendMessage(

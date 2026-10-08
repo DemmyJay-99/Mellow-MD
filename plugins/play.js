@@ -3,6 +3,7 @@ import { ytAudio } from "../lib/yt.js";
 import fs from "fs";
 import { fetchBuffer } from "../lib/index.js";
 import id3 from "node-id3";
+import { print } from "../lib/log.js";
 
 export default {
   name: "play",
@@ -59,7 +60,7 @@ export default {
           },
           imageBuffer: await fetchBuffer(image),
         },
-        description
+        description,
       };
       id3.write(tags, filepath);
       const buffer = fs.readFileSync(filepath);
@@ -78,7 +79,7 @@ export default {
         // console.error('Failed to delete temp video file:', err);
       }
     } catch (e) {
-      console.log("Play Error:", e.stack);
+      print("error", "Play Error:" + e.stack);
       await sock.sendMessage(chatID, { text: e.message });
     }
   },

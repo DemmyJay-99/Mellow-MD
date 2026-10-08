@@ -1,4 +1,5 @@
 import { isSenderAdmin } from "../lib/index.js";
+import { print } from "../lib/log.js";
 
 export default {
   name: "delete",
@@ -43,7 +44,7 @@ export default {
         await sock.sendMessage(chatID, { text: "Deleted" });
       }
     } catch (error) {
-      console.log("Failed to delete message");
+      print("error", "Failed to delete message");
     }
   },
 };

@@ -1,3 +1,4 @@
+import { print } from "../lib/log.js";
 import { ytAudio } from "../lib/yt.js";
 import fs from "fs";
 
@@ -53,7 +54,7 @@ export default {
         // console.error('Failed to delete temp video file:', err);
       }
     } catch (e) {
-      console.log("YTA Error:", e.stack);
+      print("error", "YTA Error:" + e.stack);
       await sock.sendMessage(chatID, { text: e.message });
     }
   },

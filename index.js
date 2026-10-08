@@ -22,11 +22,11 @@ import messagem from "./lib/message.js";
 if (process.env.AUTO_UPDATE_BOT !== "true") {
   print("info", "Auto-update is disabled.");
 } else {
-  await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
+  await pullLatestUpdates().catch(() => print("error", "Error checking for updates"));
 }
 setInterval(
   async () => {
-    await pullLatestUpdates().catch(() => console.log("Error checking for updates"));
+    await pullLatestUpdates().catch(() => print("error", "Error checking for updates"));
   },
   1000 * 60 * 60 * 24,
 );
