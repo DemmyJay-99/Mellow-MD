@@ -40,7 +40,7 @@ function installYtDlp() {
   const YT_DLP_PATH = path.join(BIN_DIR, binaryName);
 
   if (!fs.existsSync(YT_DLP_PATH)) {
-    execSync(["curl", "-LsS", binaryUrl, "-o", YT_DLP_PATH], { stdio: "inherit" });
+    execSync(`curl -LsS binaryUrl -o ${YT_DLP_PATH}`, { stdio: "inherit" });
 
     if (process.platform !== "win32") {
       fs.chmodSync(YT_DLP_PATH, 0o755);
