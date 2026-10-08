@@ -13,6 +13,7 @@ try {
   process.exit(1);
 }
 const BIN_DIR = path.resolve("./bin");
+fs.mkdirSync(BIN_DIR, { recursive: true });
 
 function getPlatformBinaryName() {
   const platform = process.platform;
