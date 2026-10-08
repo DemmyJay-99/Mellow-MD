@@ -3,7 +3,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
 import { writeFile } from "fs/promises";
-import { explicitLog } from "../lib/log.js";
+import { explicitLog, print } from "../lib/log.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -25,7 +25,7 @@ export default {
     try {
       parsedUrl = new URL(text);
     } catch (err) {
-      console.log(err);
+      print("error", err.message);
       return await sock.sendMessage(chatID, { text: "Invalid URL" });
     }
     const allowedHosts = ["gist.github.com"];

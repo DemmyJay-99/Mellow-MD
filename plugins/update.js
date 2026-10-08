@@ -1,5 +1,6 @@
 import { pullLatestUpdates, checkForUpdates } from "../lib/update.js";
 import { clearReact } from "../lib/index.js";
+import { explicitLog, print } from "../lib/log.js";
 export default {
   name: "update",
   description: "Update the bot",
@@ -9,7 +10,6 @@ export default {
   execute: async (sock, msg, args) => {
     try {
       if (args[0] === "now") {
-        console.log("Updating...");
         const { updated } = await pullLatestUpdates();
         if (updated) {
           await sock.sendMessage(msg.key.remoteJid, {
@@ -20,7 +20,7 @@ export default {
             process.exit(0);
           }, 1500);
         } else {
-          console.log("No updates found");
+          explicitLog("No updates found");
           return await sock.sendMessage(msg.key.remoteJid, {
             text: "No updates found",
           });
@@ -29,7 +29,7 @@ export default {
         const { commitLength, commits, available } = await checkForUpdates();
         const commitMessage = `Missing ${commitLength} updates\n` + commits;
         if (available) {
-          console.log("Your version of mellow-md is outdated");
+          print("warning", "Your version of mellow-md is outdated");
           await sock.sendMessage(msg.key.remoteJid, {
             text: commitMessage,
           });
@@ -41,7 +41,7 @@ export default {
         }
       }
     } catch (e) {
-      console.log("Error checking for updates:", e.message);
+      print("error", "Error checking for updates:" + e.message);
       const text =
         e.response?.status === 404
           ? "Couldn't find this branch on GitHub — skipping update check."
