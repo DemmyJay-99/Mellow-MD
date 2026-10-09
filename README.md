@@ -29,10 +29,10 @@
 ## Documentation
 
 - [Home](https://github.com/DemmyJay-99/Mellow-MD/wiki)
-- [Adding plugins](https://github.com/DemmyJay-99/Mellow-MD/wiki/Adding-plugins)
-- [Commands](https://github.com/DemmyJay-99/Mellow-MD/wiki/Commands)
-- [Configuration](https://github.com/DemmyJay-99/Mellow-MD/wiki/Configuration)
 - [Installation](https://github.com/DemmyJay-99/Mellow-MD/wiki/Installation)
+- [Configuration](https://github.com/DemmyJay-99/Mellow-MD/wiki/Configuration)
+- [Commands](https://github.com/DemmyJay-99/Mellow-MD/wiki/Commands)
+- [Adding plugins](https://github.com/DemmyJay-99/Mellow-MD/wiki/Adding-plugins)
 
 ## Features
 
