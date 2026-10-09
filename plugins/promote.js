@@ -20,8 +20,6 @@ export default {
       return sock.sendMessage(chatID, { text: "Admin only." });
     }
 
-    const user = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-
     const isBotAdmin = await isSenderAdmin(sock, botID, chatID);
 
     if (!isBotAdmin) {

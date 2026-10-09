@@ -6,9 +6,9 @@ export default {
   category: "Fun",
   usage: "morse <text>",
   execute: async (sock, msg, args, mellow = {}) => {
+    const { quotedMessageText, chatID } = mellow;
     try {
       let text;
-      const { quotedMessageText, chatID } = mellow;
       if (args[0]) {
         text = args.join(" ");
       } else if (quotedMessageText) {

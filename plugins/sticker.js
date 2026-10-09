@@ -19,7 +19,7 @@ export default {
     }
     let type = quotedMessage?.imageMessage ? "image" : quotedMessage?.videoMessage ? "video" : "document";
     const isVideo = type === "video";
-    const isGif = quotedMessage?.videoMessage?.gifPlayback;
+    // const isGif = quotedMessage?.videoMessage?.gifPlayback;
     const stream = await downloadContentFromMessage(mediaMessage, type);
     const chunks = [];
     for await (const chunk of stream) {

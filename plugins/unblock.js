@@ -14,7 +14,7 @@ export default {
     } else if (args[0]) {
       const num = args[0].replace(/\D/g, "");
       if (!num) {
-        await sock.sendMessage(remoteJid, {
+        await sock.sendMessage(chatID, {
           text: "Provide a valid number.",
         });
         return;

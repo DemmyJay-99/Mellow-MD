@@ -76,7 +76,7 @@ export default {
       try {
         fs.unlinkSync(filepath);
       } catch (error) {
-        // console.error('Failed to delete temp video file:', err);
+        print("error",'Failed to delete temp video file:' + error.message);
       }
     } catch (e) {
       print("error", "Play Error:" + e.stack);

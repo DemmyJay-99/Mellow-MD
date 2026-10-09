@@ -6,8 +6,8 @@ export default {
   category: "Owner",
   usage: "Reply to an image with .addpp",
   execute: async (sock, msg, args, mellow = {}) => {
+    const { chatID, quotedMessage, botID } = mellow;
     try {
-      const { chatID, quotedMessage, botID } = mellow;
       const media = quotedMessage?.imageMessage;
       if (!media) {
         await sock.sendMessage(chatID, {

@@ -1,3 +1,4 @@
+import { print } from "../lib/log.js";
 import { ytVideo } from "../lib/yt.js";
 import fs from "fs";
 
@@ -45,7 +46,7 @@ export default {
       try {
         fs.unlinkSync(filepath);
       } catch (error) {
-        // console.error('Failed to delete temp video file:', err);
+        print("error",'Failed to delete temp video file:' +error.message);
       }
     } catch (error) {
       console.error("Error downloading YouTube video:", error);

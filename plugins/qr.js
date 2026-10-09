@@ -6,8 +6,8 @@ export default {
   category: "Tools",
   usage: "qr <text>",
   execute: async (sock, msg, args, mellow = {}) => {
+    const { quotedMessageText, chatID } = mellow;
     try {
-      const { quotedMessageText, chatID } = mellow;
       let text;
       if (args[0]) {
         text = args.join(" ");

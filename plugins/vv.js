@@ -4,8 +4,8 @@ export default {
   category: "Media",
   usage: "Reply to a view-once message with .vv || .vv me (to send to yourself)",
   execute: async (sock, msg, args, mellow = {}) => {
+    const { chatID, quotedMessage, botID } = mellow;
     try {
-      const { chatID, quotedMessage, botID } = mellow;
 
       if (!quotedMessage) {
         return sock.sendMessage(chatID, {

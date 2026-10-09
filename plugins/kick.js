@@ -27,6 +27,12 @@ export default {
       });
     }
 
+    if (targetJid === botID) {
+      return sock.sendMessage(chatID, {
+        text: "You can't kick yourself",
+      });
+    }
+
     try {
       await sock.groupParticipantsUpdate(chatID, [targetJid], "remove");
       await sock.sendMessage(chatID, { text: "Removed." });
