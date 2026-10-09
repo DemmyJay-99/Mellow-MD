@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "Setting up Termux environment..."
+echo "Setting up Ubuntu environment..."
 apt update && apt upgrade -y
 echo "Installing required packages..."
 apt install -y git ffmpeg build-essential libvips-dev webp curl ca-certificates
