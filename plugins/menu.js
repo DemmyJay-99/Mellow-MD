@@ -74,7 +74,6 @@ export default {
       `┃★┃User: ${pushname || "Unknown"}\n` +
       `┃★┃Time: ${time}\n` +
       `┃★┃Day: ${day}\n` +
-      `┃★┃Platform: ${process.env.PLATFORM}\n` +
       `┃★┃Plugins: ${plugins.length}\n` +
       `┃★┃Version: ${version}\n` +
       `┃★┃Uptime: ${formattedSeconds}\n` +
