@@ -24,6 +24,13 @@
 
 > [!WARNING]
 > Use a dedicated WhatsApp account for the bot. Using your personal number may increase the risk of account restrictions or bans.
+## Documentation
+
+- [Home](https://github.com/DemmyJay-99/Mellow-MD/wiki)
+- [Adding plugins](https://github.com/DemmyJay-99/Mellow-MD/wiki/Adding-plugins)
+- [Commands](https://github.com/DemmyJay-99/Mellow-MD/wiki/Commands)
+- [Configuration](https://github.com/DemmyJay-99/Mellow-MD/wiki/Configuration)
+- [Installation](https://github.com/DemmyJay-99/Mellow-MD/wiki/Installation)
 
 ## Features
 
@@ -38,14 +45,6 @@
 - Group management tools (e.g. warn system, anti-link)
 - Multi-prefix support
 - Timezone configuration for time-related features
-
-## Documentation
-
-- [Home](https://github.com/DemmyJay-99/Mellow-MD/wiki)
-- [Adding plugins](https://github.com/DemmyJay-99/Mellow-MD/wiki/Adding-plugins)
-- [Commands](https://github.com/DemmyJay-99/Mellow-MD/wiki/Commands)
-- [Configuration](https://github.com/DemmyJay-99/Mellow-MD/wiki/Configuration)
-- [Installation](https://github.com/DemmyJay-99/Mellow-MD/wiki/Installation)
 
 ## Disclaimer
 
