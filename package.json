@@ -24,7 +24,8 @@
     "stop": "pm2 stop mellow",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node setup.js",
-    "format": "yarn prettier . --write"
+    "format": "yarn prettier . --write",
+    "lint": "yarn eslint ."
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^7.0.0-rc14",
@@ -61,7 +62,10 @@
     "node": ">=22"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/better-sqlite3": "^7.6.13",
+    "eslint": "^10.12.0",
+    "globals": "^17.13.0",
     "prettier": "^3.9.9"
   }
 }

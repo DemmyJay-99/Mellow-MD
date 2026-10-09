@@ -14,7 +14,6 @@ export default {
       });
     }
 
-    const metadata = await sock.groupMetadata(chatID);
     const senderJid = msg.key.participant || msg.key.remoteJid;
     const isAdmin = await isSenderAdmin(sock, senderJid, chatID);
 

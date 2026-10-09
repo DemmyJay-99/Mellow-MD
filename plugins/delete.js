@@ -44,7 +44,7 @@ export default {
         await sock.sendMessage(chatID, { text: "Deleted" });
       }
     } catch (error) {
-      print("error", "Failed to delete message");
+      print("error", "Failed to delete message" + error.message);
     }
   },
 };
