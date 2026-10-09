@@ -2044,6 +2044,11 @@ node-abi@^3.3.0:
   dependencies:
     semver "^7.3.5"
 
+node-addon-api@^8.9.2:
+  version "8.9.2"
+  resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.9.2.tgz#db7ac94a13ffd9b55e6cb04584bd5ef8e1d74b18"
+  integrity sha512-VijLXbi3UACN69I0JVXJsX4tjACjNoQDgv2gTF6sx2wWEi8tkSg2eX8p5gSIFi8z2+DL3oHmY6OyKce38SDolg==
+
 node-catbox@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/node-catbox/-/node-catbox-4.2.0.tgz#40e7712dceb8abd281f9744c42c351543e40fcee"
