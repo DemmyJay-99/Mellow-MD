@@ -24,7 +24,8 @@
     "stop": "pm2 stop mellow",
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node setup.js",
-    "format": "yarn prettier . --write"
+    "format": "yarn prettier . --write",
+    "lint": "yarn eslint ."
   },
   "dependencies": {
     "@whiskeysockets/baileys": "^7.0.0-rc14",
