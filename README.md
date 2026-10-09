@@ -16,6 +16,7 @@
 </div>
 
 ## Table of Contents
+
 - [Documentation](#documentation)
 - [Features](#features)
 - [Disclaimer](#disclaimer)
@@ -24,6 +25,7 @@
 
 > [!WARNING]
 > Use a dedicated WhatsApp account for the bot. Using your personal number may increase the risk of account restrictions or bans.
+
 ## Documentation
 
 - [Home](https://github.com/DemmyJay-99/Mellow-MD/wiki)

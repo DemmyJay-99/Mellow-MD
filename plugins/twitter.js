@@ -1,6 +1,6 @@
 import fs from "fs";
 import { twitterVideo } from "../lib/yt.js";
-import {print} from "../lib/log.js"
+import { print } from "../lib/log.js";
 
 export default {
   name: "twitter",
@@ -41,7 +41,7 @@ export default {
       try {
         fs.unlinkSync(filepath);
       } catch (error) {
-        print("error",'Failed to delete temp video file:' + error.message);
+        print("error", "Failed to delete temp video file:" + error.message);
       }
     } catch (e) {
       console.error("twitter error:", e);

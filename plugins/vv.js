@@ -6,7 +6,6 @@ export default {
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, quotedMessage, botID } = mellow;
     try {
-
       if (!quotedMessage) {
         return sock.sendMessage(chatID, {
           text: "Reply to a view-once message with .vv",

@@ -46,7 +46,7 @@ export default {
       try {
         fs.unlinkSync(filepath);
       } catch (error) {
-        print("error",'Failed to delete temp video file:' +error.message);
+        print("error", "Failed to delete temp video file:" + error.message);
       }
     } catch (error) {
       console.error("Error downloading YouTube video:", error);
