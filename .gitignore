@@ -11,6 +11,9 @@ data/*.json
 *.mp4
 *pvv.js
 bin/
+store.db
+store.db-wal
+store.db-shm
 baileys_store.db
 baileys_store.db-wal
 baileys_store.db-shm
