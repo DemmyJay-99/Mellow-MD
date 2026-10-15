@@ -25,7 +25,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node setup.js",
     "format": "yarn prettier . --write",
-    "restart": "pm2 restart mellow",
+    "restart": "pm2 restart mellow --attach --update-env",
     "lint": "yarn eslint ."
   },
   "dependencies": {
