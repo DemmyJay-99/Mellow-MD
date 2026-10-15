@@ -10,6 +10,9 @@ export default {
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID } = mellow;
     const prefixes = args;
+    if(!prefixes || prefixes.length === 0) {
+        return await sock.sendMessage(chatID, {text: "Specify the new prefix"})
+    }
     try {
       await setvar("PREFIX", prefixes.join(","));
       return await sock.sendMessage(chatID, {text: `Set prefix to "${prefixes.join(",")}"`})
