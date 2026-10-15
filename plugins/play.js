@@ -42,12 +42,6 @@ export default {
           },
         },
       });
-      const COOKIE = process.env.YT_COOKIE;
-      if (!COOKIE) {
-        return sock.sendMessage(chatID, {
-          text: "YT_COOKIE environment variable not set",
-        });
-      }
       const filepath = await ytAudio(url);
       const tags = {
         title,

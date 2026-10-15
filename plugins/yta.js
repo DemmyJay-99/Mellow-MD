@@ -30,12 +30,7 @@ export default {
         text: "Please provide a valid YouTube video URL.",
       });
     }
-    const COOKIE = process.env.YT_COOKIE;
-    if (!COOKIE) {
-      return sock.sendMessage(chatID, {
-        text: "YT_COOKIE environment variable not set",
-      });
-    }
+    
     try {
       const filepath = await ytAudio(url);
       const buffer = fs.readFileSync(filepath);
