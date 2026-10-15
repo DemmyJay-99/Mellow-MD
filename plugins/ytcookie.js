@@ -11,7 +11,8 @@ export default {
   name: "ytcookie",
   description: "Set yt cookie",
   usage: "Reply to a cookies.txt file",
-  category: "Downloaders",
+  category: "Owner",
+  ownerOnly: true,
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, chatID } = mellow;
     const isCookieFile =
