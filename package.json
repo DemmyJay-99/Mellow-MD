@@ -25,6 +25,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "node setup.js",
     "format": "yarn prettier . --write",
+    "restart": "pm2 restart mellow",
     "lint": "yarn eslint ."
   },
   "dependencies": {
@@ -42,6 +43,7 @@
     "is-emoji": "^0.1.1",
     "link-preview-js": "^4.0.3",
     "linkify-it": "^6.1.0",
+    "mongoose": "^9.11.1",
     "morsee": "^1.0.10",
     "node-addon-api": "^8.9.2",
     "node-catbox": "^4.2.0",
