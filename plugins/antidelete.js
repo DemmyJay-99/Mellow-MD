@@ -33,6 +33,7 @@ export const handleMessageRevocation = async (sock, message) => {
         print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
+      await new Promise((r) => setTimeout(r, 1500));
       await sock.sendMessage(
         jid,
         {
@@ -47,6 +48,7 @@ export const handleMessageRevocation = async (sock, message) => {
         print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
+      await new Promise((r) => setTimeout(r, 1500));
       await sock.sendMessage(
         jid,
         {
@@ -61,6 +63,7 @@ export const handleMessageRevocation = async (sock, message) => {
         print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
+      await new Promise((r) => setTimeout(r, 1500));
       await sock.sendMessage(
         jid,
         {
@@ -74,6 +77,7 @@ export const handleMessageRevocation = async (sock, message) => {
         print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
+      await new Promise((r) => setTimeout(r, 1500));
       await sock.sendMessage(
         jid,
         {
@@ -90,6 +94,7 @@ export const handleMessageRevocation = async (sock, message) => {
         print("error", `Media for message ID ${msgID} not found.`);
         return;
       }
+      await new Promise((r) => setTimeout(r, 1500));
       await sock.sendMessage(
         jid,
         {
@@ -100,6 +105,7 @@ export const handleMessageRevocation = async (sock, message) => {
         { quoted: original },
       );
     } else {
+      await new Promise((r) => setTimeout(r, 1500));
       await sock.sendMessage(
         jid,
         {
