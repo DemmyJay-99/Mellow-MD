@@ -8,12 +8,12 @@ export default {
   usage: ".ytv <url> or reply to a YouTube video link with .ytv",
   category: "Downloaders",
   execute: async (sock, msg, args, mellow = {}) => {
-    const { quotedMessageText, chatID } = mellow;
+    const { quotedMessageText, chatID, quotedLink, quotedMessage } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
-    } else if (quotedMessageText) {
-      url = quotedMessageText;
+    } else if (quotedMessage) {
+      url = quotedLink || quotedMessageText;
     }
     if (!url) {
       return await sock.sendMessage(chatID, {

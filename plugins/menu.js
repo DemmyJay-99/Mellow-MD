@@ -6,6 +6,7 @@ import { commandHandler } from "../lib/command.js";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import timezone from "dayjs/plugin/timezone.js";
+import os from "os";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -67,6 +68,12 @@ export default {
     const version = p.version;
     const uptime = process.uptime();
     const formattedSeconds = formatSeconds(uptime);
+    const cores = os.cpus().length;
+    const cpuModel = os.cpus()[0].model;
+    const totalMem = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2);
+    const freeMem = (os.freemem() / 1024 / 1024 / 1024).toFixed(2);
+    const botRamUsed = (process.memoryUsage().rss / 1024 / 1024).toFixed(2);
+
     const text =
       "```┏━━━『 MELLOW MD 』━━━\n" +
       "┃★┏━━━━━━━━━━━━━━\n" +
@@ -77,11 +84,14 @@ export default {
       `┃★┃Plugins: ${plugins.length}\n` +
       `┃★┃Version: ${version}\n` +
       `┃★┃Uptime: ${formattedSeconds}\n` +
+      `┃★┃CPU: ${cpuModel}\n` +
+      `┃★┃System RAM: ${freeMem} GB / ${totalMem} GB\n` +
+      `┃★┃Bot RAM: ${botRamUsed} MB\n` +
       "┃★┗━━━━━━━━━━━━━━```\n" +
       `${joinedText}\n` +
       `┗━━━━━━━━━━━━━━`;
 
-    const styledText = transform(text, fonts["bold"]);
+    const styledText = transform(text, fonts["monospace"]);
 
     await sock.sendMessage(chatID, { text: styledText });
   },

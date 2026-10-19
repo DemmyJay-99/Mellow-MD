@@ -8,12 +8,12 @@ export default {
   usage: ".yta <url> or reply to a YouTube video link with .yta",
   category: "Downloaders",
   execute: async (sock, msg, args, mellow = {}) => {
-    const { quotedMessageText, chatID } = mellow;
+    const { quotedMessageText, chatID, quotedMessage, quotedLink } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
-    } else if (quotedMessageText) {
-      url = quotedMessageText;
+    } else if (quotedMessage) {
+      url = quotedLink || quotedMessageText;
     }
     if (!url) {
       return await sock.sendMessage(chatID, {
@@ -30,7 +30,7 @@ export default {
         text: "Please provide a valid YouTube video URL.",
       });
     }
-    
+
     try {
       const filepath = await ytAudio(url);
       const buffer = fs.readFileSync(filepath);
