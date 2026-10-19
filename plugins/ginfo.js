@@ -1,16 +1,19 @@
+import { isGroup } from "../lib/index.js";
+
 export default {
   name: "ginfo",
   description: "Get group info",
   category: "Group",
-  usage: "ginfo",
+  usage: "ginfo <optional group jid>",
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, chatIDisGroup } = mellow;
-    if (!chatIDisGroup) {
+    const jid = args[0] && isGroup(args[0]) ? args[0] : chatIDisGroup ? chatID : null;
+    if (!jid) {
       return sock.sendMessage(chatID, {
         text: "This command only works in groups.",
       });
     }
-    const metadata = await sock.groupMetadata(chatID);
+    const metadata = await sock.groupMetadata(jid);
     const groupName = metadata.subject;
     const groupDesc = metadata.desc;
     const groupMembers = metadata.size;
@@ -18,8 +21,8 @@ export default {
     const mentionText = groupAdminJids.map((jid) => "@" + jid.split("@")[0]).join(",");
     const groupCreated = new Date(metadata.creation * 1000).toLocaleString();
     const groupOwner = metadata.owner || "Unknown";
-
-    const groupPP = await sock.profilePictureUrl(chatID, "image");
+    const groupPP =
+      chatID === jid ? await sock.profilePictureUrl(chatID, "image").catch(() => "assets/default_profile.png") : null;
     const groupInfo = `*Name:* ${groupName}\n*Description:* ${groupDesc}\n*Members:* ${groupMembers}\n*Admins:*${mentionText}\n*Created:* ${groupCreated}\n*Owner:* @${groupOwner.split("@")[0]}`;
     if (groupPP) {
       await sock.sendMessage(chatID, {
