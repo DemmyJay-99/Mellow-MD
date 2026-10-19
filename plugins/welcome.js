@@ -14,7 +14,7 @@ export const handleWelcomeEvent = async (sock, chatID, participants) => {
       profilePictureUrl = profilePicture;
     } catch (error) {
       console.error(`Could not fetch profile picture for ${participant.id}:`, error);
-      profilePictureUrl = "https://i.ibb.co/sdvxvbS2/wanderercreative-blank-profile-picture-973460-640.jpg"; // Fallback if profile picture is not available
+      profilePictureUrl = "assets/default_profile.png";
     }
     await sock.sendMessage(chatID, {
       image: { url: profilePictureUrl },
