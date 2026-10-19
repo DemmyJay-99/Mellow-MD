@@ -20,8 +20,8 @@ export default {
     if (!isCookieFile) {
       return await sock.sendMessage(chatID, { text: 'Reply to your exported "cookies.txt" file' });
     }
-    const stream = await downloadContentFromMessage(quotedMessage.documentMessage,"document")
-    const filepath = path.join(__dirname,"../", "cookies.txt");
-    await pipeline(stream, createWriteStream(filepath))
+    const stream = await downloadContentFromMessage(quotedMessage.documentMessage, "document");
+    const filepath = path.join(__dirname, "../", "cookies.txt");
+    await pipeline(stream, createWriteStream(filepath));
   },
 };

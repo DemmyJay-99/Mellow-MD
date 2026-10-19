@@ -12,7 +12,7 @@ export default {
     if (args[0]) {
       url = args[0];
     } else if (quotedMessage) {
-      url = quotedLink||quotedMessageText;
+      url = quotedLink || quotedMessageText;
     }
     if (!url) {
       await sock.sendMessage(chatID, {

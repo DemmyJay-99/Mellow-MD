@@ -13,7 +13,7 @@ export default {
     if (args[0]) {
       url = args[0];
     } else if (quotedMessage) {
-      url =quotedLink || quotedMessageText;
+      url = quotedLink || quotedMessageText;
     }
     if (!url) {
       return await sock.sendMessage(chatID, {
@@ -30,7 +30,7 @@ export default {
         text: "Please provide a valid YouTube video URL.",
       });
     }
-    
+
     try {
       const filepath = await ytAudio(url);
       const buffer = fs.readFileSync(filepath);
