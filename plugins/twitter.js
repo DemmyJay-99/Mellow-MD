@@ -9,12 +9,12 @@ export default {
   aliases: ["tw", "twitterdl", "xdl", "twdl", "xitter"],
   category: "Downloaders",
   execute: async (sock, msg, args, mellow = {}) => {
-    const { quotedMessage, quotedMessageText, chatID } = mellow;
+    const { quotedMessage, quotedMessageText, chatID, quotedLink } = mellow;
     let url;
     if (args[0]) {
       url = args[0];
     } else if (quotedMessage) {
-      url = quotedMessageText;
+      url =quotedLink|| quotedMessageText;
     }
     if (!url) {
       return await sock.sendMessage(chatID, {
