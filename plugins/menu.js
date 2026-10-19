@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import timezone from "dayjs/plugin/timezone.js";
 import os from "os";
+import { readFileSync } from "fs";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -70,8 +71,20 @@ export default {
     const formattedSeconds = formatSeconds(uptime);
     const cores = os.cpus().length;
     const cpuModel = os.cpus()[0].model;
-    const totalMem = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2);
-    const freeMem = (os.freemem() / 1024 / 1024 / 1024).toFixed(2);
+    const getAvailableMem = () => {
+      try {
+        const line = readFileSync("/proc/meminfo", "utf8")
+          .split("\n")
+          .find((l) => l.startsWith("MemAvailable:"));
+        return parseInt(line.match(/\d+/)[0], 10) * 1024; // kB -> bytes
+      } catch {
+        return os.freemem(); // fallback for non-Linux
+      }
+    };
+    const gb = (bytes) => (bytes / 1024 ** 3).toFixed(2);
+    const totalMem = gb(os.totalmem());
+    const availMem = getAvailableMem();
+    const usedMem = gb(os.totalmem() - availMem);
     const botRamUsed = (process.memoryUsage().rss / 1024 / 1024).toFixed(2);
 
     const text =
@@ -84,8 +97,8 @@ export default {
       `┃★┃Plugins: ${plugins.length}\n` +
       `┃★┃Version: ${version}\n` +
       `┃★┃Uptime: ${formattedSeconds}\n` +
-      `┃★┃CPU: ${cpuModel}\n` +
-      `┃★┃System RAM: ${freeMem} GB / ${totalMem} GB\n` +
+      `┃★┃CPU: ${cpuModel} (${cores} cores)\n` +
+      `┃★┃System RAM: ${usedMem} GB / ${totalMem} GB\n` +
       `┃★┃Bot RAM: ${botRamUsed} MB\n` +
       "┃★┗━━━━━━━━━━━━━━```\n" +
       `${joinedText}\n` +
