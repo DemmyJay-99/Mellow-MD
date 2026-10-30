@@ -34,7 +34,7 @@ export default {
     }
     const [stickerNameRaw, stickerAuthorRaw] = (process.env.STICKER_PACKNAME || "").split(",");
     const stickerName = stickerNameRaw || "Mellow MD";
-    const stickerAuthor = stickerAuthorRaw || "Mellow";
+    const stickerAuthor = stickerAuthorRaw || "https://github.com/DemmyJay-99/Mellow-MD" ;
     const sticker = await createSticker(buffer, {
       pack: stickerName,
       author: stickerAuthor,
