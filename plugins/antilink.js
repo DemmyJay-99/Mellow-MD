@@ -94,12 +94,12 @@ export default {
       });
     }
     const action = args[0];
-    const groupConfig = await getGroupConfig(chatID);
     if (!action) {
       return sock.sendMessage(chatID, {
         text: "Please provide an action: on, off or set <action>.",
       });
     }
+    const groupConfig = await getGroupConfig(chatID);
     if (action === "on") {
       await setGroupConfig(chatID, { ...groupConfig, enabled: true });
       await sock.sendMessage(chatID, {
