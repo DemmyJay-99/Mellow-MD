@@ -28,7 +28,6 @@ export default {
     }
 
     let targetid = ctxInfo?.participant || (ctxInfo?.mentionedJid?.length ? ctxInfo.mentionedJid[0] : null);
-
     if (!targetid) {
       return sock.sendMessage(chatID, {
         text: "Reply to a user or mention them.",
