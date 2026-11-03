@@ -1,6 +1,5 @@
 import fs from "fs";
 import path from "path";
-// import { twitterVideo } from "../lib/yt.js";
 import { galleryDL } from "../lib/gallery-dl.js";
 import { fileTypeFromBuffer } from "file-type";
 import { print } from "../lib/log.js";
@@ -68,7 +67,7 @@ export default {
             edit: msg.key,
           });
         } catch (err) {
-          console.error("Error processing file:", err);
+          print("error", "Error processing file:" + err.message);
           continue;
         }
       }
@@ -77,7 +76,7 @@ export default {
       });
       await fs.promises.rm(dir, { recursive: true });
     } catch (e) {
-      console.error("Twitter error:", e);
+      print("error", "Twitter error:" + e.message);
       if (e.message.includes("No results found")) {
         return await sock.sendMessage(chatID, {
           text: "No results found for this URL.",
