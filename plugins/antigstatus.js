@@ -7,7 +7,7 @@ export const handleGroupStatusMentionMessage = async (sock, chatID, senderID, ms
   if (!config || !config.enabled) {
     return;
   }
-  
+
   const action = config.action || "delete";
   const isAdmin = await isSenderAdmin(sock, senderID, chatID);
   if (isAdmin) {
