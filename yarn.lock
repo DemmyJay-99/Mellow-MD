@@ -1005,6 +1005,11 @@ cli-tableau@2.0.1:
   dependencies:
     chalk "3.0.0"
 
+clone@2.x:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.2.tgz#1b7f4b9f591f1e8f83670401600345a02887435f"
+  integrity sha512-3Pe/CF1Nn94hyhIYpjtiLhdCoEoz0DqQ+988E9gmeEdQZlojxnOb74wctFyuwWQHzqyf9X7C7MG8juUpqBJT8w==
+
 color-convert@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
@@ -2254,6 +2259,13 @@ node-addon-api@^8.9.2:
   version "8.9.2"
   resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-8.9.2.tgz#db7ac94a13ffd9b55e6cb04584bd5ef8e1d74b18"
   integrity sha512-VijLXbi3UACN69I0JVXJsX4tjACjNoQDgv2gTF6sx2wWEi8tkSg2eX8p5gSIFi8z2+DL3oHmY6OyKce38SDolg==
+
+node-cache@^5.1.2:
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/node-cache/-/node-cache-5.1.2.tgz#f264dc2ccad0a780e76253a694e9fd0ed19c398d"
+  integrity sha512-t1QzWwnk4sjLWaQAS8CHgOJ+RAfmHpxFWmc36IWTiWHQfs0w5JDMBS1b1ZxQteo0vVVuWJvIUKHDkkeK7vIGCg==
+  dependencies:
+    clone "2.x"
 
 node-catbox@^4.2.0:
   version "4.2.0"
