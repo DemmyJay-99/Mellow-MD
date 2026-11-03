@@ -47,6 +47,7 @@
     "mongoose": "^9.11.1",
     "morsee": "^1.0.10",
     "node-addon-api": "^8.9.2",
+    "node-cache": "^5.1.2",
     "node-catbox": "^4.2.0",
     "node-id3": "^0.2.9",
     "patch-package": "^8.0.1",

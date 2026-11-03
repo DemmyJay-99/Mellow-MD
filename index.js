@@ -19,6 +19,7 @@ import { exec } from "child_process";
 import { pullLatestUpdates } from "./lib/update.js";
 import { explicitLog } from "./lib/log.js";
 import messagem from "./lib/message.js";
+import { groupCache } from "./lib/index.js";
 if (process.env.AUTO_UPDATE_BOT !== "true") {
   print("info", "Auto-update is disabled.");
 } else {
@@ -60,6 +61,7 @@ const startBot = async () => {
     },
     shouldSyncHistoryMessage: () => false,
     printQRInTerminal: false,
+    cachedGroupMetadata: async (jid) => groupCache.get(jid),
     browser: Browsers.android("Mellow"),
     markOnlineOnConnect: process.env.ALWAYS_ONLINE === "true" || false,
   });
