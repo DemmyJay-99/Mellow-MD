@@ -56,7 +56,11 @@ export default {
       const contact = await store.getContact(lid);
       const name =
         contact?.notify || contact?.name || contact?.verified_name || (await normaliseJidToPN(sock, lid)) || "User";
-      const buffer = await chatBubbleSticker(quotedMessageText, { name, avatar: pfp, bg: null });
+      const chain = await store.getReplyChain(msg);
+      const quotedContact = chain ? await store.getContact(chain.jid) : null;
+      const quotedName = quotedContact?.notify || quotedContact?.name || quotedContact?.verified_name || (await normaliseJidToPN(sock, chain?.jid)) || "User";
+      const quoted = chain ? { name: quotedName, text: chain.text } : null;
+      const buffer = await chatBubbleSticker(quotedMessageText, { name, avatar: pfp, bg: null, quoted });
       sticker = await createSticker(buffer, {
         pack: "Mellow MD",
         author: "https://github.com/DemmyJay-99/Mellow-MD",
