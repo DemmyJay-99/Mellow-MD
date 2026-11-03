@@ -6,14 +6,14 @@ import store from "../lib/store.js";
 import normaliseJidToPN from "../lib/normaliseJidToPN.js";
 export default {
   name: "sticker",
-  description: "Convert an image or video to a sticker",
+  description: "Convert an image, text or video to a sticker",
   category: "Media",
   usage: "Reply to an image or video message with .sticker",
   aliases: ["s"],
   execute: async (sock, msg, args, mellow = {}) => {
     const { createSticker } = await import("stickers-formatter");
     const { downloadContentFromMessage } = await import("@whiskeysockets/baileys");
-    const { chatID, quotedMessage, quotedMessageText, ctxInfo, pushname } = mellow;
+    const { chatID, quotedMessage, quotedMessageText, ctxInfo } = mellow;
     const mediaMessage = quotedMessage?.imageMessage || quotedMessage?.videoMessage || quotedMessage?.documentMessage;
     let sticker;
     const [stickerNameRaw, stickerAuthorRaw] = (process.env.STICKER_PACKNAME || "").split(",");
