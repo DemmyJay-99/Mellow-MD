@@ -19,7 +19,7 @@ export default {
     const [stickerNameRaw, stickerAuthorRaw] = (process.env.STICKER_PACKNAME || "").split(",");
     const stickerName = stickerNameRaw || "Mellow MD";
     const stickerAuthor = stickerAuthorRaw || "https://github.com/DemmyJay-99/Mellow-MD";
-  
+
     if (mediaMessage) {
       let type = quotedMessage?.imageMessage ? "image" : quotedMessage?.videoMessage ? "video" : "document";
       const isVideo = type === "video";
@@ -63,7 +63,7 @@ export default {
         type: StickerTypes.FULL,
         id: id,
         quality: 50,
-        background: "transparent"
+        background: "transparent",
       });
     } else {
       return sock.sendMessage(chatID, {
