@@ -5,6 +5,8 @@ import { print } from "../lib/log.js";
 export default {
   name: "gif",
   description: "Send GIFs",
+  category: "Downloaders",
+  usage: "gif <search term> [count]",
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID } = mellow;
     const last = Number(args.at(-1));
