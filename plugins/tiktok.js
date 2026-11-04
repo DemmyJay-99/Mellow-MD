@@ -51,10 +51,15 @@ export default {
               image: buffer,
               mimetype: mime,
             });
-          } else {
+          } else if (mime.startsWith("video/")) {
             await sock.sendMessage(chatID, {
               video: buffer,
               mimetype: "video/mp4",
+            });
+          } else if (mime.startsWith("audio/")) {
+            await sock.sendMessage(chatID, {
+              audio: buffer,
+              mimetype: mime,
             });
           }
           fs.unlinkSync(filepath);
