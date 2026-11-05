@@ -69,6 +69,7 @@ export default {
   name: "antigstatus",
   description: "Enable or disable anti group status",
   usage: "antigstatus on|off|set <warn|kick|delete>",
+  category: "Group",
   aliases: ["agstatus"],
   execute: async function (sock, msg, args, mellow = {}) {
     const { chatID, chatIDisGroup, senderID } = mellow;
