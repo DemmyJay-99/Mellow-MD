@@ -25,15 +25,15 @@ export default {
       return;
     }
 
+    const categoryOrder = ["general", "utility", "downloaders", "fun", "owner", "ai", "group", "uncategorized"];
+    
     const grouped = {};
     for (const c of cmds) {
-      const category = c.category || "Uncategorized";
+      const category = (c.category || "Uncategorized").trim().toLowerCase();
       if (!grouped[category]) grouped[category] = [];
       grouped[category].push(c);
     }
-
-    const categoryOrder = ["General", "Utility", "Downloaders", "Fun", "Owner", "AI", "Group", "Uncategorized"];
-
+    
     const sortedCategories = Object.keys(grouped).sort((a, b) => {
       const ia = categoryOrder.indexOf(a);
       const ib = categoryOrder.indexOf(b);
