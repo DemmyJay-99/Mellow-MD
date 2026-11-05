@@ -6,6 +6,7 @@ export default {
   name: "pin",
   description: "Pin a message to the chat",
   usage: "Reply to a message with pin <time in days>",
+  category: "Group",
   async execute(sock, msg, args, mellow) {
     const { chatID, chatIDisGroup, senderID, botID, ctxInfo, quotedMessage } = mellow;
     if (!quotedMessage) {
