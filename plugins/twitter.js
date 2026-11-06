@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { galleryDL } from "../lib/gallery-dl.js";
+import { toVideo } from "../lib/ffmpeg.js";
 import { fileTypeFromBuffer } from "file-type";
 import { print } from "../lib/log.js";
 
@@ -44,14 +45,15 @@ export default {
       for (const file of files) {
         try {
           const filepath = path.join(dir, file);
-          const buffer = fs.readFileSync(filepath);
-          const { mime } = await fileTypeFromBuffer(buffer);
+          const buff = fs.readFileSync(filepath);
+          const { mime } = await fileTypeFromBuffer(buff);
           if (mime.startsWith("image/")) {
             await sock.sendMessage(chatID, {
-              image: buffer,
+              image: buff,
               mimetype: mime,
             });
           } else {
+            const buffer = await toVideo(buff, "mp4");
             await sock.sendMessage(chatID, {
               video: buffer,
               mimetype: "video/mp4",
