@@ -1,5 +1,6 @@
 import { print } from "../lib/log.js";
 import { ytVideo } from "../lib/yt.js";
+import { toVideo } from "../lib/ffmpeg.js";
 import fs from "fs";
 
 export default {
@@ -32,7 +33,8 @@ export default {
     }
     try {
       const filepath = await ytVideo(url);
-      const buffer = fs.readFileSync(filepath);
+      const buff = fs.readFileSync(filepath);
+      const buffer = await toVideo(buff, "mp4");
       await sock.sendMessage(chatID, {
         video: buffer,
         mimetype: "video/mp4",
