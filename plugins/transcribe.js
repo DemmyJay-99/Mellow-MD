@@ -9,6 +9,9 @@ export default {
     if(!audioMessage) {
       return await sock.sendMessage(chatID, { text: 'Please reply to an audio message to transcribe.' });
     }
+    if(!process.env.GROQ_API_KEY) {
+      return await sock.sendMessage(chatID, { text: 'API key not configured. Please set GROQ_API_KEY environment variable.' });
+    }
     try {
       const stream = await downloadContentFromMessage(audioMessage, "audio");
       const transcript = await transcribeAudio(stream);
