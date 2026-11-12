@@ -26,6 +26,7 @@
     "postinstall": "node setup.js",
     "format": "yarn prettier . --write",
     "restart": "pm2 restart mellow --attach --update-env",
+    "reset-session": "node -e \"import('fs').then(f=>f.default.rmSync('./session',{recursive:true,force:true})).then(()=>console.log('Session folder cleared!'))\"",
     "lint": "yarn eslint ."
   },
   "dependencies": {
