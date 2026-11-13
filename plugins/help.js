@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import {commandHandler} from "../lib/command.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,20 +10,15 @@ export default {
   description: "Get help for commands",
   category: "General",
   usage: "help to get a list of all commands, or help <command> to get help for a specific command",
-  execute: async (sock, msg, args) => {
-    const remoteJid = msg.key.remoteJid;
-    const commands = new Map();
-    const commandFiles = fs.readdirSync(path.join(__dirname, "../plugins")).filter((file) => file.endsWith(".js"));
-    for (const file of commandFiles) {
-      const { default: command } = await import(`../plugins/${file}`);
-      commands.set(command.name, command);
-    }
-
+  execute: async (sock, msg, args, mellow) => {
+    const { chatID } = mellow;
+    const plugins = await commandHandler.getPlugins();
+    
     if (args[0]) {
       const query = args[0].toLowerCase();
-      const command = commands.get(query);
+      const command = plugins.find((p) => p.name.toLowerCase() === query || (p.aliases && p.aliases.includes(query)));
       if (!command) {
-        await sock.sendMessage(remoteJid, {
+        await sock.sendMessage(chatID, {
           text: `Command ${query} not found`,
         });
         return;
@@ -38,13 +34,13 @@ export default {
       helpText += `*Category:* ${category}\n`;
       helpText += `*Usage:* ${usage}\n`;
       helpText += `*Aliases:* ${aliases}\n`;
-      return await sock.sendMessage(remoteJid, { text: helpText });
+      return await sock.sendMessage(chatID, { text: helpText });
     }
 
     let helpText = "Available commands:\n\n";
-    for (const [name, command] of commands) {
-      helpText += `*${name}* - ${command.description}\n`;
+    for (const command of plugins) {
+      helpText += `*${command.name}* - ${command.description}\n`;
     }
-    await sock.sendMessage(remoteJid, { text: helpText });
+    await sock.sendMessage(chatID, { text: helpText });
   },
 };
