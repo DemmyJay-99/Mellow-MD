@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import {commandHandler} from "../lib/command.js";
+import { commandHandler } from "../lib/command.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,7 +13,7 @@ export default {
   execute: async (sock, msg, args, mellow) => {
     const { chatID } = mellow;
     const plugins = await commandHandler.getPlugins();
-    
+
     if (args[0]) {
       const query = args[0].toLowerCase();
       const command = plugins.find((p) => p.name.toLowerCase() === query || (p.aliases && p.aliases.includes(query)));

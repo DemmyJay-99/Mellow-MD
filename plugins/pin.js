@@ -13,13 +13,15 @@ export default {
       await sock.sendMessage(chatID, { text: "Please reply to a message to pin it." });
       return;
     }
-    const timeArg = args[0]
+    const timeArg = args[0];
     const allowedArgs = [1, 7, 30];
     let time;
     if (timeArg) {
       const days = parseInt(timeArg);
       if (!allowedArgs.includes(days)) {
-        await sock.sendMessage(chatID, { text: "Invalid time argument. Please provide a number of days. Allowed values: 1, 7, 30." });
+        await sock.sendMessage(chatID, {
+          text: "Invalid time argument. Please provide a number of days. Allowed values: 1, 7, 30.",
+        });
         return;
       } else {
         time = days * 86400;
