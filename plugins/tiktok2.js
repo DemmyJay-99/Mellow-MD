@@ -6,7 +6,7 @@ export default {
   aliases: ["tt2", "ttdl2", "tiktokdl2"],
   description: "Download Tiktok videos with this command if tiktok command is not working",
   usage: "tiktok2 <TikTok URL> (or reply to a message with the URL)",
-  execute: async (sock, msg,args, mellow) => {
+  execute: async (sock, msg, args, mellow) => {
     const { quotedMessage, quotedMessageText, chatID, quotedLink } = mellow;
     let url;
     if (args[0]) {
@@ -32,11 +32,11 @@ export default {
     try {
       const file = await ytVideo(url);
       await sock.sendMessage(chatID, {
-        video: {url: file},
+        video: { url: file },
       });
     } catch (error) {
       console.error(error);
       await sock.sendMessage(chatID, { text: "Failed to download video" });
     }
-  }
-}
+  },
+};
