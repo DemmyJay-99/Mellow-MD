@@ -39,18 +39,13 @@ const addAudioStickerFields = (proto) => {
 
 const tempName = () => `asticker-${randomBytes(6).toString("hex")}`;
 const TEMP_DIR = os.tmpdir();
-const uploadVoice = async (sock, path, seconds) => {
-  const output = join(TEMP_DIR, `${tempName()}.ogg`);
-  try {
-    const audio = await toOpus(path, output, seconds);
-    const { audioMessage } = await prepareWAMessageMedia(
-      { audio, mimetype: "audio/ogg; codecs=opus", ptt: true },
-      { upload: sock.waUploadToServer },
-    );
-    return audioMessage;
-  } finally {
-    fs.rmSync(output, { force: true });
-  }
+const uploadVoice = async (sock, buffer, seconds) => {
+  const audio = await toOpus(buffer, seconds);
+  const { audioMessage } = await prepareWAMessageMedia(
+    { audio, mimetype: "audio/ogg; codecs=opus", ptt: true },
+    { upload: sock.waUploadToServer },
+  );
+  return audioMessage;
 };
 
 const sendAudioSticker = async (sock, chatID, stickerMessage, audioMessage) => {
@@ -88,9 +83,10 @@ export default {
         if (!(await hasAudio(filePath))) {
           return sock.sendMessage(chatID, { text: "That video has no audio." });
         }
+        const videoBuffer = await fs.promises.readFile(filePath);
         const [webp, audioMessage] = await Promise.all([
-          videoToWebp(await fs.promises.readFile(filePath), STICKER_SECONDS),
-          uploadVoice(sock, filePath, STICKER_SECONDS),
+          videoToWebp(videoBuffer, STICKER_SECONDS),
+          uploadVoice(sock, videoBuffer, STICKER_SECONDS),
         ]);
         const { stickerMessage } = await prepareWAMessageMedia({ sticker: webp }, { upload: sock.waUploadToServer });
         return sendAudioSticker(sock, chatID, stickerMessage, audioMessage);
