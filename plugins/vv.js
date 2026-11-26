@@ -11,6 +11,12 @@ export default {
           text: "Reply to a view-once message with .vv",
         });
       }
+      const viewOnceText = quotedMessage.message?.extendedTextMessage?.text;
+      if (viewOnceText) {
+        return sock.sendMessage(chatID, {
+          text: viewOnceText,
+        });
+      }
       let actualMessage = quotedMessage;
 
       if (quotedMessage?.viewOnceMessage?.message) {
@@ -54,7 +60,7 @@ export default {
         sendObject.mimetype = media.mimetype || "audio/ogg; codecs=opus";
         sendObject.ptt = media.ptt || false;
       } else {
-        sendObject.document = buffer;
+        sendObject.text = buffer;
         sendObject.fileName = "file";
       }
       if (args[0] === "me") {
