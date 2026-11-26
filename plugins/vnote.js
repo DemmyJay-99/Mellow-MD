@@ -25,7 +25,7 @@ export default {
       }
       const buffer = Buffer.concat(chunks);
 
-      const audioBuffer = await toOpus(buffer, mediaMessage.mimetype.split("/")[1]);
+      const audioBuffer = await toOpus(buffer, undefined, mediaMessage.mimetype.split("/")[1]);
       await sock.sendMessage(chatID, {
          audio: audioBuffer,
          mimetype: "audio/ogg; codecs=opus",
