@@ -1,7 +1,7 @@
 import fs from "fs";
 import { join } from "path";
 import { randomBytes } from "crypto";
-import { hasAudio, toOpus } from "../lib/ffmpeg.js";
+import { hasAudio, toOpus, videoToWebp } from "../lib/ffmpeg.js";
 import { prepareWAMessageMedia, proto } from "@whiskeysockets/baileys";
 import os from "os";
 import store from "../lib/store.js";
@@ -82,20 +82,18 @@ export default {
     }
 
     if (quotedMessage?.videoMessage) {
-      // const quotedMsg = {
-      //   key: { remoteJid: chatID, id: ctxInfo?.stanzaId, participant: ctxInfo?.participant },
-      //   message: quotedMessage,
-      // };
       const dlPath = join(TEMP_DIR, `${msgID}.mp4`);
       const filePath = await store.downloadMedia(quotedMessage?.videoMessage, "video", dlPath);
-      console.log(filePath, dlPath);
       try {
         if (!(await hasAudio(filePath))) {
           return sock.sendMessage(chatID, { text: "That video has no audio." });
         }
-        const audioMessage = await uploadVoice(sock, filePath, STICKER_SECONDS);
-        saved.set(key, audioMessage);
-        return sock.sendMessage(chatID, { text: "Audio saved. Now reply to a sticker with asticker to add it." });
+        const [webp, audioMessage] = await Promise.all([
+          videoToWebp(await fs.promises.readFile(filePath), STICKER_SECONDS),
+          uploadVoice(sock, filePath, STICKER_SECONDS),
+        ]);
+        const { stickerMessage } = await prepareWAMessageMedia({ sticker: webp }, { upload: sock.waUploadToServer });
+        return sendAudioSticker(sock, chatID, stickerMessage, audioMessage);
       } finally {
         fs.rmSync(filePath, { force: true });
       }
