@@ -7,14 +7,18 @@ export default {
   execute: async (sock, msg, args, mellow = {}) => {
     const { quotedMessage, chatID } = mellow;
     try {
-      const mediaMessage = quotedMessage?.videoMessage || quotedMessage?.documentMessage;
+      const mediaMessage = quotedMessage?.videoMessage || quotedMessage?.documentMessage || quotedMessage?.audioMessage;
       if (!mediaMessage) {
         return sock.sendMessage(chatID, {
           text: "Reply to a video or document message.",
         });
       }
       const { downloadContentFromMessage } = await import("@whiskeysockets/baileys");
-      const stream = await downloadContentFromMessage(mediaMessage, "video");
+      let type;
+      if (quotedMessage?.videoMessage) type = "video";
+      else if (quotedMessage?.documentMessage) type = "document";
+      else if (quotedMessage?.audioMessage) type = "audio";
+      const stream = await downloadContentFromMessage(mediaMessage, type);
       const chunks = [];
       for await (const chunk of stream) {
         chunks.push(chunk);
@@ -24,7 +28,7 @@ export default {
       const audioBuffer = await toAudio(buffer, mediaMessage.mimetype.split("/")[1]);
       await sock.sendMessage(chatID, { audio: audioBuffer, mimetype: "audio/mpeg" }, { quoted: msg });
     } catch (e) {
-      console.error("tomp3 error:", e);
+      console.error("mp3 error:", e);
       await sock.sendMessage(chatID, {
         text: "Conversion to MP3 failed.",
       });
