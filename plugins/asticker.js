@@ -66,7 +66,8 @@ const sendAudioSticker = async (sock, chatID, stickerMessage, audioMessage) => {
 export default {
   name: "asticker",
   description: "audio sticker from a video, or add saved audio to a sticker",
-  usage: USAGE,
+  usage: "Reply to a video with asticker to turn it into an audio sticker.\n" +
+        "Or reply to a voice note / song with asticker to save its audio, then reply to any sticker with asticker to add it.",
   aliases: ["astick"],
   execute: async (sock, msg, args, mellow) => {
     const { chatID, quotedMessage, msgID, senderID } = mellow;

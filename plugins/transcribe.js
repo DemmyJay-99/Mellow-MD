@@ -2,7 +2,8 @@ import { transcribeAudio } from "../lib/transcribe.js";
 import { downloadContentFromMessage } from "@whiskeysockets/baileys";
 export default {
   name: "transcribe",
-  description: "Transcribes audio files using OpenAI Whisper API",
+  description: "Transcribes voice notes",
+  usage: "reply to an audio message with transcribe",
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, quotedMessage } = mellow;
     const audioMessage = quotedMessage?.audioMessage;
