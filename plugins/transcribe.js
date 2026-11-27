@@ -4,6 +4,8 @@ export default {
   name: "transcribe",
   description: "Transcribes voice notes",
   usage: "reply to an audio message with transcribe",
+  category: "Tools",
+  aliases: ["ts"],
   execute: async (sock, msg, args, mellow = {}) => {
     const { chatID, quotedMessage } = mellow;
     const audioMessage = quotedMessage?.audioMessage;
