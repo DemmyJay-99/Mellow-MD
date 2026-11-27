@@ -26,11 +26,15 @@ export default {
       const buffer = Buffer.concat(chunks);
 
       const audioBuffer = await toOpus(buffer, undefined, mediaMessage.mimetype.split("/")[1]);
-      await sock.sendMessage(chatID, {
-         audio: audioBuffer,
-         mimetype: "audio/ogg; codecs=opus",
-         ptt: true,
-       }, { quoted: msg });
+      await sock.sendMessage(
+        chatID,
+        {
+          audio: audioBuffer,
+          mimetype: "audio/ogg; codecs=opus",
+          ptt: true,
+        },
+        { quoted: msg },
+      );
     } catch (e) {
       console.error("vnote error:", e);
       await sock.sendMessage(chatID, {
